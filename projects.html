@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Projects | Saifee Clone</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: 'Helvetica Neue', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #fff;
+      color: #111;
+    }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px 40px;
+      align-items: center;
+      border-bottom: 1px solid #eee;
+    }
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+    }
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+    h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+    .card {
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      padding: 20px;
+      transition: 0.3s;
+    }
+    .card:hover {
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    .card h3 {
+      margin-top: 0;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div><strong>saifee</strong> creations</div>
+    <div>
+      <a href="index.html">Home</a>
+      <a href="projects.html">Projects</a>
+      <a href="about.html">About</a>
+      <a href="clients.html">Clients</a>
+      <a href="services.html">Services</a>
+      <a href="blogs.html">Blogs</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1>Our Projects</h1>
+    <div class="projects">
+      <div class="card">
+        <h3>Project Alpha</h3>
+        <p>A modern branding revamp for a fintech company.</p>
+      </div>
+      <div class="card">
+        <h3>Creative Studio Redesign</h3>
+        <p>Website UX/UI overhaul with interactive elements.</p>
+      </div>
+      <div class="card">
+        <h3>Commerce Pro</h3>
+        <p>E-commerce site for a clothing brand with custom CMS.</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
