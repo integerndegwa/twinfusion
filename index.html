@@ -1,163 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Twinfusion – Tech Consultancy</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Orbitron', sans-serif;
-    }
-    .tab-content {
-      display: none;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Twinfusion</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+      .tab-content {
+        display: none;
+      }
+      .tab-content.active {
+        display: block;
+      }
+      .glow {
+        animation: glow 2s ease-in-out infinite alternate;
+      }
+      @keyframes glow {
+        from {
+          text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000;
+        }
+        to {
+          text-shadow: 0 0 20px #ff4d4d, 0 0 30px #ff4d4d;
+        }
+      }
+      .techno-font {
+        font-family: 'Orbitron', sans-serif;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-900 text-white">
+    <section class="text-center p-8 space-y-6">
+      <h1 class="text-4xl md:text-6xl font-bold text-red-500 glow techno-font">TWINFUSION</h1>
+      <p class="text-lg text-gray-300 max-w-2xl mx-auto techno-font">Where innovation meets execution – delivering high-tech digital solutions for a connected world.</p>
 
-    .tab-content.active {
-      display: block;
-      animation: fadeIn 0.5s ease-in-out;
-    }
+      <!-- Tabs -->
+      <div class="flex justify-center space-x-4 mt-6">
+        <button class="tab-button px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700" data-tab="branding">Branding</button>
+        <button class="tab-button px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700" data-tab="development">Development</button>
+        <button class="tab-button px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700" data-tab="web">Web Design</button>
+      </div>
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+      <!-- Dynamic Tab Content -->
+      <div id="branding" class="tab-content active text-lg max-w-xl text-red-500 techno-font">We craft identities that stand out, resonate, and build trust.</div>
+      <div id="development" class="tab-content text-lg max-w-xl text-red-500 techno-font">From backend to frontend, we build robust, scalable, and modern digital solutions.</div>
+      <div id="web" class="tab-content text-lg max-w-xl text-red-500 techno-font">Clean. Fast. Responsive. Our web designs combine beauty with function.</div>
+    </section>
 
-    .hero-bg {
-      background-image: url('https://images.unsplash.com/photo-1531497865144-0464ef8fbf4b?auto=format&fit=crop&w=1470&q=80');
-      background-size: cover;
-      background-position: center;
-    }
-  </style>
-</head>
-<body class="bg-white text-gray-900 font-sans">
+    <!-- Latest Blogs Section -->
+    <section class="p-8">
+      <h2 class="text-3xl font-bold text-red-500 mb-4 techno-font">Latest Blogs</h2>
+      <div id="rss-blogs" class="max-w-3xl mx-auto space-y-6 text-left">
+        <p class="text-gray-500 italic">Loading latest blog posts...</p>
+      </div>
+    </section>
 
-  <!-- Navigation Bar -->
-  <header class="w-full py-6 bg-white shadow animate-fade-in">
-    <nav class="max-w-6xl mx-auto flex justify-center space-x-10 text-lg font-medium">
-      <a href="#projects" class="hover:text-red-500 transition">Projects</a>
-      <a href="#about" class="hover:text-red-500 transition">About</a>
-      <a href="#clients" class="hover:text-red-500 transition">Clients</a>
-      <a href="#services" class="hover:text-red-500 transition">Services</a>
-      <a href="#blogs" class="hover:text-red-500 transition">Blogs</a>
-    </nav>
-  </header>
+    <script>
+      // Tab switching
+      const buttons = document.querySelectorAll('.tab-button');
+      const tabs = document.querySelectorAll('.tab-content');
 
-  <!-- Hero Section -->
-  <section class="hero-bg flex flex-col items-center justify-center text-center py-32 px-4 text-black bg-opacity-90">
-    <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-8 drop-shadow-md font-[Orbitron]">
-      Let's create something <span class="text-red-500">brilliant</span>.
-    </h1>
-    <!-- Tabs -->
-    <div class="flex space-x-4 mt-4 mb-6">
-      <button onclick="showTab('branding')" class="px-6 py-2 bg-gray-300 text-black rounded-full hover:bg-red-100 transition">Branding</button>
-      <button onclick="showTab('development')" class="px-6 py-2 bg-gray-300 text-black rounded-full hover:bg-red-100 transition">Development</button>
-      <button onclick="showTab('web')" class="px-6 py-2 bg-gray-300 text-black rounded-full hover:bg-red-100 transition">Web Design</button>
-    </div>
+      buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const target = btn.getAttribute('data-tab');
 
-    <!-- Dynamic Tab Content -->
-    <div id="branding" class="tab-content active text-lg max-w-xl text-red-500 font-[Orbitron]">
-      We craft identities that stand out, resonate, and build trust.
-    </div>
-    <div id="development" class="tab-content text-lg max-w-xl text-red-500 font-[Orbitron]">
-      From backend to frontend, we build robust, scalable, and modern digital solutions.
-    </div>
-    <div id="web" class="tab-content text-lg max-w-xl text-red-500 font-[Orbitron]">
-      Clean. Fast. Responsive. Our web designs combine beauty with function.
-    </div>
-  </section>
-
-  <script>
-    function showTab(tabId) {
-      document.querySelectorAll('.tab-content').forEach(el => {
-        el.classList.remove('active');
+          tabs.forEach(tab => tab.classList.remove('active'));
+          document.getElementById(target).classList.add('active');
+        });
       });
-      document.getElementById(tabId).classList.add('active');
-    }
-  </script>
 
-  <!-- Projects Section -->
-  <section id="projects" class="py-20 px-6 bg-white text-center">
-    <h2 class="text-3xl font-bold mb-6">Projects</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-      <div class="bg-gray-100 p-6 rounded-xl shadow hover:shadow-lg transition">
-        <h3 class="font-semibold text-xl mb-2">E-Commerce Platform</h3>
-        <p>Custom-built scalable shop for a leading fashion retailer.</p>
-      </div>
-      <div class="bg-gray-100 p-6 rounded-xl shadow hover:shadow-lg transition">
-        <h3 class="font-semibold text-xl mb-2">Healthcare Portal</h3>
-        <p>A secure patient-doctor dashboard system for clinics.</p>
-      </div>
-      <div class="bg-gray-100 p-6 rounded-xl shadow hover:shadow-lg transition">
-        <h3 class="font-semibold text-xl mb-2">Brand Revamp</h3>
-        <p>Full rebranding and digital strategy for a logistics firm.</p>
-      </div>
-    </div>
-  </section>
+      // Fetch RSS feed
+      async function fetchRSS() {
+        const rssUrl = 'https://example.com/feed'; // Replace with your RSS feed URL
+        const response = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`);
+        const data = await response.json();
 
-  <!-- About Section -->
-  <section id="about" class="py-20 px-6 bg-gray-50 text-center">
-    <h2 class="text-3xl font-bold mb-6">About Twinfusion</h2>
-    <p class="max-w-3xl mx-auto text-lg leading-relaxed">
-      We are a team of technologists, designers, and strategists passionate about helping brands innovate and thrive. Our mission is to fuse creativity and code to build experiences that matter.
-    </p>
-  </section>
+        const container = document.getElementById('rss-blogs');
+        container.innerHTML = '';
 
-  <!-- Clients Section -->
-  <section id="clients" class="py-20 px-6 bg-white text-center">
-    <h2 class="text-3xl font-bold mb-10">Clients</h2>
-    <div class="flex flex-wrap justify-center items-center gap-8">
-      <span class="text-xl font-medium text-gray-600">Acme Inc</span>
-      <span class="text-xl font-medium text-gray-600">HealthNet</span>
-      <span class="text-xl font-medium text-gray-600">CargoX</span>
-      <span class="text-xl font-medium text-gray-600">EduSpark</span>
-      <span class="text-xl font-medium text-gray-600">GreenFields</span>
-    </div>
-  </section>
+        data.items.slice(0, 3).forEach(item => {
+          const article = document.createElement('article');
+          article.className = 'border-l-4 border-red-500 pl-4';
+          article.innerHTML = `
+            <h3 class="text-xl font-semibold"><a href="${item.link}" target="_blank" class="hover:underline">${item.title}</a></h3>
+            <p class="text-gray-600 text-sm">${new Date(item.pubDate).toLocaleDateString()} · ${item.author}</p>
+          `;
+          container.appendChild(article);
+        });
+      }
 
-  <!-- Services Section -->
-  <section id="services" class="py-20 px-6 bg-gray-50 text-center">
-    <h2 class="text-3xl font-bold mb-6">Our Services</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
-        <h3 class="font-semibold text-xl mb-2">Branding</h3>
-        <p>Identity design, brand strategy, and storytelling.</p>
-      </div>
-      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
-        <h3 class="font-semibold text-xl mb-2">Web Development</h3>
-        <p>From static sites to complex apps built with modern stacks.</p>
-      </div>
-      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
-        <h3 class="font-semibold text-xl mb-2">UI/UX Design</h3>
-        <p>Pixel-perfect designs that delight and convert.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Blogs Section -->
-  <section id="blogs" class="py-20 px-6 bg-white text-center">
-    <h2 class="text-3xl font-bold mb-6">Latest Blogs</h2>
-    <div class="max-w-3xl mx-auto space-y-6 text-left">
-      <article class="border-l-4 border-red-500 pl-4 blog-hover cursor-pointer">
-        <h3 class="text-xl font-semibold">Why Branding is Your Secret Weapon</h3>
-        <p class="text-gray-600 text-sm">April 2025 · 3 min read</p>
-      </article>
-      <article class="border-l-4 border-red-500 pl-4 blog-hover cursor-pointer">
-        <h3 class="text-xl font-semibold">Choosing the Right Tech Stack for 2025</h3>
-        <p class="text-gray-600 text-sm">March 2025 · 4 min read</p>
-      </article>
-      <article class="border-l-4 border-red-500 pl-4 blog-hover cursor-pointer">
-        <h3 class="text-xl font-semibold">Design Thinking in Web Projects</h3>
-        <p class="text-gray-600 text-sm">February 2025 · 2 min read</p>
-      </article>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="py-10 text-center bg-gray-100 text-gray-600">
-    <p>&copy; 2025 Twinfusion. All rights reserved.</p>
-  </footer>
-
-</body>
+      fetchRSS();
+    </script>
+  </body>
 </html>
