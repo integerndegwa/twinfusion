@@ -135,24 +135,50 @@
     </div>
   </section>
 
-  <!-- Blogs Section -->
-  <section id="blogs" class="py-20 px-6 bg-white text-center">
-    <h2 class="text-3xl font-bold mb-6">Latest Blogs</h2>
-    <div class="max-w-3xl mx-auto space-y-6 text-left">
-      <article class="border-l-4 border-red-500 pl-4 blog-hover cursor-pointer">
-        <h3 class="text-xl font-semibold">Why Branding is Your Secret Weapon</h3>
-        <p class="text-gray-600 text-sm">April 2025 · 3 min read</p>
-      </article>
-      <article class="border-l-4 border-red-500 pl-4 blog-hover cursor-pointer">
-        <h3 class="text-xl font-semibold">Choosing the Right Tech Stack for 2025</h3>
-        <p class="text-gray-600 text-sm">March 2025 · 4 min read</p>
-      </article>
-      <article class="border-l-4 border-red-500 pl-4 blog-hover cursor-pointer">
-        <h3 class="text-xl font-semibold">Design Thinking in Web Projects</h3>
-        <p class="text-gray-600 text-sm">February 2025 · 2 min read</p>
-      </article>
-    </div>
-  </section>
+ <!-- Blogs Section -->
+<section id="blogs" class="py-20 px-6 bg-white text-center">
+  <h2 class="text-3xl font-bold mb-6">Latest Blogs</h2>
+  <div id="rss-feed" class="max-w-3xl mx-auto space-y-6 text-left">
+    <p class="text-gray-600">Loading latest posts...</p>
+  </div>
+</section>
+
+<!-- RSS Feed Script -->
+<script>
+  const rssFeedUrl = 'https://api.rss2json.com/v1/api.json?rss_url=https://example.com/feed'; // Replace with your real RSS feed
+
+  fetch(rssFeedUrl)
+    .then(response => response.json())
+    .then(data => {
+      const feedContainer = document.getElementById('rss-feed');
+      feedContainer.innerHTML = ''; // Clear placeholder
+
+      data.items.slice(0, 3).forEach(item => {
+        const article = document.createElement('article');
+        article.className = 'border-l-4 border-red-500 pl-4 blog-hover cursor-pointer';
+
+        const title = document.createElement('h3');
+        title.className = 'text-xl font-semibold';
+        title.textContent = item.title;
+
+        const meta = document.createElement('p');
+        meta.className = 'text-gray-600 text-sm';
+        const date = new Date(item.pubDate).toLocaleDateString(undefined, { month: 'long', year: 'numeric' });
+        meta.textContent = `${date} · ${Math.ceil(item.content.length / 500)} min read`;
+
+        article.appendChild(title);
+        article.appendChild(meta);
+        article.onclick = () => window.open(item.link, '_blank');
+
+        feedContainer.appendChild(article);
+      });
+    })
+    .catch(error => {
+      document.getElementById('rss-feed').innerHTML = '<p class="text-red-500">Failed to load blog posts.</p>';
+      console.error('RSS Feed Error:', error);
+    });
+</script>
+
 
   <!-- Footer -->
   <footer class="py-10 text-center bg-gray-100 text-gray-600">
