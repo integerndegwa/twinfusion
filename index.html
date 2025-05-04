@@ -2,14 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Twinfusion – Tech Consultancy</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    .tab-content {
-      display: none;
-    }
-
+    .tab-content { display: none; }
     .tab-content.active {
       display: block;
       animation: fadeIn 0.5s ease-in-out;
@@ -20,52 +17,70 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
+    @keyframes zoomIn {
+      from { opacity: 0; transform: scale(0.95) translateY(30px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .zoom-in {
+      opacity: 0;
+      transform: scale(0.95);
+      transition: all 0.7s ease-out;
+    }
+
+    .zoom-in.show {
+      animation: zoomIn 0.8s ease forwards;
+    }
+
+    .blog-hover {
+      transition: all 0.4s ease;
+    }
+
+    .blog-hover:hover {
+      transform: translateY(-4px);
+      border-color: black;
+    }
+
     .hero-bg {
       background-image: url('https://images.unsplash.com/photo-1531497865144-0464ef8fbf4b?auto=format&fit=crop&w=1470&q=80');
       background-size: cover;
       background-position: center;
     }
 
-    .scroll-fade {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.7s ease-out;
+    .dark-mode {
+      background-color: #1a202c;
+      color: #e2e8f0;
     }
 
-    .scroll-fade.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    @keyframes fadein {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .animate-fadein {
-      animation: fadein 1.2s ease-out forwards;
-    }
+    .dark-mode .bg-white { background-color: #2d3748; }
+    .dark-mode .bg-gray-100 { background-color: #4a5568; }
+    .dark-mode .bg-gray-50 { background-color: #2d3748; }
+    .dark-mode .text-gray-900 { color: #e2e8f0; }
+    .dark-mode .text-gray-600 { color: #a0aec0; }
+    .dark-mode .text-black { color: #edf2f7; }
+    .dark-mode .hover\:text-red-500:hover { color: #feb2b2; }
+    .dark-mode .border-red-500 { border-color: #feb2b2; }
   </style>
 </head>
-<body class="bg-white text-gray-900 font-sans">
+<body class="bg-white text-gray-900 font-sans transition-colors duration-300">
 
   <!-- Navigation Bar -->
-  <header class="w-full py-6 bg-white shadow">
-    <nav class="max-w-6xl mx-auto flex justify-center space-x-10 text-lg font-medium">
+  <header class="w-full py-6 bg-white shadow flex justify-between items-center px-6">
+    <nav class="flex space-x-10 text-lg font-medium mx-auto">
       <a href="#projects" class="hover:text-red-500">Projects</a>
       <a href="#about" class="hover:text-red-500">About</a>
       <a href="#clients" class="hover:text-red-500">Clients</a>
       <a href="#services" class="hover:text-red-500">Services</a>
       <a href="#blogs" class="hover:text-red-500">Blogs</a>
     </nav>
+    <button onclick="toggleDarkMode()" class="ml-4 bg-gray-200 hover:bg-gray-300 text-sm px-4 py-2 rounded transition">Toggle Mode</button>
   </header>
 
   <!-- Hero Section -->
   <section class="hero-bg flex flex-col items-center justify-center text-center py-32 px-4 text-black bg-opacity-90">
-    <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-8 drop-shadow-md opacity-0 animate-fadein">
+    <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-8 drop-shadow-md">
       Let's create something <span class="text-red-500">brilliant</span>.
     </h1>
-
     <!-- Tabs -->
     <div class="flex space-x-4 mt-4 mb-6">
       <button onclick="showTab('branding')" class="px-6 py-2 bg-gray-300 text-black rounded-full hover:bg-red-100 transition">Branding</button>
@@ -74,39 +89,24 @@
     </div>
 
     <!-- Dynamic Tab Content -->
-    <div id="branding" class="tab-content active text-lg max-w-xl text-red-500">
-      We craft identities that stand out, resonate, and build trust.
-    </div>
-    <div id="development" class="tab-content text-lg max-w-xl text-red-500">
-      From backend to frontend, we build robust, scalable, and modern digital solutions.
-    </div>
-    <div id="web" class="tab-content text-lg max-w-xl text-red-500">
-      Clean. Fast. Responsive. Our web designs combine beauty with function.
-    </div>
+    <div id="branding" class="tab-content active text-lg max-w-xl text-red-500">We craft identities that stand out, resonate, and build trust.</div>
+    <div id="development" class="tab-content text-lg max-w-xl text-red-500">From backend to frontend, we build robust, scalable, and modern digital solutions.</div>
+    <div id="web" class="tab-content text-lg max-w-xl text-red-500">Clean. Fast. Responsive. Our web designs combine beauty with function.</div>
   </section>
 
-  <script>
-    function showTab(tabId) {
-      document.querySelectorAll('.tab-content').forEach(el => {
-        el.classList.remove('active');
-      });
-      document.getElementById(tabId).classList.add('active');
-    }
-  </script>
-
   <!-- Projects Section -->
-  <section id="projects" class="scroll-fade py-20 px-6 bg-white text-center">
+  <section id="projects" class="py-20 px-6 bg-white text-center">
     <h2 class="text-3xl font-bold mb-6">Projects</h2>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-      <div class="bg-gray-100 p-6 rounded-xl shadow hover:shadow-lg transition">
+      <div class="bg-gray-100 p-6 rounded-xl shadow hover:shadow-xl transition transform hover:scale-105 zoom-in">
         <h3 class="font-semibold text-xl mb-2">E-Commerce Platform</h3>
         <p>Custom-built scalable shop for a leading fashion retailer.</p>
       </div>
-      <div class="bg-gray-100 p-6 rounded-xl shadow hover:shadow-lg transition">
+      <div class="bg-gray-100 p-6 rounded-xl shadow hover:shadow-xl transition transform hover:scale-105 zoom-in">
         <h3 class="font-semibold text-xl mb-2">Healthcare Portal</h3>
         <p>A secure patient-doctor dashboard system for clinics.</p>
       </div>
-      <div class="bg-gray-100 p-6 rounded-xl shadow hover:shadow-lg transition">
+      <div class="bg-gray-100 p-6 rounded-xl shadow hover:shadow-xl transition transform hover:scale-105 zoom-in">
         <h3 class="font-semibold text-xl mb-2">Brand Revamp</h3>
         <p>Full rebranding and digital strategy for a logistics firm.</p>
       </div>
@@ -114,7 +114,7 @@
   </section>
 
   <!-- About Section -->
-  <section id="about" class="scroll-fade py-20 px-6 bg-gray-50 text-center">
+  <section id="about" class="py-20 px-6 bg-gray-50 text-center">
     <h2 class="text-3xl font-bold mb-6">About Twinfusion</h2>
     <p class="max-w-3xl mx-auto text-lg leading-relaxed">
       We are a team of technologists, designers, and strategists passionate about helping brands innovate and thrive. Our mission is to fuse creativity and code to build experiences that matter.
@@ -122,7 +122,7 @@
   </section>
 
   <!-- Clients Section -->
-  <section id="clients" class="scroll-fade py-20 px-6 bg-white text-center">
+  <section id="clients" class="py-20 px-6 bg-white text-center">
     <h2 class="text-3xl font-bold mb-10">Clients</h2>
     <div class="flex flex-wrap justify-center items-center gap-8">
       <span class="text-xl font-medium text-gray-600">Acme Inc</span>
@@ -134,7 +134,7 @@
   </section>
 
   <!-- Services Section -->
-  <section id="services" class="scroll-fade py-20 px-6 bg-gray-50 text-center">
+  <section id="services" class="py-20 px-6 bg-gray-50 text-center">
     <h2 class="text-3xl font-bold mb-6">Our Services</h2>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
       <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
@@ -153,18 +153,18 @@
   </section>
 
   <!-- Blogs Section -->
-  <section id="blogs" class="scroll-fade py-20 px-6 bg-white text-center">
+  <section id="blogs" class="py-20 px-6 bg-white text-center">
     <h2 class="text-3xl font-bold mb-6">Latest Blogs</h2>
     <div class="max-w-3xl mx-auto space-y-6 text-left">
-      <article class="border-l-4 border-red-500 pl-4">
+      <article class="border-l-4 border-red-500 pl-4 blog-hover cursor-pointer">
         <h3 class="text-xl font-semibold">Why Branding is Your Secret Weapon</h3>
         <p class="text-gray-600 text-sm">April 2025 · 3 min read</p>
       </article>
-      <article class="border-l-4 border-red-500 pl-4">
+      <article class="border-l-4 border-red-500 pl-4 blog-hover cursor-pointer">
         <h3 class="text-xl font-semibold">Choosing the Right Tech Stack for 2025</h3>
         <p class="text-gray-600 text-sm">March 2025 · 4 min read</p>
       </article>
-      <article class="border-l-4 border-red-500 pl-4">
+      <article class="border-l-4 border-red-500 pl-4 blog-hover cursor-pointer">
         <h3 class="text-xl font-semibold">Design Thinking in Web Projects</h3>
         <p class="text-gray-600 text-sm">February 2025 · 2 min read</p>
       </article>
@@ -176,18 +176,26 @@
     <p>&copy; 2025 Twinfusion. All rights reserved.</p>
   </footer>
 
-  <!-- Scroll Observer Script -->
+  <!-- Scripts -->
   <script>
-    const observer = new IntersectionObserver(entries => {
+    function showTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+    }
+
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-mode');
+    }
+
+    const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('show');
         }
       });
-    });
+    }, { threshold: 0.1 });
 
-    document.querySelectorAll('.scroll-fade').forEach(el => observer.observe(el));
+    document.querySelectorAll('.zoom-in').forEach(el => observer.observe(el));
   </script>
-
 </body>
 </html>
