@@ -74,33 +74,135 @@
     });
   </script>
 
-  <!-- Hero Section -->
-  <section class="hero-bg flex flex-col items-center justify-center text-center py-32 px-4 text-black bg-opacity-90">
-    <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-8 drop-shadow-md font-[Orbitron]">
-      Better Technology Solutions <span class="text-red-500">For Business Growth</span>.
-    </h1>
-    <div class="flex space-x-4 mt-4 mb-6">
-      <button onclick="showTab('branding')" class="px-6 py-2 bg-gray-300 text-black rounded-full hover:bg-red-100 transition">Branding</button>
-      <button onclick="showTab('development')" class="px-6 py-2 bg-gray-300 text-black rounded-full hover:bg-red-100 transition">Development</button>
-      <button onclick="showTab('web')" class="px-6 py-2 bg-gray-300 text-black rounded-full hover:bg-red-100 transition">Web Design</button>
-    </div>
-    <div id="branding" class="tab-content active text-lg max-w-xl text-red-500 font-[Orbitron]">
-      We craft identities that stand out, resonate, and build trust.
-    </div>
-    <div id="development" class="tab-content text-lg max-w-xl text-red-500 font-[Orbitron]">
-      From backend to frontend, we build robust, scalable, and modern digital solutions.
-    </div>
-    <div id="web" class="tab-content text-lg max-w-xl text-red-500 font-[Orbitron]">
-      Clean. Fast. Responsive. Our web designs combine beauty with function.
-    </div>
-  </section>
+ <!-- Hero Section -->
+<section class="hero-bg flex flex-col items-center justify-center text-center py-32 px-4 text-black bg-opacity-90">
+  <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-8 drop-shadow-md font-[Orbitron]">
+    Better Technology Solutions <span class="text-red-500">For Business Growth</span>.
+  </h1>
 
-  <script>
-    function showTab(tabId) {
-      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-      document.getElementById(tabId).classList.add('active');
+  <!-- Tab Buttons -->
+  <div class="flex space-x-4 mt-4 mb-6">
+    <button onclick="showTab('branding')" class="px-6 py-2 bg-gray-300 text-black rounded-full hover:bg-red-100 transition">Branding</button>
+    <button onclick="showTab('development')" class="px-6 py-2 bg-gray-300 text-black rounded-full hover:bg-red-100 transition">Development</button>
+    <button onclick="showTab('web')" class="px-6 py-2 bg-gray-300 text-black rounded-full hover:bg-red-100 transition">Web Design</button>
+  </div>
+
+  <!-- Branding Tab -->
+  <div id="branding" class="tab-content text-lg max-w-xl text-red-500 font-[Orbitron]">
+    <p>We craft identities that stand out, resonate, and build trust.</p>
+    <div class="slideshow relative mt-4">
+      <img class="slide-img hidden opacity-0 transition-opacity duration-700 absolute inset-0 w-full" src="branding1.jpg" alt="Branding 1">
+      <img class="slide-img hidden opacity-0 transition-opacity duration-700 absolute inset-0 w-full" src="branding2.jpg" alt="Branding 2">
+      <img class="slide-img hidden opacity-0 transition-opacity duration-700 absolute inset-0 w-full" src="branding3.jpg" alt="Branding 3">
+      <div class="flex justify-between mt-48 relative z-10">
+        <button onclick="prevSlide('branding')" class="bg-white/60 px-4 py-1 rounded-l">⟨</button>
+        <button onclick="nextSlide('branding')" class="bg-white/60 px-4 py-1 rounded-r">⟩</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Development Tab -->
+  <div id="development" class="tab-content hidden text-lg max-w-xl text-red-500 font-[Orbitron]">
+    <p>From backend to frontend, we build robust, scalable, and modern digital solutions.</p>
+    <div class="slideshow relative mt-4">
+      <img class="slide-img hidden opacity-0 transition-opacity duration-700 absolute inset-0 w-full" src="dev1.jpg" alt="Dev 1">
+      <img class="slide-img hidden opacity-0 transition-opacity duration-700 absolute inset-0 w-full" src="dev2.jpg" alt="Dev 2">
+      <img class="slide-img hidden opacity-0 transition-opacity duration-700 absolute inset-0 w-full" src="dev3.jpg" alt="Dev 3">
+      <div class="flex justify-between mt-48 relative z-10">
+        <button onclick="prevSlide('development')" class="bg-white/60 px-4 py-1 rounded-l">⟨</button>
+        <button onclick="nextSlide('development')" class="bg-white/60 px-4 py-1 rounded-r">⟩</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Web Design Tab -->
+  <div id="web" class="tab-content hidden text-lg max-w-xl text-red-500 font-[Orbitron]">
+    <p>Clean. Fast. Responsive. Our web designs combine beauty with function.</p>
+    <div class="slideshow relative mt-4">
+      <img class="slide-img hidden opacity-0 transition-opacity duration-700 absolute inset-0 w-full" src="web1.jpg" alt="Web 1">
+      <img class="slide-img hidden opacity-0 transition-opacity duration-700 absolute inset-0 w-full" src="web2.jpg" alt="Web 2">
+      <img class="slide-img hidden opacity-0 transition-opacity duration-700 absolute inset-0 w-full" src="web3.jpg" alt="Web 3">
+      <div class="flex justify-between mt-48 relative z-10">
+        <button onclick="prevSlide('web')" class="bg-white/60 px-4 py-1 rounded-l">⟨</button>
+        <button onclick="nextSlide('web')" class="bg-white/60 px-4 py-1 rounded-r">⟩</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Tailwind-style Helpers -->
+<style>
+  .hidden { display: none; }
+</style>
+
+<!-- JavaScript -->
+<script>
+  const slideshows = {};
+
+  function showTab(tabId) {
+    // Hide all tabs
+    document.querySelectorAll('.tab-content').forEach(tab => {
+      tab.classList.add('hidden');
+    });
+
+    // Show selected tab
+    const selected = document.getElementById(tabId);
+    selected.classList.remove('hidden');
+
+    // Stop all intervals
+    for (let id in slideshows) {
+      clearInterval(slideshows[id].interval);
     }
-  </script>
+
+    // Start new slideshow
+    initSlideShow(tabId);
+  }
+
+  function initSlideShow(tabId) {
+    const tab = document.getElementById(tabId);
+    const images = tab.querySelectorAll('.slide-img');
+    if (!images.length) return;
+
+    images.forEach(img => {
+      img.classList.add('hidden', 'opacity-0');
+    });
+
+    let index = 0;
+    images[index].classList.remove('hidden');
+    images[index].classList.add('opacity-100');
+
+    slideshows[tabId] = {
+      index,
+      images,
+      interval: setInterval(() => nextSlide(tabId), 3000)
+    };
+  }
+
+  function nextSlide(tabId) {
+    const show = slideshows[tabId];
+    if (!show) return;
+
+    const { images } = show;
+    images[show.index].classList.add('hidden', 'opacity-0');
+    show.index = (show.index + 1) % images.length;
+    images[show.index].classList.remove('hidden');
+    images[show.index].classList.add('opacity-100');
+  }
+
+  function prevSlide(tabId) {
+    const show = slideshows[tabId];
+    if (!show) return;
+
+    const { images } = show;
+    images[show.index].classList.add('hidden', 'opacity-0');
+    show.index = (show.index - 1 + images.length) % images.length;
+    images[show.index].classList.remove('hidden');
+    images[show.index].classList.add('opacity-100');
+  }
+
+  // Show branding tab by default
+  window.onload = () => showTab('branding');
+</script>
 
   <!-- Value We Provide -->
   <section id="value" class="py-20 px-6 bg-white text-center">
