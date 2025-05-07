@@ -33,6 +33,23 @@
       opacity: 1;
     }
   </style>
+  <style>
+    @keyframes marquee {
+  0%   { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+@keyframes marquee-reverse {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+.animate-marquee {
+  animation: marquee 15s linear infinite;
+}
+.animate-marquee-reverse {
+  animation: marquee-reverse 15s linear infinite;
+}
+
+  </style>
 </head>
 <body class="bg-white text-gray-900 font-sans">
 
@@ -127,16 +144,38 @@
     }, 5000);
   </script>
 
-  <!-- Value Section with Fade -->
-  <section id="value" class="py-20 px-6 bg-white text-center animate-fadeIn">
-    <h2 class="text-3xl font-bold mb-6">The Value We Provide</h2>
-    <div class="max-w-4xl mx-auto text-lg leading-relaxed">
-      <p class="mb-4 hover:scale-105 transition">While many POS providers focus on general solutions, we engineer systems tailored to your business logic.</p>
-      <p class="mb-4 hover:scale-105 transition">Integrated with hardware and mobile money systems for seamless real-time reporting.</p>
-      <p class="mb-4 hover:scale-105 transition">Modular, transparent, and full data ownership—no hidden fees or lock-ins.</p>
-      <p class="hover:scale-105 transition">We deliver performance, flexibility, and elite support tailored to your vision.</p>
+  <!-- Value Section with Futuristic Marquee Style -->
+<section id="value" class="py-20 px-6 bg-black text-center text-white animate-fadeIn">
+  <h2 class="text-3xl font-bold mb-12 tracking-widest uppercase text-cyan-400">The Value We Provide</h2>
+  <div class="space-y-6 max-w-5xl mx-auto">
+    
+    <div class="overflow-hidden relative h-12">
+      <p class="whitespace-nowrap animate-marquee text-lg hover:scale-105 transition duration-300 ease-in-out text-green-300">
+        While many POS providers focus on general solutions, we engineer systems tailored to your business logic.
+      </p>
     </div>
-  </section>
+    
+    <div class="overflow-hidden relative h-12">
+      <p class="whitespace-nowrap animate-marquee-reverse text-lg hover:scale-105 transition duration-300 ease-in-out text-blue-300">
+        Integrated with hardware and mobile money systems for seamless real-time reporting.
+      </p>
+    </div>
+
+    <div class="overflow-hidden relative h-12">
+      <p class="whitespace-nowrap animate-marquee text-lg hover:scale-105 transition duration-300 ease-in-out text-purple-300">
+        Modular, transparent, and full data ownership—no hidden fees or lock-ins.
+      </p>
+    </div>
+
+    <div class="overflow-hidden relative h-12">
+      <p class="whitespace-nowrap animate-marquee-reverse text-lg hover:scale-105 transition duration-300 ease-in-out text-pink-400">
+        We deliver performance, flexibility, and elite support tailored to your vision.
+      </p>
+    </div>
+
+  </div>
+</section>
+
 
   <!-- Projects Section with Pulse -->
   <section id="projects" class="py-20 px-6 bg-white text-center">
