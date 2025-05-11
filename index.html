@@ -1,119 +1,218 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Twinfusion – Tech Consultancy</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet" />
-    <style>
-      html {
-        scroll-behavior: smooth;
-      }
-      body {
-        font-family: 'Orbitron', sans-serif;
-      }
-    </style>
-  </head>
-  <body class="bg-white text-gray-800">
-    <!-- Navbar -->
-    <nav class="sticky top-0 bg-white shadow z-50 px-6 py-4 flex justify-between items-center">
-      <h1 class="text-2xl font-bold text-red-600">Twinfusion</h1>
-      <div class="space-x-6 text-sm md:text-base hidden md:flex">
-        <a href="#hero" class="hover:text-red-500">Home</a>
-        <a href="#projects" class="hover:text-red-500">Projects</a>
-        <a href="#clients" class="hover:text-red-500">Clients</a>
-        <a href="#contact" class="hover:text-red-500">Contact</a>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Twinfusion – Tech Consultancy</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Orbitron', sans-serif;
+    }
+    .tab-content { display: none; }
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .carousel-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+    .carousel-image.active {
+      opacity: 1;
+    }
+  </style>
+  <style>
+   @keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+.animate-float-delayed {
+  animation: float 6s ease-in-out infinite;
+  animation-delay: 2s;
+}
+.glow-text {
+  text-shadow: 0 0 10px rgba(0,255,255,0.6), 0 0 20px rgba(0,255,255,0.4);
+}
+.glow-box {
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.1), 0 0 40px rgba(0, 255, 255, 0.05);
+  transition: transform 0.3s ease;
+}
+.glow-box:hover {
+  transform: scale(1.03);
+}
+
+
+  </style>
+</head>
+<body class="bg-white text-gray-900 font-sans">
+
+   <!-- Navigation Bar -->
+ <header class="bg-purple-600 shadow py-4 px-6">
+    <div class="max-w-6xl mx-auto flex items-center justify-between">
+      <!-- Logo -->
+      <div class="flex items-center space-x-2">
+        <img src="logo.png" alt="Twinfusion Logo" class="h-10 w-auto">
+        <span class="text-xl font-bold"></span>
       </div>
-    </nav>
 
-    <!-- Hero Section -->
-    <section id="hero" class="h-screen bg-gradient-to-br from-gray-900 to-black flex flex-col justify-center items-center text-center text-white px-4">
-      <h2 class="text-3xl md:text-6xl font-bold mb-4">We <span id="typed" class="text-red-500"></span></h2>
-      <p class="text-lg md:text-xl max-w-2xl mb-6">Your one-stop tech consultancy for development, branding & digital strategy</p>
-      <a href="#projects" class="bg-red-600 px-6 py-3 rounded-full text-white font-semibold hover:bg-red-700 transition">Explore Our Work</a>
-    </section>
+     <!-- Desktop Menu -->
+<nav class="hidden md:flex space-x-6 text-lg font-medium">
+  <a href="#projects" class="hover:text-white transition">Projects</a>
+  <a href="#about" class="hover:text-white transition">About</a>
+  <a href="#clients" class="hover:text-white transition">Clients</a>
+  <a href="#services" class="hover:text-white transition">Services</a>
+  <a href="blog.html" class="hover:text-white transition font-semibold text-red-600">Blog</a>
+</nav>
 
-    <!-- Projects Section -->
-    <section id="projects" class="py-20 bg-gray-100 text-center px-4">
-      <h2 class="text-3xl font-bold mb-6">Our Projects</h2>
-      <div class="grid md:grid-cols-3 gap-6">
-        <div class="bg-white shadow hover:shadow-xl rounded-lg p-6 transition-transform hover:-translate-y-1">
-          <h3 class="text-xl font-semibold mb-2">Custom Web Apps</h3>
-          <p>Building powerful applications tailored to your business workflow.</p>
-        </div>
-        <div class="bg-white shadow hover:shadow-xl rounded-lg p-6 transition-transform hover:-translate-y-1">
-          <h3 class="text-xl font-semibold mb-2">E-Commerce Solutions</h3>
-          <p>From inventory to checkout, we craft seamless online stores.</p>
-        </div>
-        <div class="bg-white shadow hover:shadow-xl rounded-lg p-6 transition-transform hover:-translate-y-1">
-          <h3 class="text-xl font-semibold mb-2">Digital Branding</h3>
-          <p>We design modern brand identities that stand out online.</p>
-        </div>
+      <!-- Hamburger -->
+      <div class="md:hidden">
+        <button id="menu-toggle" class="focus:outline-none">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
       </div>
-    </section>
+    </div>
 
-    <!-- Clients Section -->
-    <section id="clients" class="py-20 bg-white px-4">
-      <h2 class="text-3xl font-bold text-center mb-6">Trusted By</h2>
-      <div class="overflow-hidden whitespace-nowrap animate-marquee flex space-x-12 justify-center">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Google-flutter-logo.svg" alt="Client" class="h-12" />
-        <img src="https://upload.wikimedia.org/wikipedia/commons/1/17/Google-flutter-logo.png" alt="Client" class="h-12" />
-        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" alt="Client" class="h-12" />
-        <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Sass_Logo_Color.svg" alt="Client" class="h-12" />
-        <!-- Add more logos -->
-      </div>
-    </section>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="md:hidden hidden px-6 pt-4 space-y-2 text-lg font-medium">
+      <a href="#projects" class="block hover:text-red-500">Projects</a>
+      <a href="#about" class="block hover:text-red-500">About</a>
+      <a href="#clients" class="block hover:text-red-500">Clients</a>
+      <a href="#services" class="block hover:text-red-500">Services</a>
+      <a href="blog.html" class="block hover:text-red-600 font-semibold">Blog</a>
+    </div>
+  </header>
 
-    <!-- Testimonials Carousel -->
-    <section class="bg-gray-100 py-20 px-4 text-center">
-      <h2 class="text-3xl font-bold mb-10">What Clients Say</h2>
-      <div class="max-w-xl mx-auto">
-        <div class="bg-white p-6 rounded-lg shadow transition hover:shadow-xl">
-          <p class="text-lg italic mb-4">"Twinfusion built us a fast, beautiful web app and were incredible to work with."</p>
-          <h4 class="font-semibold">— Jane M., Startup Founder</h4>
-        </div>
-      </div>
-    </section>
+  <script>
+    document.getElementById("menu-toggle").addEventListener("click", function () {
+      const menu = document.getElementById("mobile-menu");
+      menu.classList.toggle("hidden");
+    });
+  </script>
 
-    <!-- Contact -->
-    <section id="contact" class="py-20 px-4 bg-black text-white text-center">
-      <h2 class="text-3xl font-bold mb-4">Let’s Work Together</h2>
-      <p class="mb-6">Reach us at <a href="mailto:info@twinfusion.tech" class="underline text-red-400">info@twinfusion.tech</a></p>
-      <a href="mailto:info@twinfusion.tech" class="bg-red-600 px-6 py-3 rounded-full font-semibold hover:bg-red-700 transition">Send Inquiry</a>
-    </section>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-gray-300 py-6 text-center text-sm">
-      &copy; 2025 Twinfusion. All rights reserved.
-    </footer>
+ <!-- Hero Section with Carousel and CTA -->
+<section class="relative h-screen flex flex-col items-center justify-center text-center px-4 text-white overflow-hidden">
+  <!-- Carousel Images -->
+  <div class="absolute inset-0 z-0">
+    <img src="herosection1.png" class="carousel-image active" />
+    <img src="herosection2.png" class="carousel-image" />
+    <img src="herosection3.png" class="carousel-image" />
+  </div>
 
-    <!-- Scroll to Top Button -->
-    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
-      class="fixed bottom-5 right-5 bg-red-600 text-white px-3 py-2 rounded-full shadow-lg hover:bg-red-700 transition">
-      ↑
-    </button>
+  <!-- Content Overlay -->
+  <div class="relative z-10 bg-black bg-opacity-70 p-6 sm:p-10 rounded-xl max-w-3xl w-full">
+    <h1 class="text-3xl sm:text-5xl font-bold leading-tight mb-6 drop-shadow-md font-[Orbitron]">
+      Better Technology Solutions <span class="text-red-500">For Business Growth</span>.
+    </h1>
 
-    <!-- Typed.js -->
-    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-    <script>
-      new Typed("#typed", {
-        strings: ["Innovate.", "Design.", "Build."],
-        typeSpeed: 80,
-        backSpeed: 50,
-        loop: true
-      });
-    </script>
+    <!-- Tabs -->
+    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-6">
+      <button onclick="showTab('branding')" class="px-4 py-2 bg-white text-black rounded-full hover:bg-red-100 transition">Branding</button>
+      <button onclick="showTab('development')" class="px-4 py-2 bg-white text-black rounded-full hover:bg-red-100 transition">Development</button>
+      <button onclick="showTab('web')" class="px-4 py-2 bg-white text-black rounded-full hover:bg-red-100 transition">Web Design</button>
+    </div>
 
-    <!-- Marquee Animation -->
-    <style>
-      @keyframes marquee {
-        0% { transform: translateX(100%) }
-        100% { transform: translateX(-100%) }
-      }
-      .animate-marquee {
-        animation: marquee 20s linear infinite;
-      }
-    </style>
-  </body>
-</html>
+    <!-- Tab Content -->
+    <div id="branding" class="tab-content active text-base sm:text-lg max-w-xl text-red-400 font-[Orbitron]">
+      We craft identities that stand out, resonate, and build trust.
+    </div>
+    <div id="development" class="tab-content text-base sm:text-lg max-w-xl text-red-400 font-[Orbitron]">
+      From backend to frontend, we build robust, scalable, and modern digital solutions.
+    </div>
+    <div id="web" class="tab-content text-base sm:text-lg max-w-xl text-red-400 font-[Orbitron]">
+      Clean. Fast. Responsive. Our web designs combine beauty with function.
+    </div>
+
+    <!-- CTA Buttons -->
+    <div class="mt-8 flex flex-col sm:flex-row justify-center gap-4">
+      <a href="#services" class="bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-lg transition shadow-lg">Explore Services</a>
+      <a href="#contact" class="border border-white hover:bg-white hover:text-black font-semibold px-6 py-3 rounded-lg transition">Get a Quote</a>
+    </div>
+  </div>
+</section>
+
+
+  <script>
+    function showTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+    }
+
+    // Carousel logic
+    const images = document.querySelectorAll('.carousel-image');
+    let current = 0;
+    setInterval(() => {
+      images[current].classList.remove('active');
+      current = (current + 1) % images.length;
+      images[current].classList.add('active');
+    }, 5000);
+  </script>
+
+ <!-- Value Section with Futuristic Glow and Motion -->
+<section id="value" class="py-20 px-6 bg-gradient-to-b from-gray-900 to-black text-white text-center">
+  <h2 class="text-4xl font-extrabold mb-12 tracking-wide text-cyan-400 glow-text">The Value We Provide</h2>
+  
+  <div class="max-w-5xl mx-auto space-y-8">
+    <div class="p-6 backdrop-blur-md bg-white/5 border border-cyan-400/30 rounded-lg shadow-md animate-float glow-box">
+      <p class="text-lg leading-relaxed">While many POS providers focus on general solutions, we engineer systems tailored to your business logic.</p>
+    </div>
+    
+    <div class="p-6 backdrop-blur-md bg-white/5 border border-indigo-400/30 rounded-lg shadow-md animate-float-delayed glow-box">
+      <p class="text-lg leading-relaxed">Integrated with hardware and mobile money systems for seamless real-time reporting.</p>
+    </div>
+    
+    <div class="p-6 backdrop-blur-md bg-white/5 border border-purple-400/30 rounded-lg shadow-md animate-float glow-box">
+      <p class="text-lg leading-relaxed">Modular, transparent, and full data ownership—no hidden fees or lock-ins.</p>
+    </div>
+    
+    <div class="p-6 backdrop-blur-md bg-white/5 border border-pink-400/30 rounded-lg shadow-md animate-float-delayed glow-box">
+      <p class="text-lg leading-relaxed">We deliver performance, flexibility, and elite support tailored to your vision.</p>
+    </div>
+  </div>
+</section>
+
+
+ <!-- Projects Section with Enhanced Styling -->
+<section id="projects" class="py-24 px-6 bg-gradient-to-b from-white via-gray-50 to-white text-center">
+  <h2 class="text-4xl font-extrabold mb-12 text-gray-800 tracking-tight">✨ Our Projects</h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
+
+    <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-200 hover:shadow-2xl transform hover:-translate-y-2 transition duration-500 group relative overflow-hidden">
+      <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-400 to-blue-500 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
+      <h3 class="text-2xl font-semibold text-gray-800 mb-3 group-hover:text-green-600 transition duration-300">Muthokinju POS Integration</h3>
+      <p class="text-gray-600 leading-relaxed">Custom POS for Sales and Operations Streamlining for Muthokinju Paints.</p>
+    </div>
+
+    <!-- Add more project cards here if needed -->
+
+  </div>
+</section>
+
+  <!-- About Section with Enhanced Zoom and Style -->
+<section id="about" class="py-24 px-6 bg-gradient-to-b from-gray-50 via-white to-gray-50 text-center">
+  <h2 class="text-4xl font-extrabold mb-8 text-gray-800 tracking-tight">💡 About Twinfusion</h2>
+  <div class="max-w-4xl mx-auto">
+    <p class="text-xl text-gray-600 leading-relaxed transform transition duration-500 hover:scale-105 hover:text-gray-800">
+      We are <span class="font-semibold text-purple-600">technologists</span>, <span class="font-semibold text-blue-600">designers</span>, and <span class="font-semibold text-pink-600">strategists</span> building experiences that matter. We merge creativity with code to deliver purposeful digital solutions.
+    </p>
+  </div>
+</section>
+
