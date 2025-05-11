@@ -32,31 +32,27 @@
     .carousel-image.active {
       opacity: 1;
     }
-  </style>
-  <style>
-   @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-8px); }
-}
-.animate-float {
-  animation: float 6s ease-in-out infinite;
-}
-.animate-float-delayed {
-  animation: float 6s ease-in-out infinite;
-  animation-delay: 2s;
-}
-.glow-text {
-  text-shadow: 0 0 10px rgba(0,255,255,0.6), 0 0 20px rgba(0,255,255,0.4);
-}
-.glow-box {
-  box-shadow: 0 0 20px rgba(0, 255, 255, 0.1), 0 0 40px rgba(0, 255, 255, 0.05);
-  transition: transform 0.3s ease;
-}
-.glow-box:hover {
-  transform: scale(1.03);
-}
-
-
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+    .animate-float {
+      animation: float 6s ease-in-out infinite;
+    }
+    .animate-float-delayed {
+      animation: float 6s ease-in-out infinite;
+      animation-delay: 2s;
+    }
+    .glow-text {
+      text-shadow: 0 0 10px rgba(0,255,255,0.6), 0 0 20px rgba(0,255,255,0.4);
+    }
+    .glow-box {
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.1), 0 0 40px rgba(0, 255, 255, 0.05);
+      transition: transform 0.3s ease;
+    }
+    .glow-box:hover {
+      transform: scale(1.03);
+    }
   </style>
 </head>
 <body class="bg-white text-gray-900 font-sans">
@@ -71,13 +67,13 @@
       </div>
 
      <!-- Desktop Menu -->
-<nav class="hidden md:flex space-x-6 text-lg font-medium">
-  <a href="#projects" class="hover:text-white transition">Projects</a>
-  <a href="#about" class="hover:text-white transition">About</a>
-  <a href="#clients" class="hover:text-white transition">Clients</a>
-  <a href="#services" class="hover:text-white transition">Services</a>
-  <a href="blog.html" class="hover:text-white transition font-semibold text-red-600">Blog</a>
-</nav>
+      <nav class="hidden md:flex space-x-6 text-lg font-medium">
+        <a href="#projects" class="hover:text-white transition">Projects</a>
+        <a href="#about" class="hover:text-white transition">About</a>
+        <a href="#clients" class="hover:text-white transition">Clients</a>
+        <a href="#services" class="hover:text-white transition">Services</a>
+        <a href="blog.html" class="hover:text-white transition font-semibold text-red-600">Blog</a>
+      </nav>
 
       <!-- Hamburger -->
       <div class="md:hidden">
@@ -107,48 +103,46 @@
     });
   </script>
 
-
- <!-- Hero Section with Carousel and CTA -->
-<section class="relative h-screen flex flex-col items-center justify-center text-center px-4 text-white overflow-hidden">
-  <!-- Carousel Images -->
-  <div class="absolute inset-0 z-0">
-    <img src="herosection1.png" class="carousel-image active" />
-    <img src="herosection2.png" class="carousel-image" />
-    <img src="herosection3.png" class="carousel-image" />
-  </div>
-
-  <!-- Content Overlay -->
-  <div class="relative z-10 bg-black bg-opacity-70 p-6 sm:p-10 rounded-xl max-w-3xl w-full">
-    <h1 class="text-3xl sm:text-5xl font-bold leading-tight mb-6 drop-shadow-md font-[Orbitron]">
-      Better Technology Solutions <span class="text-red-500">For Business Growth</span>.
-    </h1>
-
-    <!-- Tabs -->
-    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-6">
-      <button onclick="showTab('branding')" class="px-4 py-2 bg-white text-black rounded-full hover:bg-red-100 transition">Branding</button>
-      <button onclick="showTab('development')" class="px-4 py-2 bg-white text-black rounded-full hover:bg-red-100 transition">Development</button>
-      <button onclick="showTab('web')" class="px-4 py-2 bg-white text-black rounded-full hover:bg-red-100 transition">Web Design</button>
+  <!-- Hero Section with Carousel and CTA -->
+  <section class="relative h-screen flex flex-col items-center justify-center text-center px-4 text-white overflow-hidden">
+    <!-- Carousel Images -->
+    <div class="absolute inset-0 z-0">
+      <img src="herosection1.png" class="carousel-image active" />
+      <img src="herosection2.png" class="carousel-image" />
+      <img src="herosection3.png" class="carousel-image" />
     </div>
 
-    <!-- Tab Content -->
-    <div id="branding" class="tab-content active text-base sm:text-lg max-w-xl text-red-400 font-[Orbitron]">
-      We craft identities that stand out, resonate, and build trust.
-    </div>
-    <div id="development" class="tab-content text-base sm:text-lg max-w-xl text-red-400 font-[Orbitron]">
-      From backend to frontend, we build robust, scalable, and modern digital solutions.
-    </div>
-    <div id="web" class="tab-content text-base sm:text-lg max-w-xl text-red-400 font-[Orbitron]">
-      Clean. Fast. Responsive. Our web designs combine beauty with function.
-    </div>
+    <!-- Content Overlay -->
+    <div class="relative z-10 bg-black bg-opacity-70 p-6 sm:p-10 rounded-xl max-w-3xl w-full">
+      <h1 class="text-3xl sm:text-5xl font-bold leading-tight mb-6 drop-shadow-md font-[Orbitron]">
+        Better Technology Solutions <span class="text-red-500">For Business Growth</span>.
+      </h1>
 
-    <!-- CTA Buttons -->
-    <div class="mt-8 flex flex-col sm:flex-row justify-center gap-4">
-      <a href="#services" class="bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-lg transition shadow-lg">Explore Services</a>
-      <a href="#contact" class="border border-white hover:bg-white hover:text-black font-semibold px-6 py-3 rounded-lg transition">Get a Quote</a>
-    </div>
-  </div>
-</section>
+      <!-- Tabs -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-6">
+        <button onclick="showTab('branding')" class="px-4 py-2 bg-white text-black rounded-full hover:bg-red-100 transition">Branding</button>
+        <button onclick="showTab('development')" class="px-4 py-2 bg-white text-black rounded-full hover:bg-red-100 transition">Development</button>
+        <button onclick="showTab('web')" class="px-4 py-2 bg-white text-black rounded-full hover:bg-red-100 transition">Web Design</button>
+      </div>
 
+      <!-- Tab Content -->
+      <div id="branding" class="tab-content active text-base sm:text-lg max-w-xl text-red-400 font-[Orbitron]">
+        We craft identities that stand out, resonate, and build trust.
+      </div>
+      <div id="development" class="tab-content text-base sm:text-lg max-w-xl text-red-400 font-[Orbitron]">
+        From backend to frontend, we build robust, scalable, and modern digital solutions.
+      </div>
+      <div id="web" class="tab-content text-base sm:text-lg max-w-xl text-red-400 font-[Orbitron]">
+        Clean. Fast. Responsive. Our web designs combine beauty with function.
+      </div>
+
+      <!-- CTA Buttons -->
+      <div class="mt-8 flex flex-col sm:flex-row justify-center gap-4">
+        <a href="#services" class="bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-lg transition shadow-lg">Explore Services</a>
+        <a href="#contact" class="border border-white hover:bg-white hover:text-black font-semibold px-6 py-3 rounded-lg transition">Get a Quote</a>
+      </div>
+    </div>
+  </section>
 
   <script>
     function showTab(tabId) {
@@ -166,53 +160,51 @@
     }, 5000);
   </script>
 
- <!-- Value Section with Futuristic Glow and Motion -->
-<section id="value" class="py-20 px-6 bg-gradient-to-b from-gray-900 to-black text-white text-center">
-  <h2 class="text-4xl font-extrabold mb-12 tracking-wide text-cyan-400 glow-text">The Value We Provide</h2>
-  
-  <div class="max-w-5xl mx-auto space-y-8">
-    <div class="p-6 backdrop-blur-md bg-white/5 border border-cyan-400/30 rounded-lg shadow-md animate-float glow-box">
-      <p class="text-lg leading-relaxed">While many POS providers focus on general solutions, we engineer systems tailored to your business logic.</p>
-    </div>
+  <!-- Value Section with Futuristic Glow and Motion -->
+  <section id="value" class="py-20 px-6 bg-gradient-to-b from-gray-900 to-black text-white text-center">
+    <h2 class="text-4xl font-extrabold mb-12 tracking-wide text-cyan-400 glow-text">The Value We Provide</h2>
     
-    <div class="p-6 backdrop-blur-md bg-white/5 border border-indigo-400/30 rounded-lg shadow-md animate-float-delayed glow-box">
-      <p class="text-lg leading-relaxed">Integrated with hardware and mobile money systems for seamless real-time reporting.</p>
+    <div class="max-w-5xl mx-auto space-y-8">
+      <div class="p-6 backdrop-blur-md bg-white/5 border border-cyan-400/30 rounded-lg shadow-md animate-float glow-box">
+        <p class="text-lg leading-relaxed">While many POS providers focus on general solutions, we engineer systems tailored to your business logic.</p>
+      </div>
+      
+      <div class="p-6 backdrop-blur-md bg-white/5 border border-indigo-400/30 rounded-lg shadow-md animate-float-delayed glow-box">
+        <p class="text-lg leading-relaxed">Integrated with hardware and mobile money systems for seamless real-time reporting.</p>
+      </div>
+      
+      <div class="p-6 backdrop-blur-md bg-white/5 border border-purple-400/30 rounded-lg shadow-md animate-float glow-box">
+        <p class="text-lg leading-relaxed">Modular, transparent, and full data ownership—no hidden fees or lock-ins.</p>
+      </div>
+      
+      <div class="p-6 backdrop-blur-md bg-white/5 border border-pink-400/30 rounded-lg shadow-md animate-float-delayed glow-box">
+        <p class="text-lg leading-relaxed">We deliver performance, flexibility, and elite support tailored to your vision.</p>
+      </div>
     </div>
-    
-    <div class="p-6 backdrop-blur-md bg-white/5 border border-purple-400/30 rounded-lg shadow-md animate-float glow-box">
-      <p class="text-lg leading-relaxed">Modular, transparent, and full data ownership—no hidden fees or lock-ins.</p>
+  </section>
+
+  <!-- Projects Section with Enhanced Styling -->
+  <section id="projects" class="py-24 px-6 bg-gradient-to-b from-white via-gray-50 to-white text-center">
+    <h2 class="text-4xl font-extrabold mb-12 text-gray-800 tracking-tight">✨ Our Projects</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
+
+      <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-200 hover:shadow-2xl transform hover:-translate-y-2 transition duration-500 group relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-400 to-blue-500 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
+        <h3 class="text-2xl font-semibold text-gray-800 mb-3 group-hover:text-green-600 transition duration-300">Muthokinju POS Integration</h3>
+        <p class="text-gray-600 leading-relaxed">Custom POS for Sales and Operations Streamlining for Muthokinju Paints.</p>
+      </div>
+
     </div>
-    
-    <div class="p-6 backdrop-blur-md bg-white/5 border border-pink-400/30 rounded-lg shadow-md animate-float-delayed glow-box">
-      <p class="text-lg leading-relaxed">We deliver performance, flexibility, and elite support tailored to your vision.</p>
-    </div>
-  </div>
-</section>
-
-
- <!-- Projects Section with Enhanced Styling -->
-<section id="projects" class="py-24 px-6 bg-gradient-to-b from-white via-gray-50 to-white text-center">
-  <h2 class="text-4xl font-extrabold mb-12 text-gray-800 tracking-tight">✨ Our Projects</h2>
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
-
-    <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-200 hover:shadow-2xl transform hover:-translate-y-2 transition duration-500 group relative overflow-hidden">
-      <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-400 to-blue-500 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
-      <h3 class="text-2xl font-semibold text-gray-800 mb-3 group-hover:text-green-600 transition duration-300">Muthokinju POS Integration</h3>
-      <p class="text-gray-600 leading-relaxed">Custom POS for Sales and Operations Streamlining for Muthokinju Paints.</p>
-    </div>
-
-    <!-- Add more project cards here if needed -->
-
-  </div>
-</section>
+  </section>
 
   <!-- About Section with Enhanced Zoom and Style -->
-<section id="about" class="py-24 px-6 bg-gradient-to-b from-gray-50 via-white to-gray-50 text-center">
-  <h2 class="text-4xl font-extrabold mb-8 text-gray-800 tracking-tight">💡 About Twinfusion</h2>
-  <div class="max-w-4xl mx-auto">
-    <p class="text-xl text-gray-600 leading-relaxed transform transition duration-500 hover:scale-105 hover:text-gray-800">
-      We are <span class="font-semibold text-purple-600">technologists</span>, <span class="font-semibold text-blue-600">designers</span>, and <span class="font-semibold text-pink-600">strategists</span> building experiences that matter. We merge creativity with code to deliver purposeful digital solutions.
-    </p>
-  </div>
-</section>
-
+  <section id="about" class="py-24 px-6 bg-gradient-to-b from-gray-50 via-white to-gray-50 text-center">
+    <h2 class="text-4xl font-extrabold mb-8 text-gray-800 tracking-tight">💡 About Twinfusion</h2>
+    <div class="max-w-4xl mx-auto">
+      <p class="text-xl text-gray-600 leading-relaxed transform transition duration-500 hover:scale-105 hover:text-gray-800">
+        We are <span class="font-semibold text-purple-600">technologists</span>, <span class="font-semibold text-blue-600">designers</span>, and <span class="font-semibold text-pink-600">strategists</span> building experiences that matter. We merge creativity with code to deliver purposeful digital solutions.
+      </p>
+    </div>
+  </section>
+</body>
+</html>
