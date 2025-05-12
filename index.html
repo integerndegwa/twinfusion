@@ -9,7 +9,6 @@
   <style>
     body {
       font-family: 'Orbitron', sans-serif;
-      scroll-behavior: smooth;
     }
     .tab-content { display: none; }
     .tab-content.active {
@@ -33,60 +32,52 @@
     .carousel-image.active {
       opacity: 1;
     }
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-8px); }
-    }
-    .animate-float {
-      animation: float 6s ease-in-out infinite;
-    }
-    .animate-float-delayed {
-      animation: float 6s ease-in-out infinite;
-      animation-delay: 2s;
-    }
-    .glow-text {
-      text-shadow: 0 0 10px rgba(0,255,255,0.6), 0 0 20px rgba(0,255,255,0.4);
-    }
-    .glow-box {
-      box-shadow: 0 0 20px rgba(0, 255, 255, 0.1), 0 0 40px rgba(0, 255, 255, 0.05);
-      transition: transform 0.3s ease;
-    }
-    .glow-box:hover {
-      transform: scale(1.03);
-    }
-    /* Parallax Effect */
-    .parallax {
-      background-image: url('your-image.jpg');
-      height: 100vh;
-      background-attachment: fixed;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-    }
-    /* Custom cursor */
-    body {
-      cursor: url('cursor.png'), auto;
-    }
+  </style>
+  <style>
+   @keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+.animate-float-delayed {
+  animation: float 6s ease-in-out infinite;
+  animation-delay: 2s;
+}
+.glow-text {
+  text-shadow: 0 0 10px rgba(0,255,255,0.6), 0 0 20px rgba(0,255,255,0.4);
+}
+.glow-box {
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.1), 0 0 40px rgba(0, 255, 255, 0.05);
+  transition: transform 0.3s ease;
+}
+.glow-box:hover {
+  transform: scale(1.03);
+}
+
+
   </style>
 </head>
 <body class="bg-white text-gray-900 font-sans">
 
-  <!-- Navigation Bar -->
-  <header class="bg-purple-600 shadow py-4 px-6">
+   <!-- Navigation Bar -->
+ <header class="bg-purple-600 shadow py-4 px-6">
     <div class="max-w-6xl mx-auto flex items-center justify-between">
+      <!-- Logo -->
       <div class="flex items-center space-x-2">
         <img src="logo.png" alt="Twinfusion Logo" class="h-10 w-auto">
         <span class="text-xl font-bold"></span>
       </div>
 
-      <!-- Desktop Menu -->
-      <nav class="hidden md:flex space-x-6 text-lg font-medium">
-        <a href="#projects" class="hover:text-white transition">Projects</a>
-        <a href="#about" class="hover:text-white transition">About</a>
-        <a href="#clients" class="hover:text-white transition">Clients</a>
-        <a href="#services" class="hover:text-white transition">Services</a>
-        <a href="blog.html" class="hover:text-white transition font-semibold text-red-600">Blog</a>
-      </nav>
+     <!-- Desktop Menu -->
+<nav class="hidden md:flex space-x-6 text-lg font-medium">
+  <a href="#projects" class="hover:text-white transition">Projects</a>
+  <a href="#about" class="hover:text-white transition">About</a>
+  <a href="#clients" class="hover:text-white transition">Clients</a>
+  <a href="#services" class="hover:text-white transition">Services</a>
+  <a href="blog.html" class="hover:text-white transition font-semibold text-red-600">Blog</a>
+</nav>
 
       <!-- Hamburger -->
       <div class="md:hidden">
@@ -116,43 +107,48 @@
     });
   </script>
 
-  <!-- Hero Section with Carousel and CTA -->
-  <section class="relative h-screen flex flex-col items-center justify-center text-center px-4 text-white overflow-hidden parallax">
-    <div class="absolute inset-0 z-0">
-      <img src="herosection1.png" class="carousel-image active" />
-      <img src="herosection2.png" class="carousel-image" />
-      <img src="herosection3.png" class="carousel-image" />
+
+ <!-- Hero Section with Carousel and CTA -->
+<section class="relative h-screen flex flex-col items-center justify-center text-center px-4 text-white overflow-hidden">
+  <!-- Carousel Images -->
+  <div class="absolute inset-0 z-0">
+    <img src="herosection1.png" class="carousel-image active" />
+    <img src="herosection2.png" class="carousel-image" />
+    <img src="herosection3.png" class="carousel-image" />
+  </div>
+
+  <!-- Content Overlay -->
+  <div class="relative z-10 bg-black bg-opacity-70 p-6 sm:p-10 rounded-xl max-w-3xl w-full">
+    <h1 class="text-3xl sm:text-5xl font-bold leading-tight mb-6 drop-shadow-md font-[Orbitron]">
+      Better Technology Solutions <span class="text-red-500">For Business Growth</span>.
+    </h1>
+
+    <!-- Tabs -->
+    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-6">
+      <button onclick="showTab('branding')" class="px-4 py-2 bg-white text-black rounded-full hover:bg-red-100 transition">Branding</button>
+      <button onclick="showTab('development')" class="px-4 py-2 bg-white text-black rounded-full hover:bg-red-100 transition">Development</button>
+      <button onclick="showTab('web')" class="px-4 py-2 bg-white text-black rounded-full hover:bg-red-100 transition">Web Design</button>
     </div>
-    <div class="relative z-10 bg-black bg-opacity-70 p-6 sm:p-10 rounded-xl max-w-3xl w-full">
-      <h1 class="text-3xl sm:text-5xl font-bold leading-tight mb-6 drop-shadow-md font-[Orbitron]">
-        Better Technology Solutions <span class="text-red-500">For Business Growth</span>.
-      </h1>
 
-      <!-- Tabs -->
-      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-6">
-        <button onclick="showTab('branding')" class="px-4 py-2 bg-white text-black rounded-full hover:bg-red-100 transition">Branding</button>
-        <button onclick="showTab('development')" class="px-4 py-2 bg-white text-black rounded-full hover:bg-red-100 transition">Development</button>
-        <button onclick="showTab('web')" class="px-4 py-2 bg-white text-black rounded-full hover:bg-red-100 transition">Web Design</button>
-      </div>
-
-      <!-- Tab Content -->
-      <div id="branding" class="tab-content active text-base sm:text-lg max-w-xl text-red-400 font-[Orbitron]">
-        We craft identities that stand out, resonate, and build trust.
-      </div>
-      <div id="development" class="tab-content text-base sm:text-lg max-w-xl text-red-400 font-[Orbitron]">
-        From backend to frontend, we build robust, scalable, and modern digital solutions.
-      </div>
-      <div id="web" class="tab-content text-base sm:text-lg max-w-xl text-red-400 font-[Orbitron]">
-        Clean. Fast. Responsive. Our web designs combine beauty with function.
-      </div>
-
-      <!-- CTA Buttons -->
-      <div class="mt-8 flex flex-col sm:flex-row justify-center gap-4">
-        <a href="#services" class="bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-lg transition shadow-lg">Explore Services</a>
-        <a href="#contact" class="border border-white hover:bg-white hover:text-black font-semibold px-6 py-3 rounded-lg transition">Get a Quote</a>
-      </div>
+    <!-- Tab Content -->
+    <div id="branding" class="tab-content active text-base sm:text-lg max-w-xl text-red-400 font-[Orbitron]">
+      We craft identities that stand out, resonate, and build trust.
     </div>
-  </section>
+    <div id="development" class="tab-content text-base sm:text-lg max-w-xl text-red-400 font-[Orbitron]">
+      From backend to frontend, we build robust, scalable, and modern digital solutions.
+    </div>
+    <div id="web" class="tab-content text-base sm:text-lg max-w-xl text-red-400 font-[Orbitron]">
+      Clean. Fast. Responsive. Our web designs combine beauty with function.
+    </div>
+
+    <!-- CTA Buttons -->
+    <div class="mt-8 flex flex-col sm:flex-row justify-center gap-4">
+      <a href="#services" class="bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-lg transition shadow-lg">Explore Services</a>
+      <a href="#contact" class="border border-white hover:bg-white hover:text-black font-semibold px-6 py-3 rounded-lg transition">Get a Quote</a>
+    </div>
+  </div>
+</section>
+
 
   <script>
     function showTab(tabId) {
@@ -170,63 +166,159 @@
     }, 5000);
   </script>
 
-  <!-- Value Section with Futuristic Glow and Motion -->
-  <section id="value" class="py-20 px-6 bg-gradient-to-b from-gray-900 to-black text-white text-center">
-    <h2 class="text-4xl font-extrabold mb-12 tracking-wide text-cyan-400 glow-text">The Value We Provide</h2>
+ <!-- Value Section with Futuristic Glow and Motion -->
+<section id="value" class="py-20 px-6 bg-gradient-to-b from-gray-900 to-black text-white text-center">
+  <h2 class="text-4xl font-extrabold mb-12 tracking-wide text-cyan-400 glow-text">The Value We Provide</h2>
+  
+  <div class="max-w-5xl mx-auto space-y-8">
+    <div class="p-6 backdrop-blur-md bg-white/5 border border-cyan-400/30 rounded-lg shadow-md animate-float glow-box">
+      <p class="text-lg leading-relaxed">While many POS providers focus on general solutions, we engineer systems tailored to your business logic.</p>
+    </div>
+    
+    <div class="p-6 backdrop-blur-md bg-white/5 border border-indigo-400/30 rounded-lg shadow-md animate-float-delayed glow-box">
+      <p class="text-lg leading-relaxed">Integrated with hardware and mobile money systems for seamless real-time reporting.</p>
+    </div>
+    
+    <div class="p-6 backdrop-blur-md bg-white/5 border border-purple-400/30 rounded-lg shadow-md animate-float glow-box">
+      <p class="text-lg leading-relaxed">Modular, transparent, and full data ownership—no hidden fees or lock-ins.</p>
+    </div>
+    
+    <div class="p-6 backdrop-blur-md bg-white/5 border border-pink-400/30 rounded-lg shadow-md animate-float-delayed glow-box">
+      <p class="text-lg leading-relaxed">We deliver performance, flexibility, and elite support tailored to your vision.</p>
+    </div>
+  </div>
+</section>
 
-    <div class="max-w-5xl mx-auto space-y-8">
-      <div class="p-6 backdrop-blur-md bg-white/5 border border-cyan-400/30 rounded-lg shadow-md animate-float glow-box">
-        <p class="text-lg leading-relaxed">While many POS providers focus on general solutions, we engineer systems tailored to your business logic.</p>
-      </div>
 
-      <div class="p-6 backdrop-blur-md bg-white/5 border border-indigo-400/30 rounded-lg shadow-md animate-float-delayed glow-box">
-        <p class="text-lg leading-relaxed">Integrated with hardware and mobile money systems for seamless real-time reporting.</p>
-      </div>
 
-      <div class="p-6 backdrop-blur-md bg-white/5 border border-purple-400/30 rounded-lg shadow-md animate-float glow-box">
-        <p class="text-lg leading-relaxed">Modular, transparent, and full data ownership—no hidden fees or lock-ins.</p>
-      </div>
+  <!-- Projects Section with Enhanced Styling -->
+<section id="projects" class="py-24 px-6 bg-gradient-to-b from-white via-gray-50 to-white text-center">
+  <h2 class="text-4xl font-extrabold mb-12 text-gray-800 tracking-tight">✨ Our Projects</h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
 
-      <div class="p-6 backdrop-blur-md bg-white/5 border border-pink-400/30 rounded-lg shadow-md animate-float-delayed glow-box">
-        <p class="text-lg leading-relaxed">We deliver performance, flexibility, and elite support tailored to your vision.</p>
-      </div>
+    <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-200 hover:shadow-2xl transform hover:-translate-y-2 transition duration-500 group relative overflow-hidden">
+      <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-400 to-blue-500 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
+      <h3 class="text-2xl font-semibold text-gray-800 mb-3 group-hover:text-green-600 transition duration-300">Muthokinju POS Integration</h3>
+      <p class="text-gray-600 leading-relaxed">Custom POS for Sales and Operations Streamlining for Muthokinju Paints.</p>
+    </div>
+     <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-200 hover:shadow-2xl transform hover:-translate-y-2 transition duration-500 group relative overflow-hidden">
+      <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-400 to-blue-500 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
+      <h3 class="text-2xl font-semibold text-gray-800 mb-3 group-hover:text-green-600 transition duration-300">Al Jamea University Project</h3>
+      <p class="text-gray-600 leading-relaxed">Developed Al Jamea University Project Management Solution for procurement handling by different departments.</p>
+    </div>
+
+    <!-- Add more project cards here if needed -->
+
+  </div>
+</section>
+
+  <!-- About Section with Enhanced Zoom and Style -->
+<section id="about" class="py-24 px-6 bg-gradient-to-b from-gray-50 via-white to-gray-50 text-center">
+  <h2 class="text-4xl font-extrabold mb-8 text-gray-800 tracking-tight">💡 About Twinfusion</h2>
+  <div class="max-w-4xl mx-auto">
+    <p class="text-xl text-gray-600 leading-relaxed transform transition duration-500 hover:scale-105 hover:text-gray-800">
+      We are <span class="font-semibold text-purple-600">technologists</span>, <span class="font-semibold text-blue-600">designers</span>, and <span class="font-semibold text-pink-600">strategists</span> building experiences that matter. We merge creativity with code to deliver purposeful digital solutions.
+    </p>
+  </div>
+</section>
+
+
+  <!-- Clients Section with Logo Effects -->
+  <section id="clients" class="py-20 px-6 bg-white text-center">
+    <h2 class="text-3xl font-bold mb-10">Clients</h2>
+    <div class="flex flex-wrap justify-center items-center gap-8">
+      <img src="fairdeal.png" class="h-16 object-contain hover:scale-110 transition" />
+      <img src="formlab.png" class="h-16 object-contain hover:scale-110 transition" />
+      <img src="homecare.png" class="h-16 object-contain hover:scale-110 transition" />
+      <img src="retreat.png" class="h-16 object-contain hover:scale-110 transition" />
+      <img src="alhatim.png" class="h-16 object-contain hover:scale-110 transition" />
+      <img src="ajsn.png" class="h-16 object-contain hover:scale-110 transition" />
     </div>
   </section>
 
-  <!-- Projects Section -->
-  <section id="projects" class="py-24 px-6 bg-gradient-to-b from-white via-gray-50 to-white text-center">
-    <h2 class="text-4xl font-extrabold mb-12 text-gray-800 tracking-tight">✨ Our Projects</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
-      <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-200 hover:shadow-2xl transform hover:-translate-y-2 transition duration-500 group relative overflow-hidden">
-        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-400 to-blue-500 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
-        <h3 class="text-2xl font-semibold text-gray-800 mb-3 group-hover:text-green-600 transition duration-300">Muthokinju POS Integration</h3>
-        <p class="text-gray-600 leading-relaxed">Custom POS for Sales and Operations Streamlining for Muthokinju Paints.</p>
-      </div>
+ <!-- Enhanced Services Section -->
+<section id="services" class="py-24 px-6 bg-gradient-to-b from-white via-gray-50 to-white text-center">
+  <h2 class="text-4xl font-extrabold mb-12 text-gray-800 tracking-tight">🛠️ Our Services</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
 
-      <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-200 hover:shadow-2xl transform hover:-translate-y-2 transition duration-500 group relative overflow-hidden">
-        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-400 to-blue-500 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
-        <h3 class="text-2xl font-semibold text-gray-800 mb-3 group-hover:text-green-600 transition duration-300">Al Jamea University Project</h3>
-        <p class="text-gray-600 leading-relaxed">Developed Al Jamea University Project Management Solution for procurement handling by different departments.</p>
-      </div>
-
-      <!-- Add more project cards here if needed -->
+     <!-- Service Card -->
+    <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-200 hover:shadow-2xl hover:-translate-y-2 transition duration-500 group relative overflow-hidden">
+      <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 to-pink-500 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
+      <h3 class="text-xl font-semibold text-gray-800 mb-3 group-hover:text-purple-600 transition">Saify POS</h3>
+      <p class="text-gray-600 leading-relaxed">Handles Front-End & Sales, Online Ordering, and Inventory Management.</p>
     </div>
-  </section>
 
-  <!-- About Section -->
-  <section id="about" class="py-24 px-6 bg-gradient-to-b from-gray-50 via-white to-gray-50 text-center">
-    <h2 class="text-4xl font-extrabold mb-8 text-gray-800 tracking-tight">💡 About Twinfusion</h2>
-    <div class="max-w-4xl mx-auto">
-      <p class="text-xl text-gray-600 leading-relaxed transform transition duration-500 hover:scale-105 hover:text-gray-800">
-        We are <span class="font-semibold text-purple-600">technologists</span>, <span class="font-semibold text-blue-600">designers</span>, and <span class="font-semibold text-pink-600">strategists</span> building experiences that matter. We merge creativity with code to deliver purposeful digital solutions.
-      </p>
+
+    <!-- Service Card -->
+    <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-200 hover:shadow-2xl hover:-translate-y-2 transition duration-500 group relative overflow-hidden">
+      <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 to-pink-500 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
+      <h3 class="text-xl font-semibold text-gray-800 mb-3 group-hover:text-purple-600 transition">Custom Software Solutions</h3>
+      <p class="text-gray-600 leading-relaxed">Streamline your operations with custom software solutions.</p>
     </div>
-  </section>
+
+    <!-- Service Card -->
+    <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-200 hover:shadow-2xl hover:-translate-y-2 transition duration-500 group relative overflow-hidden">
+      <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-cyan-500 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
+      <h3 class="text-xl font-semibold text-gray-800 mb-3 group-hover:text-blue-600 transition">Web & Mobile App Development</h3>
+      <p class="text-gray-600 leading-relaxed">Achieve your marketing goals and revenue targets with tailored app solutions.</p>
+    </div>
+
+    <!-- Service Card -->
+    <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-200 hover:shadow-2xl hover:-translate-y-2 transition duration-500 group relative overflow-hidden">
+      <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-400 to-teal-500 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
+      <h3 class="text-xl font-semibold text-gray-800 mb-3 group-hover:text-green-600 transition">Enterprise Software Development</h3>
+      <p class="text-gray-600 leading-relaxed">Secure and robust software that gives your business a competitive edge.</p>
+    </div>
+
+    <!-- Service Card -->
+    <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-200 hover:shadow-2xl hover:-translate-y-2 transition duration-500 group relative overflow-hidden">
+      <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-yellow-400 to-orange-500 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
+      <h3 class="text-xl font-semibold text-gray-800 mb-3 group-hover:text-yellow-600 transition">Digital Marketing & Social Media</h3>
+      <p class="text-gray-600 leading-relaxed">Cross-platform campaigns that power engagement in today’s digital landscape.</p>
+    </div>
+
+    <!-- Service Card -->
+    <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-200 hover:shadow-2xl hover:-translate-y-2 transition duration-500 group relative overflow-hidden">
+      <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 to-fuchsia-500 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
+      <h3 class="text-xl font-semibold text-gray-800 mb-3 group-hover:text-indigo-600 transition">Digital Infrastructure & Analytics</h3>
+      <p class="text-gray-600 leading-relaxed">Unlock business insights and reach with cutting-edge digital architecture and analytics.</p>
+    </div>
+
+  </div>
+</section>
+
+  <!-- Enhanced Blogs Section -->
+<section id="blogs" class="py-24 px-6 bg-white text-center">
+  <h2 class="text-4xl font-extrabold mb-12 text-gray-800 tracking-tight">📝 Latest Blogs</h2>
+  <div class="max-w-4xl mx-auto grid gap-6 text-left">
+
+    <!-- Blog Card -->
+    <a href="blog.html" class="block bg-gray-50 p-6 rounded-xl shadow-sm hover:shadow-md hover:scale-[1.015] transition duration-300 border-l-4 border-red-500 group">
+      <h3 class="text-xl font-semibold text-gray-800 mb-1 group-hover:text-red-600 transition">Why Branding is Your Secret Weapon</h3>
+      <p class="text-sm text-gray-500">April 2025 · 3 min read</p>
+    </a>
+
+    <!-- Blog Card -->
+    <a href="blog.html" class="block bg-gray-50 p-6 rounded-xl shadow-sm hover:shadow-md hover:scale-[1.015] transition duration-300 border-l-4 border-red-500 group">
+      <h3 class="text-xl font-semibold text-gray-800 mb-1 group-hover:text-red-600 transition">Choosing the Right Tech Stack for 2025</h3>
+      <p class="text-sm text-gray-500">March 2025 · 4 min read</p>
+    </a>
+
+    <!-- Blog Card -->
+    <a href="blog.html" class="block bg-gray-50 p-6 rounded-xl shadow-sm hover:shadow-md hover:scale-[1.015] transition duration-300 border-l-4 border-red-500 group">
+      <h3 class="text-xl font-semibold text-gray-800 mb-1 group-hover:text-red-600 transition">Design Thinking in Web Projects</h3>
+      <p class="text-sm text-gray-500">February 2025 · 2 min read</p>
+    </a>
+
+  </div>
+</section>
+
 
   <!-- Footer -->
   <footer class="py-10 text-center bg-gray-100 text-gray-600">
     <p>&copy; 2025 Twinfusion. All rights reserved.</p>
   </footer>
+
 
 </body>
 </html>
