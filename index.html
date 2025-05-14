@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Twinfusion - Your Partner in Tech Excellence</title>
+    <title>Innovatech Solutions - Your Partner in Tech Excellence</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -51,6 +51,44 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* Slideshow Styles */
+        #hero-slideshow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0; /* Behind hero content */
+        }
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out; /* Smooth fade transition */
+            z-index: 1;
+        }
+        .hero-slide.active {
+            opacity: 1;
+            z-index: 2;
+        }
+        /* Dark overlay for better text readability on slideshow */
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Adjust opacity as needed */
+            z-index: 3; /* Above slides, below text */
+        }
+
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased">
@@ -59,7 +97,7 @@
         <div class="container mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
                 <a href="#" class="text-2xl font-bold text-indigo-600">
-                    Twinfusion<span class="text-sky-500">.</span>
+                    Innovatech<span class="text-sky-500">.</span>
                 </a>
                 <div class="hidden md:flex space-x-6 items-center">
                     <a href="#home" class="text-slate-600 hover:text-indigo-600 transition duration-300">Home</a>
@@ -86,11 +124,16 @@
         </div>
     </nav>
 
-    <header id="home" class="min-h-screen bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center text-white pt-20 relative overflow-hidden">
-        <div class="absolute inset-0 opacity-20">
-             <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="smallGrid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100%" height="100%" fill="url(#smallGrid)" /></svg>
+    <header id="home" class="min-h-screen flex items-center justify-center text-white pt-20 relative overflow-hidden">
+        <div id="hero-slideshow">
+            <div class="hero-slide active" style="background-image: url('https://placehold.co/1920x1080/312E81/FFFFFF?text=Innovative+Solutions&font=Inter');"></div>
+            <div class="hero-slide" style="background-image: url('https://placehold.co/1920x1080/4F46E5/FFFFFF?text=Tech+Excellence&font=Inter');"></div>
+            <div class="hero-slide" style="background-image: url('https://placehold.co/1920x1080/7C3AED/FFFFFF?text=Future+Forward&font=Inter');"></div>
+            <div class="hero-slide" style="background-image: url('https://placehold.co/1920x1080/DB2777/FFFFFF?text=Client+Focused&font=Inter');"></div>
         </div>
-        <div class="container mx-auto px-6 text-center relative z-10">
+        <div class="hero-overlay"></div>
+
+        <div class="container mx-auto px-6 text-center relative z-10"> {/* z-10 to ensure text is above overlay */}
             <h1 class="text-4xl sm:text-5xl md:text-7xl font-extrabold mb-6 animate-fadeInSlideUp" style="opacity:0;">
                 Transforming Businesses with <span class="block md:inline">Cutting-Edge Technology</span>
             </h1>
@@ -98,12 +141,12 @@
                 We architect, build, and scale innovative digital solutions that drive growth and efficiency.
             </p>
             <div class="animate-fadeInSlideUp delay-400" style="opacity:0;">
-                <a href="#services" class="bg-white text-indigo-600 font-bold py-4 px-8 rounded-lg text-lg shadow-xl hover:bg-slate-100 transition duration-300 transform hover:scale-105">
+                <a href="#services" class="bg-white text-indigo-700 font-bold py-4 px-8 rounded-lg text-lg shadow-xl hover:bg-slate-100 transition duration-300 transform hover:scale-105">
                     Discover Our Expertise
                 </a>
             </div>
         </div>
-        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce z-10">
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce z-10"> {/* z-10 for visibility */}
             <a href="#services" aria-label="Scroll down">
                 <svg class="w-8 h-8 text-white opacity-70 hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
             </a>
@@ -146,7 +189,7 @@
         <div class="container mx-auto px-6">
             <div class="flex flex-col md:flex-row items-center gap-10 md:gap-16">
                 <div class="md:w-1/2">
-                    <img src="https://placehold.co/600x400/6366F1/FFFFFF?text=Our+Team&font=Inter" alt="Our Team Working" class="rounded-xl shadow-2xl w-full">
+                    <img src="https://placehold.co/600x400/6366F1/FFFFFF?text=Our+Team&font=Inter" alt="Our Team Working" class="rounded-xl shadow-2xl w-full" onerror="this.onerror=null;this.src='https://placehold.co/600x400/E0E7FF/6366F1?text=Image+Not+Found';">
                 </div>
                 <div class="md:w-1/2">
                     <span class="text-indigo-600 font-semibold">Who We Are</span>
@@ -203,11 +246,11 @@
                 <p class="text-lg text-slate-600 mt-2 md:mt-4">We're proud to have partnered with amazing companies.</p>
             </div>
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8 items-center">
-                <img src="https://placehold.co/200x100/E0E7FF/6366F1?text=Client+Logo+1" alt="Client Logo 1" class="mx-auto opacity-70 hover:opacity-100 transition-opacity duration-300">
-                <img src="https://placehold.co/200x100/E0E7FF/6366F1?text=Client+Logo+2" alt="Client Logo 2" class="mx-auto opacity-70 hover:opacity-100 transition-opacity duration-300">
-                <img src="https://placehold.co/200x100/E0E7FF/6366F1?text=Client+Logo+3" alt="Client Logo 3" class="mx-auto opacity-70 hover:opacity-100 transition-opacity duration-300">
-                <img src="https://placehold.co/200x100/E0E7FF/6366F1?text=Client+Logo+4" alt="Client Logo 4" class="mx-auto opacity-70 hover:opacity-100 transition-opacity duration-300">
-                <img src="https://placehold.co/200x100/E0E7FF/6366F1?text=Client+Logo+5" alt="Client Logo 5" class="mx-auto opacity-70 hover:opacity-100 transition-opacity duration-300">
+                <img src="https://placehold.co/200x100/E0E7FF/6366F1?text=Client+Logo+1" alt="Client Logo 1" class="mx-auto opacity-70 hover:opacity-100 transition-opacity duration-300" onerror="this.onerror=null;this.src='https://placehold.co/200x100/CCCCCC/999999?text=Logo+Error';">
+                <img src="https://placehold.co/200x100/E0E7FF/6366F1?text=Client+Logo+2" alt="Client Logo 2" class="mx-auto opacity-70 hover:opacity-100 transition-opacity duration-300" onerror="this.onerror=null;this.src='https://placehold.co/200x100/CCCCCC/999999?text=Logo+Error';">
+                <img src="https://placehold.co/200x100/E0E7FF/6366F1?text=Client+Logo+3" alt="Client Logo 3" class="mx-auto opacity-70 hover:opacity-100 transition-opacity duration-300" onerror="this.onerror=null;this.src='https://placehold.co/200x100/CCCCCC/999999?text=Logo+Error';">
+                <img src="https://placehold.co/200x100/E0E7FF/6366F1?text=Client+Logo+4" alt="Client Logo 4" class="mx-auto opacity-70 hover:opacity-100 transition-opacity duration-300" onerror="this.onerror=null;this.src='https://placehold.co/200x100/CCCCCC/999999?text=Logo+Error';">
+                <img src="https://placehold.co/200x100/E0E7FF/6366F1?text=Client+Logo+5" alt="Client Logo 5" class="mx-auto opacity-70 hover:opacity-100 transition-opacity duration-300" onerror="this.onerror=null;this.src='https://placehold.co/200x100/CCCCCC/999999?text=Logo+Error';">
             </div>
         </div>
     </section>
@@ -222,7 +265,7 @@
                 <div class="bg-indigo-700/50 p-8 rounded-xl shadow-xl backdrop-blur-sm">
                     <p class="text-indigo-50 italic leading-relaxed mb-6">"Innovatech Solutions transformed our operations. Their expertise and dedication were pivotal to our project's success. Highly recommended!"</p>
                     <div class="flex items-center">
-                        <img src="https://placehold.co/50x50/FFFFFF/6366F1?text=AP&font=Inter" alt="Alex P." class="w-12 h-12 rounded-full mr-4 border-2 border-sky-400">
+                        <img src="https://placehold.co/50x50/FFFFFF/6366F1?text=AP&font=Inter" alt="Alex P." class="w-12 h-12 rounded-full mr-4 border-2 border-sky-400" onerror="this.onerror=null;this.src='https://placehold.co/50x50/CCCCCC/999999?text=Err';">
                         <div>
                             <p class="font-semibold text-white">Alex P.</p>
                             <p class="text-indigo-200 text-sm">CEO, TechForward Inc.</p>
@@ -232,7 +275,7 @@
                 <div class="bg-indigo-700/50 p-8 rounded-xl shadow-xl backdrop-blur-sm">
                     <p class="text-indigo-50 italic leading-relaxed mb-6">"The team at Innovatech is incredibly knowledgeable and responsive. They delivered a solution that exceeded our expectations on time and budget."</p>
                     <div class="flex items-center">
-                        <img src="https://placehold.co/50x50/FFFFFF/6366F1?text=SJ&font=Inter" alt="Sarah J." class="w-12 h-12 rounded-full mr-4 border-2 border-sky-400">
+                        <img src="https://placehold.co/50x50/FFFFFF/6366F1?text=SJ&font=Inter" alt="Sarah J." class="w-12 h-12 rounded-full mr-4 border-2 border-sky-400" onerror="this.onerror=null;this.src='https://placehold.co/50x50/CCCCCC/999999?text=Err';">
                         <div>
                             <p class="font-semibold text-white">Sarah J.</p>
                             <p class="text-indigo-200 text-sm">CTO, MarketBoost Co.</p>
@@ -263,8 +306,7 @@
                 <p class="text-lg text-slate-600 mt-2 md:mt-4 max-w-xl mx-auto">We're here to answer your questions and explore how we can help.</p>
             </div>
             <div class="max-w-2xl mx-auto bg-slate-50 p-8 md:p-12 rounded-xl shadow-2xl">
-                <form action="#" method="POST">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <form action="#" method="POST"> <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                         <div>
                             <label for="name" class="block text-sm font-medium text-slate-700 mb-1">Full Name</label>
                             <input type="text" name="name" id="name" required class="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-150" placeholder="John Doe">
@@ -381,7 +423,7 @@
 
         // Navbar shrink on scroll
         const navbar = document.getElementById('navbar');
-        let lastScrollTop = 0;
+        // let lastScrollTop = 0; // This variable was declared but not used effectively, can be removed if not needed for other logic.
         window.addEventListener('scroll', function() {
             let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             if (scrollTop > 50) {
@@ -391,23 +433,22 @@
                 navbar.classList.add('py-4');
                 navbar.classList.remove('py-2');
             }
-            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // For Mobile or negative scrolling
+            // lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; 
         }, false);
 
         // Intersection Observer for section animations
         const sections = document.querySelectorAll('.section-transition');
         const observerOptions = {
-            root: null, // relative to document viewport
+            root: null, 
             rootMargin: '0px',
-            threshold: 0.1 // 10% of item is visible
+            threshold: 0.1 
         };
 
-        const observer = new IntersectionObserver((entries, observer) => {
+        const observer = new IntersectionObserver((entries, obs) => { // Renamed observer to obs to avoid conflict
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
-                    // Optional: unobserve after animation
-                    // observer.unobserve(entry.target); 
+                    // obs.unobserve(entry.target); // Optional: unobserve after animation
                 }
             });
         }, observerOptions);
@@ -415,6 +456,22 @@
         sections.forEach(section => {
             observer.observe(section);
         });
+
+        // Hero Slideshow Logic
+        const slides = document.querySelectorAll('#hero-slideshow .hero-slide');
+        let currentSlide = 0;
+        const slideInterval = 5000; // Time in ms (5 seconds)
+
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+
+        // Start the slideshow
+        if (slides.length > 1) {
+            setInterval(nextSlide, slideInterval);
+        }
 
     </script>
 </body>
