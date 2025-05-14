@@ -47,15 +47,21 @@
             background: var(--color-primary);
         }
 
-        /* Styles for Tabs */
+        /* Styles for Tabs (now controlling slideshow) */
         .tab-content {
             display: none; /* Hide all tab content by default */
             opacity: 0; /* Start hidden for fade-in */
             transition: opacity 0.8s ease-in-out; /* Slower transition */
+            position: absolute; /* Position for slideshow stacking */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
         }
         .tab-content.active {
             display: block; /* Show active tab content */
             opacity: 1; /* Fade in */
+            position: relative; /* Active slide dictates container size */
         }
 
         /* Style for tab buttons */
@@ -206,47 +212,124 @@
             filter: grayscale(0%) brightness(100%); /* Full color on hover */
         }
 
+        /* Slideshow container */
+        .slideshow-container {
+            position: relative;
+            max-width: 1200px; /* Match max-w-4xl */
+            margin: 0 auto; /* Center the container */
+            overflow: hidden; /* Hide overflowing slides */
+            border-radius: 0.5rem; /* Match rounded-lg */
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); /* Match shadow-2xl */
+            border: 1px solid var(--color-light-bg); /* Match border-gray-700 */
+            aspect-ratio: 16 / 9; /* Maintain aspect ratio */
+        }
+
+        /* Slideshow image styling */
+        .slideshow-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Cover the container */
+            display: block; /* Remove extra space below image */
+        }
+
+        /* Slideshow navigation dots */
+        .dot-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .dot {
+            cursor: pointer;
+            height: 12px;
+            width: 12px;
+            margin: 0 5px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+        }
+
+        .dot.active, .dot:hover {
+            background-color: var(--color-primary);
+        }
+
 
     </style>
 </head>
 <body class="bg-gray-100 text-gray-800 leading-normal tracking-wide">
 
-    <header class="bg-gray-900 shadow-md sticky top-0 z-50 bg-opacity-80 backdrop-filter backdrop-blur-lg border-b border-gray-700"> <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-cyan-500 hover:text-cyan-400 transition duration-300 ease-in-out font-[Orbitron] text-shadow: 0 0 5px rgba(15, 238, 240, 0.5);"> Twinfusion
+    <header class="bg-purple-900 shadow-md sticky top-0 z-50 bg-opacity-80 backdrop-filter backdrop-blur-lg border-b border-gray-700">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-cyan-500 hover:text-cyan-400 transition duration-300 ease-in-out font-[Orbitron] text-shadow: 0 0 5px rgba(15, 238, 240, 0.5);">
+                Twinfusion
             </a>
             <nav class="hidden md:flex space-x-8">
-                <a href="#services" class="text-gray-300 hover:text-cyan-500 transition duration-300 ease-in-out font-semibold">Services</a> <a href="#portfolio" class="text-gray-300 hover:text-cyan-500 transition duration-300 ease-in-out font-semibold">Portfolio</a> <a href="#clients" class="text-gray-300 hover:text-cyan-500 transition duration-300 ease-in-out font-semibold">Clients</a> <a href="#about" class="text-gray-300 hover:text-cyan-500 transition duration-300 ease-in-out font-semibold">About Us</a> <a href="#contact" class="text-gray-300 hover:text-cyan-500 transition duration-300 ease-in-out font-semibold">Contact</a> </nav>
+                <a href="#services" class="text-gray-300 hover:text-cyan-500 transition duration-300 ease-in-out font-semibold">Services</a>
+                <a href="#portfolio" class="text-gray-300 hover:text-cyan-500 transition duration-300 ease-in-out font-semibold">Portfolio</a>
+                <a href="#clients" class="text-gray-300 hover:text-cyan-500 transition duration-300 ease-in-out font-semibold">Clients</a>
+                <a href="#about" class="text-gray-300 hover:text-cyan-500 transition duration-300 ease-in-out font-semibold">About Us</a>
+                <a href="#contact" class="text-gray-300 hover:text-cyan-500 transition duration-300 ease-in-out font-semibold">Contact</a>
+            </nav>
             <div class="md:hidden">
                 <button id="mobile-menu-button" class="text-gray-300 hover:text-cyan-500 focus:outline-none">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                 </button>
             </div>
         </div>
-        <div id="mobile-menu" class="md:hidden bg-gray-900 shadow-lg hidden border-t border-gray-700"> <nav class="flex flex-col px-6 py-4 space-y-2">
-                <a href="#services" class="block text-gray-300 hover:text-cyan-500 transition duration-300 ease-in-out py-2 font-semibold">Services</a> <a href="#portfolio" class="block text-gray-300 hover:text-cyan-500 transition duration-300 ease-in-out py-2 font-semibold">Portfolio</a> <a href="#clients" class="block text-gray-300 hover:text-cyan-500 transition duration-300 ease-in-out py-2 font-semibold">Clients</a> <a href="#about" class="block text-gray-300 hover:text-cyan-500 transition duration-300 ease-in-out py-2 font-semibold">About Us</a> <a href="#contact" class="block text-gray-300 hover:text-cyan-500 transition duration-300 ease-in-out py-2 font-semibold">Contact</a> </nav>
+        <div id="mobile-menu" class="md:hidden bg-gray-900 shadow-lg hidden border-t border-gray-700">
+            <nav class="flex flex-col px-6 py-4 space-y-2">
+                <a href="#services" class="block text-gray-300 hover:text-cyan-500 transition duration-300 ease-in-out py-2 font-semibold">Services</a>
+                <a href="#portfolio" class="block text-gray-300 hover:text-cyan-500 transition duration-300 ease-in-out py-2 font-semibold">Portfolio</a>
+                <a href="#clients" class="block text-gray-300 hover:text-cyan-500 transition duration-300 ease-in-out py-2 font-semibold">Clients</a>
+                <a href="#about" class="block text-gray-300 hover:text-cyan-500 transition duration-300 ease-in-out py-2 font-semibold">About Us</a>
+                <a href="#contact" class="block text-gray-300 hover:text-cyan-500 transition duration-300 ease-in-out py-2 font-semibold">Contact</a>
+            </nav>
         </div>
     </header>
 
-    <section class="bg-gradient-to-br from-gray-900 to-purple-900 text-white py-24 md:py-40 text-center relative overflow-hidden border-b border-gray-800"> <div id="particles-js"></div>
+    <section class="bg-gradient-to-br from-gray-900 to-purple-900 text-white py-24 md:py-40 text-center relative overflow-hidden border-b border-gray-800">
+         <div id="particles-js"></div>
 
         <div class="container mx-auto px-6 relative z-10 animate-fade-in-up hero-content">
-            <h1 class="text-5xl md:text-7xl font-bold mb-8 animate-fade-in-up animation-delay-100 text-shadow: 0 0 15px rgba(123, 0, 255, 0.7);"> Unlocking Tomorrow's Technology, Today
+            <h1 class="text-5xl md:text-7xl font-bold mb-8 animate-fade-in-up animation-delay-100 text-shadow: 0 0 15px rgba(123, 0, 255, 0.7);">
+                Unlocking Tomorrow's Technology, Today
             </h1>
-             <div class="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16 animation-delay-300"> <button onclick="showTab('branding', this)" class="tab-button px-10 py-5 bg-gray-800 text-gray-300 rounded-full transition button-hover-effect active">Branding</button> <button onclick="showTab('development', this)" class="tab-button px-10 py-5 bg-gray-800 text-gray-300 rounded-full transition button-hover-effect">Development</button> <button onclick="showTab('web', this)" class="tab-button px-10 py-5 bg-gray-800 text-gray-300 rounded-full transition button-hover-effect">Web Design</button> </div>
+             <div class="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16 animation-delay-300">
+                <button onclick="currentSlide(1, this)" class="tab-button px-10 py-5 bg-gray-800 text-gray-300 rounded-full transition button-hover-effect active">Branding</button>
+                <button onclick="currentSlide(2, this)" class="tab-button px-10 py-5 bg-gray-800 text-gray-300 rounded-full transition button-hover-effect">Development</button>
+                <button onclick="currentSlide(3, this)" class="tab-button px-10 py-5 bg-gray-800 text-gray-300 rounded-full transition button-hover-effect">Web Design</button>
+            </div>
 
-            <div class="flex justify-center animation-delay-500 animate-scale-in">
-                <div id="branding" class="tab-content active max-w-4xl mx-auto rounded-lg shadow-2xl overflow-hidden border border-gray-700"> <img src="backgroundimage1.jpg" alt="Branding Solutions" class="w-full h-auto object-cover portfolio-image"> </div>
-                <div id="development" class="tab-content max-w-4xl mx-auto rounded-lg shadow-2xl overflow-hidden border border-gray-700"> <img src="backgroundimage2.jpg" alt="Development Expertise" class="w-full h-auto object-cover portfolio-image"> </div>
-                <div id="web" class="tab-content max-w-4xl mx-auto rounded-lg shadow-2xl overflow-hidden border border-gray-700"> <img src="backgroundimage3.jpg" alt="Web Design Services" class="w-full h-auto object-cover portfolio-image"> </div>
+            <div class="slideshow-container animation-delay-500 animate-scale-in">
+                <div class="tab-content fade">
+                    <img src="backgroundimage1.jpg" alt="Branding Solutions" class="slideshow-image portfolio-image">
+                </div>
+                <div class="tab-content fade">
+                     <img src="backgroundimage2.jpg" alt="Development Expertise" class="slideshow-image portfolio-image">
+                </div>
+                <div class="tab-content fade">
+                     <img src="backgroundimage3.jpg" alt="Web Design Services" class="slideshow-image portfolio-image">
+                </div>
+
+                <div class="dot-container">
+                    <span class="dot active" onclick="currentSlide(1, document.querySelectorAll('.tab-button')[0])"></span>
+                    <span class="dot" onclick="currentSlide(2, document.querySelectorAll('.tab-button')[1])"></span>
+                    <span class="dot" onclick="currentSlide(3, document.querySelectorAll('.tab-button')[2])"></span>
+                </div>
             </div>
 
 
-            <div class="mt-16 flex flex-col sm:flex-row justify-center gap-8 animation-delay-700"> <a href="#services" class="bg-accent hover:bg-pink-600 text-white font-semibold px-12 py-6 rounded-full transition shadow-lg button-hover-effect text-xl">Explore Services</a> <a href="#contact" class="border border-primary hover:bg-primary hover:text-dark-bg text-primary font-semibold px-12 py-6 rounded-full transition button-hover-effect text-xl">Get a Quote</a> </div>
+            <div class="mt-16 flex flex-col sm:flex-row justify-center gap-8 animation-delay-700">
+                <a href="#services" class="bg-accent hover:bg-pink-600 text-white font-semibold px-12 py-6 rounded-full transition shadow-lg button-hover-effect text-xl">Explore Services</a>
+                <a href="#contact" class="border border-primary hover:bg-primary hover:text-dark-bg text-primary font-semibold px-12 py-6 rounded-full transition button-hover-effect text-xl">Get a Quote</a>
+            </div>
         </div>
     </section>
 
-    <section id="services" class="py-24 md:py-40 section-dark border-b border-gray-800"> <div class="container mx-auto px-6">
-            <h2 class="text-4xl md:text-5xl font-bold text-center mb-20 animate-fade-in-up font-[Orbitron]">Our Expertise</h2> <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
+    <section id="services" class="py-24 md:py-40 section-dark border-b border-gray-800">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-20 animate-fade-in-up font-[Orbitron]">Our Expertise</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
                 <div class="bg-gray-800 p-12 rounded-lg shadow-xl card-hover-effect animate-fade-in-up animation-delay-200 border border-gray-700">
                     <div class="text-primary mb-8 text-center animate-pulse-glow">
                         <svg class="w-20 h-20 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h.01M17 14l.01 0M12 14h.01M12 10h.01M5 14h.01M19 17h-2a2 2 0 01-2-2V5a2 2 0 012-2h2a2 2 0 012 2v10a2 2 0 01-2 2z"></path></svg>
@@ -305,8 +388,10 @@
         </div>
     </section>
 
-    <section id="portfolio" class="py-24 md:py-40 section-light border-b border-gray-800"> <div class="container mx-auto px-6">
-            <h2 class="text-4xl md:text-5xl font-bold text-center mb-20 text-white animate-fade-in-up font-[Orbitron]">Our Work</h2> <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
+    <section id="portfolio" class="py-24 md:py-40 section-light border-b border-gray-800">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-20 text-white animate-fade-in-up font-[Orbitron]">Our Work</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
                 <div class="bg-gray-800 rounded-lg shadow-xl overflow-hidden card-hover-effect animate-fade-in-up animation-delay-200 border border-gray-700">
                     <img src="https://placehold.co/600x400/FF00AA/0A0A1A?text=Muthokinju+Paints+POS" alt="Muthokinju Paints POS Integration" class="w-full h-64 object-cover portfolio-image">
                     <div class="p-8">
@@ -323,6 +408,9 @@
                         <a href="#" class="text-primary hover:underline text-sm font-semibold">View Case Study &rarr;</a>
                     </div>
                 </div>
+                 <div class="bg-gray-800 rounded-lg shadow-xl overflow-hidden card-hover-effect animate-fade-in-up animation-delay-600 border border-gray-700">
+                    <img src="https://placehold.co/600x400/7B00FF/0A0A1A?text=Future+Project" alt="Future Project" class="w-full h-64 object-cover portfolio-image">
+                    
                 </div>
             </div>
         </div>
@@ -333,22 +421,22 @@
             <h2 class="text-4xl md:text-5xl font-bold text-center mb-20 text-white animate-fade-in-up font-[Orbitron]">Our Esteemed Clients</h2>
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8 items-center justify-center">
                 <div class="animate-fade-in-up animation-delay-100">
-                    <img src="ajsn.png" alt="AJSN" class="mx-auto w-32 h-16 object-contain client-logo">
+                    <img src="ajsn.png" alt="Client A Logo" class="mx-auto w-32 h-16 object-contain client-logo">
                 </div>
                  <div class="animate-fade-in-up animation-delay-200">
-                    <img src="alhatim.png" alt="Al Hatim" class="mx-auto w-32 h-16 object-contain client-logo">
+                    <img src="alhatim.png" alt="Client B Logo" class="mx-auto w-32 h-16 object-contain client-logo">
                 </div>
                  <div class="animate-fade-in-up animation-delay-300">
-                    <img src="fairdeal.png" alt="Fair Deal Properties Kenya" class="mx-auto w-32 h-16 object-contain client-logo">
+                    <img src="fairdeal.png" alt="Client C Logo" class="mx-auto w-32 h-16 object-contain client-logo">
                 </div>
                  <div class="animate-fade-in-up animation-delay-400">
-                    <img src="formlab.png" alt="Form Lab" class="mx-auto w-32 h-16 object-contain client-logo">
+                    <img src="formlab.png" alt="Client D Logo" class="mx-auto w-32 h-16 object-contain client-logo">
+                </div>
+                 <div class="animate-fade-in-up animation-delay-500">
+                    <img src="homecare.png" alt="Client E Logo" class="mx-auto w-32 h-16 object-contain client-logo">
                 </div>
                  <div class="animate-fade-in-up animation-delay-600">
-                    <img src="homecare.png" alt="Client F Logo" class="mx-auto w-32 h-16 object-contain client-logo">
-                </div>
-                 <div class="animate-fade-in-up animation-delay-700">
-                    <img src="retreat.png" alt="Client G Logo" class="mx-auto w-32 h-16 object-contain client-logo">
+                    <img src="retreat.png" alt="Client F Logo" class="mx-auto w-32 h-16 object-contain client-logo">
                 </div>
             </div>
         </div>
@@ -413,48 +501,80 @@
     </script>
 
      <script>
-        function showTab(tabId, button) {
-            // Hide all tab content
-            const tabContents = document.querySelectorAll('.tab-content');
-            tabContents.forEach(content => {
-                content.classList.remove('active');
-            });
+        let slideIndex = 1; // Start with the first slide
 
-            // Deactivate all tab buttons
-            const tabButtons = document.querySelectorAll('.tab-button');
-            tabButtons.forEach(btn => {
-                btn.classList.remove('active');
-            });
+        function showSlides(n) {
+            let i;
+            const slides = document.querySelectorAll(".slideshow-container .tab-content");
+            const dots = document.querySelectorAll(".dot");
+            const tabButtons = document.querySelectorAll(".tab-button");
 
-            // Show the selected tab content
-            document.getElementById(tabId).classList.add('active');
+            // Wrap around
+            if (n > slides.length) { slideIndex = 1 }
+            if (n < 1) { slideIndex = slides.length }
 
-            // Activate the clicked button
-            button.classList.add('active');
+            // Hide all slides and deactivate dots/buttons
+            for (i = 0; i < slides.length; i++) {
+                slides[i].classList.remove('active');
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].classList.remove("active");
+            }
+             for (i = 0; i < tabButtons.length; i++) {
+                tabButtons[i].classList.remove("active");
+            }
+
+            // Show the current slide and activate the corresponding dot/button
+            slides[slideIndex - 1].classList.add('active');
+            dots[slideIndex - 1].classList.add("active");
+            tabButtons[slideIndex - 1].classList.add("active");
         }
 
-        // Show the default tab on page load (e.g., 'branding')
+        // Function to control the current slide (used by dots and tabs)
+        function currentSlide(n, button) {
+            showSlides(slideIndex = n);
+             // Ensure the correct button is active when clicking dots
+            if (button) {
+                 const tabButtons = document.querySelectorAll(".tab-button");
+                 tabButtons.forEach(btn => btn.classList.remove('active'));
+                 button.classList.add('active');
+            } else {
+                 // If called from dot, activate corresponding tab button
+                 const tabButtons = document.querySelectorAll(".tab-button");
+                 tabButtons[n - 1].classList.add('active');
+            }
+        }
+
+        // Automatic slideshow (optional)
+        // let autoSlideTimer;
+        // function startAutoSlides() {
+        //     autoSlideTimer = setInterval(() => {
+        //         showSlides(++slideIndex);
+        //     }, 5000); // Change image every 5 seconds
+        // }
+
+        // Stop automatic slideshow on user interaction (optional)
+        // function stopAutoSlides() {
+        //     clearInterval(autoSlideTimer);
+        // }
+
+
+        // Initialize slideshow on page load
         document.addEventListener('DOMContentLoaded', () => {
-             // Find the default active button and click it
-             const defaultButton = document.querySelector('.tab-button.active');
-             if (defaultButton) {
-                 // Extract tabId from the onclick attribute
-                 const onclickAttr = defaultButton.getAttribute('onclick');
-                 const match = onclickAttr.match(/showTab\('([^']*)'/);
-                 if (match && match[1]) {
-                     showTab(match[1], defaultButton);
-                 }
-             } else {
-                 // Fallback: if no button has 'active', show the first tab
-                 const firstTabContent = document.querySelector('.tab-content');
-                 const firstButton = document.querySelector('.tab-button');
-                 if (firstTabContent && firstButton) {
-                      firstTabContent.classList.add('active');
-                      firstButton.classList.add('active');
-                 }
-             }
+            showSlides(slideIndex); // Show the first slide
+            // startAutoSlides(); // Start automatic slideshow
         });
+
+         // Restart automatic slideshow after user interaction (optional)
+        // document.querySelectorAll('.tab-button, .dot').forEach(element => {
+        //     element.addEventListener('click', () => {
+        //         stopAutoSlides();
+        //         startAutoSlides();
+        //     });
+        // });
+
     </script>
+
 
     <script>
         // Basic particle effect using Canvas
