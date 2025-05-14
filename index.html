@@ -3,600 +3,567 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Twinfusion - Innovate. Integrate. Inspire.</title>
+    <title>Twinfusion - Ultrafuturistic Tech Solutions</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
     <style>
+        /* Define CSS Variables for Colors */
+        :root {
+            --color-primary: #0FEEF0; /* Electric Cyan */
+            --color-secondary: #7B00FF; /* Vibrant Purple */
+            --color-accent: #FF00AA; /* Neon Pink */
+            --color-dark-bg: #0A0A1A; /* Very Dark Blue/Black */
+            --color-light-bg: #1A1A33; /* Darker Blue/Black */
+            --color-text-light: #E0FFFF; /* Pale Cyan/White */
+            --color-text-dark: #1A1A33; /* Darker Blue/Black */
+        }
+
+        /* Apply Inter font globally, use Orbitron for headings/specific elements */
         body {
             font-family: 'Inter', sans-serif;
-            color: #1a202c; /* Equivalent to Tailwind's gray-900 */
-            scroll-behavior: smooth;
+            color: var(--color-text-light);
+            background-color: var(--color-dark-bg);
+            line-height: 1.6; /* Improved readability */
+            letter-spacing: 0.02em; /* Subtle letter spacing */
         }
 
-        /* Custom gradient for hero section */
-        .hero-gradient {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Indigo to Purple */
+        h1, h2, h3, .font-\[Orbitron\] {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700; /* Bold Orbitron */
         }
 
-        /* Custom gradient for CTA banner */
-        .cta-gradient {
-            background: linear-gradient(135deg, #43cea2 0%, #185a9d 100%); /* Green to Blue */
+        /* Custom scrollbar (optional, for aesthetics) */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--color-light-bg);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-secondary);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--color-primary);
         }
 
-        /* Animation for sections fading in */
-        .fade-in-section {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        /* Styles for Tabs */
+        .tab-content {
+            display: none; /* Hide all tab content by default */
+            opacity: 0; /* Start hidden for fade-in */
+            transition: opacity 0.8s ease-in-out; /* Slower transition */
+        }
+        .tab-content.active {
+            display: block; /* Show active tab content */
+            opacity: 1; /* Fade in */
         }
 
-        .fade-in-section.is-visible {
-            opacity: 1;
-            transform: translateY(0);
+        /* Style for tab buttons */
+        .tab-button {
+             transition: all 0.4s ease-in-out;
+             border: 2px solid transparent; /* Add border for active state */
+             text-shadow: 0 0 8px rgba(123, 0, 255, 0.5); /* Subtle text glow */
         }
-
-        /* Active nav link style */
-        .nav-link-active {
-            color: #4F46E5; /* Indigo-600 */
-            font-weight: 600;
-        }
-        .nav-link-active-mobile {
-            background-color: #4F46E5; /* Indigo-600 */
+        .tab-button.active {
+            background-color: var(--color-accent);
             color: white;
+            box-shadow: 0 0 20px 5px rgba(255, 0, 170, 0.6); /* Intense neon glow */
+            transform: scale(1.15); /* More pronounced scale on active */
+            border-color: var(--color-primary); /* Border color on active */
+            text-shadow: none; /* Remove text shadow when active */
+        }
+        .tab-button:hover:not(.active) {
+             background-color: rgba(15, 238, 240, 0.1); /* Electric Cyan hover */
+             color: var(--color-primary);
+             border-color: var(--color-primary);
+             text-shadow: 0 0 10px rgba(15, 238, 240, 0.8); /* Electric Cyan text glow */
         }
 
-        /* Custom button styles */
-        .btn {
-            @apply inline-block px-8 py-3 rounded-lg shadow-lg transition-transform duration-300 ease-in-out;
-        }
-        .btn-primary {
-            @apply bg-indigo-600 text-white hover:bg-indigo-700 transform hover:scale-105;
-        }
-        .btn-secondary {
-            @apply bg-pink-500 text-white hover:bg-pink-600 transform hover:scale-105;
-        }
-        .btn-outline {
-            @apply bg-transparent border-2 border-white text-white hover:bg-white hover:text-indigo-600 transform hover:scale-105;
-        }
-        .btn-dark-outline {
-            @apply bg-transparent border-2 border-indigo-600 text-indigo-600 hover:bg-indigo-600 hover:text-white transform hover:scale-105;
+
+        /* Animation keyframes */
+        @keyframes fade-in-up {
+            from {
+                opacity: 0;
+                transform: translateY(60px); /* More distance */
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        /* Glassmorphism effect for cards */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-radius: 1rem; /* 16px */
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-        }
-         /* Service card icon style */
-        .service-icon {
-            @apply text-4xl mb-4 text-indigo-400; /* Adjusted color for better visibility on dark cards */
+         @keyframes scale-in {
+            from {
+                opacity: 0;
+                transform: scale(0.7); /* Scale from smaller */
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
-        /* Portfolio overlay */
-        .portfolio-item .overlay {
-            opacity: 0;
-            transition: opacity 0.3s ease-in-out;
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 10px rgba(15, 238, 240, 0.4); }
+            50% { box-shadow: 0 0 20px rgba(15, 238, 240, 0.8); }
+            100% { box-shadow: 0 0 10px rgba(15, 238, 240, 0.4); }
         }
-        .portfolio-item:hover .overlay {
-            opacity: 1;
+
+
+        .animate-fade-in-up-visible {
+            animation: fade-in-up 1.2s ease-out forwards; /* Slower duration */
         }
+         .animate-scale-in-visible {
+            animation: scale-in 1.2s ease-out forwards; /* Slower duration */
+        }
+        .animate-pulse-glow {
+            animation: pulse-glow 2s infinite alternate ease-in-out;
+        }
+
+
+         .animation-delay-100 { animation-delay: 0.1s; }
+         .animation-delay-200 { animation-delay: 0.2s; }
+         .animation-delay-300 { animation-delay: 0.3s; }
+         .animation-delay-400 { animation-delay: 0.4s; }
+         .animation-delay-500 { animation-delay: 0.5s; }
+         .animation-delay-600 { animation-delay: 0.6s; }
+         .animation-delay-700 { animation-delay: 0.7s; }
+         .animation-delay-800 { animation-delay: 0.8s; }
+         .animation-delay-900 { animation-delay: 0.9s; }
+         .animation-delay-1000 { animation-delay: 1s; }
+
+
+         /* Particle background for Hero section */
+         #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1; /* Ensure particles are behind content */
+         }
+
+         .hero-content {
+             position: relative;
+             z-index: 2; /* Ensure content is above particles */
+         }
+
+         /* Hover effect for cards */
+         .card-hover-effect {
+             transition: all 0.5s ease-in-out; /* Longer transition */
+             border: 1px solid rgba(123, 0, 255, 0.3); /* Subtle initial border */
+         }
+         .card-hover-effect:hover {
+             transform: translateY(-20px) rotate(3deg); /* More pronounced effect */
+             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(123, 0, 255, 0.7); /* Darker shadow + purple glow */
+             background-color: var(--color-light-bg); /* Change background on hover */
+             border-color: var(--color-secondary); /* Purple border on hover */
+         }
+
+         /* Hover effect for buttons */
+         .button-hover-effect {
+             transition: all 0.4s ease-in-out;
+             box-shadow: 0 0 15px rgba(255, 0, 170, 0.4); /* Initial subtle glow */
+         }
+         .button-hover-effect:hover {
+             transform: scale(1.1); /* More pronounced scale */
+             box-shadow: 0 0 25px 5px rgba(255, 0, 170, 0.8); /* Intense neon glow */
+         }
+
+         /* Specific styling for sections */
+         .section-dark {
+             background-color: var(--color-light-bg);
+             color: var(--color-text-light);
+         }
+
+         .section-light {
+             background-color: var(--color-dark-bg);
+             color: var(--color-text-light);
+         }
+
+         /* Styling for portfolio images */
+         .portfolio-image {
+             filter: brightness(70%) contrast(1.2); /* Stronger image filter */
+             transition: filter 0.5s ease-in-out;
+         }
+         .card-hover-effect:hover .portfolio-image {
+             filter: brightness(100%) contrast(1); /* Remove filter on hover */
+         }
+
+         /* Input focus glow */
+         input:focus, textarea:focus {
+             outline: none;
+             border-color: var(--color-primary) !important;
+             box-shadow: 0 0 10px rgba(15, 238, 240, 0.6); /* Electric Cyan glow on focus */
+         }
+
+        /* Client image styling */
+        .client-logo {
+            filter: grayscale(100%) brightness(80%); /* Desaturate and darken */
+            transition: filter 0.4s ease-in-out;
+        }
+        .client-logo:hover {
+            filter: grayscale(0%) brightness(100%); /* Full color on hover */
+        }
+
+
     </style>
 </head>
-<body class="bg-gray-50">
+<body class="bg-gray-100 text-gray-800 leading-normal tracking-wide">
 
-    <header id="header" class="bg-white shadow-md fixed w-full z-50 top-0 transition-all duration-300">
-        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
-            <a href="#" class="text-3xl font-bold text-indigo-600">Twinfusion</a>
-            <nav class="hidden md:flex space-x-8 items-center">
-                <a href="#hero" class="nav-link text-gray-700 hover:text-indigo-600 transition-colors">Home</a>
-                <a href="#services" class="nav-link text-gray-700 hover:text-indigo-600 transition-colors">Services</a>
-                <a href="#about" class="nav-link text-gray-700 hover:text-indigo-600 transition-colors">About</a>
-                <a href="#portfolio" class="nav-link text-gray-700 hover:text-indigo-600 transition-colors">Portfolio</a>
-                <a href="#contact" class="btn btn-primary text-sm px-6 py-2">Contact Us</a>
-            </nav>
+    <header class="bg-gray-900 shadow-md sticky top-0 z-50 bg-opacity-80 backdrop-filter backdrop-blur-lg border-b border-gray-700"> <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-cyan-500 hover:text-cyan-400 transition duration-300 ease-in-out font-[Orbitron] text-shadow: 0 0 5px rgba(15, 238, 240, 0.5);"> Twinfusion
+            </a>
+            <nav class="hidden md:flex space-x-8">
+                <a href="#services" class="text-gray-300 hover:text-cyan-500 transition duration-300 ease-in-out font-semibold">Services</a> <a href="#portfolio" class="text-gray-300 hover:text-cyan-500 transition duration-300 ease-in-out font-semibold">Portfolio</a> <a href="#clients" class="text-gray-300 hover:text-cyan-500 transition duration-300 ease-in-out font-semibold">Clients</a> <a href="#about" class="text-gray-300 hover:text-cyan-500 transition duration-300 ease-in-out font-semibold">About Us</a> <a href="#contact" class="text-gray-300 hover:text-cyan-500 transition duration-300 ease-in-out font-semibold">Contact</a> </nav>
             <div class="md:hidden">
-                <button id="mobile-menu-button" class="text-gray-700 focus:outline-none">
-                    <i class="fas fa-bars text-2xl"></i>
+                <button id="mobile-menu-button" class="text-gray-300 hover:text-cyan-500 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                 </button>
             </div>
         </div>
-        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg">
-            <a href="#hero" class="block nav-link-mobile py-3 px-6 text-gray-700 hover:bg-indigo-500 hover:text-white transition-colors">Home</a>
-            <a href="#services" class="block nav-link-mobile py-3 px-6 text-gray-700 hover:bg-indigo-500 hover:text-white transition-colors">Services</a>
-            <a href="#about" class="block nav-link-mobile py-3 px-6 text-gray-700 hover:bg-indigo-500 hover:text-white transition-colors">About</a>
-            <a href="#portfolio" class="block nav-link-mobile py-3 px-6 text-gray-700 hover:bg-indigo-500 hover:text-white transition-colors">Portfolio</a>
-            <a href="#contact" class="block py-3 px-6 text-gray-700 bg-indigo-500 text-white hover:bg-indigo-600 transition-colors text-center font-semibold">Contact Us</a>
+        <div id="mobile-menu" class="md:hidden bg-gray-900 shadow-lg hidden border-t border-gray-700"> <nav class="flex flex-col px-6 py-4 space-y-2">
+                <a href="#services" class="block text-gray-300 hover:text-cyan-500 transition duration-300 ease-in-out py-2 font-semibold">Services</a> <a href="#portfolio" class="block text-gray-300 hover:text-cyan-500 transition duration-300 ease-in-out py-2 font-semibold">Portfolio</a> <a href="#clients" class="block text-gray-300 hover:text-cyan-500 transition duration-300 ease-in-out py-2 font-semibold">Clients</a> <a href="#about" class="block text-gray-300 hover:text-cyan-500 transition duration-300 ease-in-out py-2 font-semibold">About Us</a> <a href="#contact" class="block text-gray-300 hover:text-cyan-500 transition duration-300 ease-in-out py-2 font-semibold">Contact</a> </nav>
         </div>
     </header>
 
-    <section id="hero" class="hero-gradient text-white min-h-screen flex items-center justify-center pt-20 md:pt-0">
-        <div class="container mx-auto px-6 text-center">
-            <h1 class="text-5xl md:text-7xl font-extrabold mb-6 leading-tight animate-fade-in-down">
-                Innovate. Integrate. <span class="text-pink-400">Inspire.</span>
+    <section class="bg-gradient-to-br from-gray-900 to-purple-900 text-white py-24 md:py-40 text-center relative overflow-hidden border-b border-gray-800"> <div id="particles-js"></div>
+
+        <div class="container mx-auto px-6 relative z-10 animate-fade-in-up hero-content">
+            <h1 class="text-5xl md:text-7xl font-bold mb-8 animate-fade-in-up animation-delay-100 text-shadow: 0 0 15px rgba(123, 0, 255, 0.7);"> Unlocking Tomorrow's Technology, Today
             </h1>
-            <p class="text-xl md:text-2xl mb-10 max-w-3xl mx-auto font-light animate-fade-in-up animation-delay-300">
-                Twinfusion: Your Strategic Partner in Technological Excellence. We craft cutting-edge solutions to propel your business forward.
+             <div class="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16 animation-delay-300"> <button onclick="showTab('branding', this)" class="tab-button px-10 py-5 bg-gray-800 text-gray-300 rounded-full transition button-hover-effect active">Branding</button> <button onclick="showTab('development', this)" class="tab-button px-10 py-5 bg-gray-800 text-gray-300 rounded-full transition button-hover-effect">Development</button> <button onclick="showTab('web', this)" class="tab-button px-10 py-5 bg-gray-800 text-gray-300 rounded-full transition button-hover-effect">Web Design</button> </div>
+
+            <div class="flex justify-center animation-delay-500 animate-scale-in">
+                <div id="branding" class="tab-content active max-w-4xl mx-auto rounded-lg shadow-2xl overflow-hidden border border-gray-700"> <img src="backgroundimage1.jpg" alt="Branding Solutions" class="w-full h-auto object-cover portfolio-image"> </div>
+                <div id="development" class="tab-content max-w-4xl mx-auto rounded-lg shadow-2xl overflow-hidden border border-gray-700"> <img src="backgroundimage2.jpg" alt="Development Expertise" class="w-full h-auto object-cover portfolio-image"> </div>
+                <div id="web" class="tab-content max-w-4xl mx-auto rounded-lg shadow-2xl overflow-hidden border border-gray-700"> <img src="backgroundimage3.jpg" alt="Web Design Services" class="w-full h-auto object-cover portfolio-image"> </div>
+            </div>
+
+
+            <div class="mt-16 flex flex-col sm:flex-row justify-center gap-8 animation-delay-700"> <a href="#services" class="bg-accent hover:bg-pink-600 text-white font-semibold px-12 py-6 rounded-full transition shadow-lg button-hover-effect text-xl">Explore Services</a> <a href="#contact" class="border border-primary hover:bg-primary hover:text-dark-bg text-primary font-semibold px-12 py-6 rounded-full transition button-hover-effect text-xl">Get a Quote</a> </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-24 md:py-40 section-dark border-b border-gray-800"> <div class="container mx-auto px-6">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-20 animate-fade-in-up font-[Orbitron]">Our Expertise</h2> <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
+                <div class="bg-gray-800 p-12 rounded-lg shadow-xl card-hover-effect animate-fade-in-up animation-delay-200 border border-gray-700">
+                    <div class="text-primary mb-8 text-center animate-pulse-glow">
+                        <svg class="w-20 h-20 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h.01M17 14l.01 0M12 14h.01M12 10h.01M5 14h.01M19 17h-2a2 2 0 01-2-2V5a2 2 0 012-2h2a2 2 0 012 2v10a2 2 0 01-2 2z"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-white mb-4 text-center font-[Orbitron]">Saify POS</h3>
+                    <p class="text-gray-400 text-center leading-relaxed">
+                        Implementing and customizing the Saify Point of Sale system for streamlined retail operations and enhanced customer experiences.
+                    </p>
+                </div>
+                <div class="bg-gray-800 p-12 rounded-lg shadow-xl card-hover-effect animate-fade-in-up animation-delay-300 border border-gray-700">
+                    <div class="text-primary mb-8 text-center animate-pulse-glow animation-delay-100">
+                         <svg class="w-20 h-20 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-white mb-4 text-center font-[Orbitron]">Custom Software Solutions</h3>
+                    <p class="text-gray-400 text-center leading-relaxed">
+                        Designing and building bespoke software applications tailored precisely to your unique business processes and requirements.
+                    </p>
+                </div>
+                <div class="bg-gray-800 p-12 rounded-lg shadow-xl card-hover-effect animate-fade-in-up animation-delay-400 border border-gray-700">
+                     <div class="text-primary mb-8 text-center animate-pulse-glow animation-delay-200">
+                         <svg class="w-20 h-20 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-white mb-4 text-center font-[Orbitron]">Web & Mobile App Dev</h3>
+                    <p class="text-gray-400 text-center leading-relaxed">
+                        Developing responsive and intuitive web and mobile applications that deliver seamless user experiences across all devices.
+                    </p>
+                </div>
+                 <div class="bg-gray-800 p-12 rounded-lg shadow-xl card-hover-effect animate-fade-in-up animation-delay-500 border border-gray-700">
+                    <div class="text-primary mb-8 text-center animate-pulse-glow animation-delay-300">
+                         <svg class="w-20 h-20 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 13.255A23.931 23.931 0 0112 15.711m8.75-2.456c-.19.16-.4.32-.62.48m0 0l-.52 1.04a1 1 0 01-1.73 0l-.52-1.04m-8.75-2.456c.19.16.4.32.62.48m0 0L6.75 14.3a1 1 0 001.73 0l.52-1.04M12 10a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-white mb-4 text-center font-[Orbitron]">Enterprise Software Dev</h3>
+                    <p class="text-gray-400 text-center leading-relaxed">
+                        Building robust and scalable enterprise-level software solutions designed to optimize complex business operations.
+                    </p>
+                </div>
+                 <div class="bg-gray-800 p-12 rounded-lg shadow-xl card-hover-effect animate-fade-in-up animation-delay-600 border border-gray-700">
+                    <div class="text-primary mb-8 text-center animate-pulse-glow animation-delay-400">
+                         <svg class="w-20 h-20 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.5a2.5 2.5 0 10-5 0V12"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-white mb-4 text-center font-[Orbitron]">Digital Marketing & Social</h3>
+                    <p class="text-gray-400 text-center leading-relaxed">
+                        Crafting data-driven digital marketing strategies and managing social media presence to amplify your brand's reach.
+                    </p>
+                </div>
+                 <div class="bg-gray-800 p-12 rounded-lg shadow-xl card-hover-effect animate-fade-in-up animation-delay-700 border border-gray-700">
+                    <div class="text-primary mb-8 text-center animate-pulse-glow animation-delay-500">
+                         <svg class="w-20 h-20 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 7v10l2 2h10l2-2V7m-2 0H6m12 0V5a2 2 0 00-2-2h-2a2 2 0 00-2 2v2M4 7h4m-4 0H3m0 0v4m0 0h3m0 0h4m0 0h4m0 0h4m0 0v-4m0 4h3m0 0v-4m0 0h-3m-2 4h2m-2 0v-4m0 0h-2m2 4v-4m0 0h-2"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-white mb-4 text-center font-[Orbitron]">Digital Infra & Analytics</h3>
+                    <p class="text-gray-400 text-center leading-relaxed">
+                        Designing, implementing, and managing robust digital infrastructure and providing insightful data analytics for informed decisions.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="py-24 md:py-40 section-light border-b border-gray-800"> <div class="container mx-auto px-6">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-20 text-white animate-fade-in-up font-[Orbitron]">Our Work</h2> <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
+                <div class="bg-gray-800 rounded-lg shadow-xl overflow-hidden card-hover-effect animate-fade-in-up animation-delay-200 border border-gray-700">
+                    <img src="https://placehold.co/600x400/FF00AA/0A0A1A?text=Muthokinju+Paints+POS" alt="Muthokinju Paints POS Integration" class="w-full h-64 object-cover portfolio-image">
+                    <div class="p-8">
+                        <h3 class="text-xl font-semibold text-white mb-2 font-[Orbitron]">Muthokinju Paints POS Integration</h3>
+                        <p class="text-gray-400 text-sm mb-4 leading-relaxed">Seamlessly integrated a modern POS system for Muthokinju Paints, enhancing sales tracking and inventory management.</p>
+                        <a href="#" class="text-primary hover:underline text-sm font-semibold">View Case Study &rarr;</a>
+                    </div>
+                </div>
+                <div class="bg-gray-800 rounded-lg shadow-xl overflow-hidden card-hover-effect animate-fade-in-up animation-delay-400 border border-gray-700">
+                    <img src="https://placehold.co/600x400/0FEEF0/0A0A1A?text=Al+Jamea+University+PMS" alt="Al Jamea University Project Management Solution" class="w-full h-64 object-cover portfolio-image">
+                    <div class="p-8">
+                        <h3 class="text-xl font-semibold text-white mb-2 font-[Orbitron]">Al Jamea University Project Mgt.</h3>
+                        <p class="text-gray-400 text-sm mb-4 leading-relaxed">Developed a comprehensive project management solution for Al Jamea University, streamlining academic and administrative projects.</p>
+                        <a href="#" class="text-primary hover:underline text-sm font-semibold">View Case Study &rarr;</a>
+                    </div>
+                </div>
+                 <div class="bg-gray-800 rounded-lg shadow-xl overflow-hidden card-hover-effect animate-fade-in-up animation-delay-600 border border-gray-700">
+                    <img src="https://placehold.co/600x400/7B00FF/0A0A1A?text=Future+Project" alt="Future Project" class="w-full h-64 object-cover portfolio-image">
+                    <div class="p-8">
+                        <h3 class="text-xl font-semibold text-white mb-2 font-[Orbitron]">Your Next Project</h3>
+                        <p class="text-gray-400 text-sm mb-4 leading-relaxed">Ready to see your vision come to life? This space is reserved for our next groundbreaking collaboration.</p>
+                        <a href="#contact" class="text-primary hover:underline text-sm font-semibold">Let's Collaborate &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="clients" class="py-24 md:py-40 section-dark animate-fade-in-up border-b border-gray-800">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-20 text-white animate-fade-in-up font-[Orbitron]">Our Esteemed Clients</h2>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8 items-center justify-center">
+                <div class="animate-fade-in-up animation-delay-100">
+                    <img src="ajsn.png" alt="AJSN" class="mx-auto w-32 h-16 object-contain client-logo">
+                </div>
+                 <div class="animate-fade-in-up animation-delay-200">
+                    <img src="alhatim.png" alt="Al Hatim" class="mx-auto w-32 h-16 object-contain client-logo">
+                </div>
+                 <div class="animate-fade-in-up animation-delay-300">
+                    <img src="fairdeal.png" alt="Fair Deal Properties Kenya" class="mx-auto w-32 h-16 object-contain client-logo">
+                </div>
+                 <div class="animate-fade-in-up animation-delay-400">
+                    <img src="formlab.png" alt="Form Lab" class="mx-auto w-32 h-16 object-contain client-logo">
+                </div>
+                 <div class="animate-fade-in-up animation-delay-500">
+                    <img src="https://placehold.co/200x100/1A1A33/E0FFFF/png?text=Client+E" alt="Client E Logo" class="mx-auto w-32 h-16 object-contain client-logo">
+                </div>
+                 <div class="animate-fade-in-up animation-delay-600">
+                    <img src="homecare.png" alt="Client F Logo" class="mx-auto w-32 h-16 object-contain client-logo">
+                </div>
+                 <div class="animate-fade-in-up animation-delay-700">
+                    <img src="retreat.png" alt="Client G Logo" class="mx-auto w-32 h-16 object-contain client-logo">
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+     <section id="about" class="py-24 md:py-40 section-dark animate-fade-in-up border-b border-gray-800"> <div class="container mx-auto px-6 flex flex-col md:flex-row items-center gap-20"> <div class="md:w-1/2 animate-fade-in-up animation-delay-200">
+                <h2 class="text-4xl md:text-5xl font-bold text-white mb-10 font-[Orbitron]">About Twinfusion</h2> <p class="text-gray-400 text-lg mb-8 leading-relaxed">
+                    Twinfusion is a collective of visionary technologists and strategists, dedicated to pioneering the future of digital innovation. We are not just a consultancy; we are architects of tomorrow's technological landscape, fusing cutting-edge expertise with a relentless pursuit of excellence.
+                </p>
+                <p class="text-gray-400 text-lg leading-relaxed">
+                    Our mission is to empower businesses to thrive in an accelerating digital universe. With a deep understanding of emerging technologies and a passion for solving complex challenges, we partner with you to build solutions that are not only functional but truly revolutionary.
+                </p>
+            </div>
+            <div class="md:w-1/2 animate-fade-in-up animation-delay-400">
+                <img src="https://placehold.co/600x400/7B00FF/0A0A1A?text=Our+Vision" alt="About Us" class="rounded-lg shadow-2xl border border-secondary"> </div>
+        </div>
+    </section>
+
+    <section class="bg-gradient-to-br from-purple-900 to-gray-900 text-white py-24 md:py-36 text-center animate-fade-in-up border-b border-gray-800"> <div class="container mx-auto px-6">
+            <h2 class="text-4xl md:text-5xl font-bold mb-10 font-[Orbitron]">Ready to Innovate?</h2> <p class="text-xl md:text-2xl mb-16 opacity-90 leading-relaxed">
+                Connect with Twinfusion and let's engineer a digital future that sets you apart.
             </p>
-            <div class="space-y-4 md:space-y-0 md:space-x-6 animate-fade-in-up animation-delay-600">
-                <a href="#services" class="btn btn-secondary">Discover Our Solutions</a>
-                <a href="#contact" class="btn btn-outline">Get in Touch</a>
-            </div>
-            <div class="mt-16 animate-bounce-slow animation-delay-1000">
-                 <a href="#services" aria-label="Scroll down to services">
-                    <i class="fas fa-chevron-down text-3xl text-white opacity-70 hover:opacity-100 transition-opacity"></i>
-                </a>
-            </div>
-        </div>
+            <a href="#contact" class="bg-accent hover:bg-pink-600 text-white font-bold py-6 px-12 rounded-full text-xl transition duration-300 ease-in-out transform hover:scale-105 inline-block button-hover-effect">
+                Initiate Project
+            </a> </div>
     </section>
 
-    <section id="services" class="py-20 bg-gray-100">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16 fade-in-section">
-                <h2 class="text-4xl font-bold text-gray-800 mb-4">Our Core Services</h2>
-                <p class="text-lg text-gray-600 max-w-2xl mx-auto">Empowering your vision with tailored technology solutions that drive growth and efficiency.</p>
-            </div>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
-                <div class="bg-white p-8 rounded-xl shadow-xl hover:shadow-2xl transition-shadow duration-300 fade-in-section transform hover:-translate-y-2">
-                    <div class="flex items-center justify-center w-16 h-16 bg-indigo-100 rounded-full mb-6">
-                        <i class="fas fa-cloud-upload-alt text-3xl text-indigo-600"></i>
-                    </div>
-                    <h3 class="text-2xl font-semibold text-gray-800 mb-3">Cloud Solutions</h3>
-                    <p class="text-gray-600 leading-relaxed">Scalable and secure cloud infrastructure, migration, and management to optimize your operations.</p>
-                </div>
-                <div class="bg-white p-8 rounded-xl shadow-xl hover:shadow-2xl transition-shadow duration-300 fade-in-section transform hover:-translate-y-2" style="animation-delay: 0.2s;">
-                    <div class="flex items-center justify-center w-16 h-16 bg-pink-100 rounded-full mb-6">
-                        <i class="fas fa-brain text-3xl text-pink-600"></i>
-                    </div>
-                    <h3 class="text-2xl font-semibold text-gray-800 mb-3">AI & Machine Learning</h3>
-                    <p class="text-gray-600 leading-relaxed">Leverage the power of AI and ML to unlock insights, automate processes, and create intelligent applications.</p>
-                </div>
-                <div class="bg-white p-8 rounded-xl shadow-xl hover:shadow-2xl transition-shadow duration-300 fade-in-section transform hover:-translate-y-2" style="animation-delay: 0.4s;">
-                    <div class="flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-6">
-                        <i class="fas fa-shield-alt text-3xl text-green-600"></i>
-                    </div>
-                    <h3 class="text-2xl font-semibold text-gray-800 mb-3">Cybersecurity</h3>
-                    <p class="text-gray-600 leading-relaxed">Comprehensive security strategies and solutions to protect your valuable digital assets from threats.</p>
-                </div>
-                <div class="bg-white p-8 rounded-xl shadow-xl hover:shadow-2xl transition-shadow duration-300 fade-in-section transform hover:-translate-y-2" style="animation-delay: 0.6s;">
-                    <div class="flex items-center justify-center w-16 h-16 bg-purple-100 rounded-full mb-6">
-                        <i class="fas fa-laptop-code text-3xl text-purple-600"></i>
-                    </div>
-                    <h3 class="text-2xl font-semibold text-gray-800 mb-3">Custom Software</h3>
-                    <p class="text-gray-600 leading-relaxed">Bespoke software development tailored to your unique business requirements and objectives.</p>
-                </div>
-                 <div class="bg-white p-8 rounded-xl shadow-xl hover:shadow-2xl transition-shadow duration-300 fade-in-section transform hover:-translate-y-2" style="animation-delay: 0.8s;">
-                    <div class="flex items-center justify-center w-16 h-16 bg-yellow-100 rounded-full mb-6">
-                        <i class="fas fa-mobile-alt text-3xl text-yellow-600"></i>
-                    </div>
-                    <h3 class="text-2xl font-semibold text-gray-800 mb-3">Mobile App Development</h3>
-                    <p class="text-gray-600 leading-relaxed">Engaging and high-performance mobile applications for iOS and Android platforms.</p>
-                </div>
-                 <div class="bg-white p-8 rounded-xl shadow-xl hover:shadow-2xl transition-shadow duration-300 fade-in-section transform hover:-translate-y-2" style="animation-delay: 1s;">
-                    <div class="flex items-center justify-center w-16 h-16 bg-teal-100 rounded-full mb-6">
-                        <i class="fas fa-chart-line text-3xl text-teal-600"></i>
-                    </div>
-                    <h3 class="text-2xl font-semibold text-gray-800 mb-3">Data Analytics & BI</h3>
-                    <p class="text-gray-600 leading-relaxed">Transform raw data into actionable insights with our advanced analytics and business intelligence services.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="about" class="py-20 bg-white">
-        <div class="container mx-auto px-6">
-            <div class="flex flex-col md:flex-row items-center">
-                <div class="md:w-1/2 mb-10 md:mb-0 md:pr-12 fade-in-section">
-                    <h2 class="text-4xl font-bold text-gray-800 mb-6">About Twinfusion</h2>
-                    <p class="text-gray-600 text-lg mb-4 leading-relaxed">
-                        At Twinfusion, we are more than just technologists; we are innovators, problem-solvers, and your dedicated partners in navigating the complexities of the digital landscape. Our mission is to empower businesses like yours with transformative technology solutions that foster growth, efficiency, and a competitive edge.
-                    </p>
-                    <p class="text-gray-600 text-lg mb-6 leading-relaxed">
-                        Founded on the principles of integrity, collaboration, and relentless pursuit of excellence, Twinfusion brings together a diverse team of experts passionate about making a tangible impact. We believe in building long-term relationships based on trust and mutual success.
-                    </p>
-                    <a href="#contact" class="btn btn-primary">Learn More About Us</a>
-                </div>
-                <div class="md:w-1/2 fade-in-section" style="animation-delay: 0.2s;">
-                    <img src="https://placehold.co/600x400/667eea/ffffff?text=Our+Team+Vibes&font=Inter" alt="About Twinfusion Team" class="rounded-xl shadow-2xl w-full h-auto object-cover">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="why-choose-us" class="py-20 bg-gray-100">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16 fade-in-section">
-                <h2 class="text-4xl font-bold text-gray-800 mb-4">Why Partner with Twinfusion?</h2>
-                <p class="text-lg text-gray-600 max-w-2xl mx-auto">We're committed to your success, offering more than just services – we offer a partnership.</p>
-            </div>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
-                <div class="bg-white p-8 rounded-xl shadow-lg fade-in-section">
-                    <i class="fas fa-star text-3xl text-yellow-500 mb-4"></i>
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Expertise & Innovation</h3>
-                    <p class="text-gray-600">Our team stays at the forefront of technology, delivering innovative solutions backed by deep industry expertise.</p>
-                </div>
-                <div class="bg-white p-8 rounded-xl shadow-lg fade-in-section" style="animation-delay: 0.2s;">
-                    <i class="fas fa-users text-3xl text-indigo-500 mb-4"></i>
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Client-Centric Approach</h3>
-                    <p class="text-gray-600">We listen, understand, and tailor our services to meet your specific needs and business goals.</p>
-                </div>
-                <div class="bg-white p-8 rounded-xl shadow-lg fade-in-section" style="animation-delay: 0.4s;">
-                    <i class="fas fa-check-circle text-3xl text-green-500 mb-4"></i>
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Measurable Results</h3>
-                    <p class="text-gray-600">We focus on delivering tangible outcomes that drive growth, improve efficiency, and provide a strong ROI.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="portfolio" class="py-20 bg-white">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16 fade-in-section">
-                <h2 class="text-4xl font-bold text-gray-800 mb-4">Our Success Stories</h2>
-                <p class="text-lg text-gray-600 max-w-2xl mx-auto">Explore some of the impactful projects we've delivered for our clients.</p>
-            </div>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="portfolio-item rounded-lg overflow-hidden shadow-xl transform hover:scale-105 transition-transform duration-300 fade-in-section group">
-                    <img src="https://placehold.co/600x400/764ba2/ffffff?text=Project+Alpha&font=Inter" alt="Portfolio Project 1" class="w-full h-64 object-cover">
-                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center overlay p-4">
-                        <div class="text-center">
-                             <h3 class="text-2xl font-semibold text-white mb-2">Project Alpha</h3>
-                             <p class="text-gray-200 mb-4">Revolutionizing e-commerce with AI.</p>
-                             <a href="#" class="btn btn-outline text-sm px-4 py-2">View Details</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="portfolio-item rounded-lg overflow-hidden shadow-xl transform hover:scale-105 transition-transform duration-300 fade-in-section group" style="animation-delay: 0.2s;">
-                    <img src="https://placehold.co/600x400/43cea2/ffffff?text=Project+Beta&font=Inter" alt="Portfolio Project 2" class="w-full h-64 object-cover">
-                     <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center overlay p-4">
-                        <div class="text-center">
-                             <h3 class="text-2xl font-semibold text-white mb-2">Project Beta</h3>
-                             <p class="text-gray-200 mb-4">Cloud migration for a financial giant.</p>
-                             <a href="#" class="btn btn-outline text-sm px-4 py-2">View Details</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="portfolio-item rounded-lg overflow-hidden shadow-xl transform hover:scale-105 transition-transform duration-300 fade-in-section group" style="animation-delay: 0.4s;">
-                    <img src="https://placehold.co/600x400/185a9d/ffffff?text=Project+Gamma&font=Inter" alt="Portfolio Project 3" class="w-full h-64 object-cover">
-                     <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center overlay p-4">
-                        <div class="text-center">
-                             <h3 class="text-2xl font-semibold text-white mb-2">Project Gamma</h3>
-                             <p class="text-gray-200 mb-4">Cybersecurity overhaul for healthcare.</p>
-                             <a href="#" class="btn btn-outline text-sm px-4 py-2">View Details</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-             <div class="text-center mt-12 fade-in-section">
-                <a href="#" class="btn btn-dark-outline">View All Projects</a>
-            </div>
-        </div>
-    </section>
-
-    <section id="testimonials" class="py-20 bg-gray-100">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16 fade-in-section">
-                <h2 class="text-4xl font-bold text-gray-800 mb-4">What Our Clients Say</h2>
-                <p class="text-lg text-gray-600 max-w-2xl mx-auto">Real feedback from businesses we've helped transform.</p>
-            </div>
-            <div class="grid md:grid-cols-1 lg:grid-cols-2 gap-10">
-                <div class="bg-white p-8 rounded-xl shadow-lg fade-in-section">
-                    <div class="flex items-center mb-4">
-                        <img src="https://placehold.co/80x80/e2e8f0/333333?text=JD&font=Inter" alt="Client Jane Doe" class="w-16 h-16 rounded-full mr-4 object-cover">
-                        <div>
-                            <h4 class="font-semibold text-lg text-gray-800">Jane Doe</h4>
-                            <p class="text-sm text-gray-500">CEO, Innovatech Ltd.</p>
-                        </div>
-                    </div>
-                    <p class="text-gray-600 italic leading-relaxed">"Twinfusion's expertise was pivotal in our digital transformation. Their team is professional, responsive, and delivered beyond our expectations. Highly recommended!"</p>
-                </div>
-                <div class="bg-white p-8 rounded-xl shadow-lg fade-in-section" style="animation-delay: 0.2s;">
-                     <div class="flex items-center mb-4">
-                        <img src="https://placehold.co/80x80/cbd5e0/333333?text=RS&font=Inter" alt="Client Robert Smith" class="w-16 h-16 rounded-full mr-4 object-cover">
-                        <div>
-                            <h4 class="font-semibold text-lg text-gray-800">Robert Smith</h4>
-                            <p class="text-sm text-gray-500">CTO, Future Solutions Inc.</p>
-                        </div>
-                    </div>
-                    <p class="text-gray-600 italic leading-relaxed">"Working with Twinfusion on our cloud migration project was seamless. Their strategic approach and technical skills ensured a smooth transition with minimal disruption."</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="cta-gradient text-white py-20">
-        <div class="container mx-auto px-6 text-center fade-in-section">
-            <h2 class="text-4xl font-bold mb-6">Ready to Elevate Your Business?</h2>
-            <p class="text-xl mb-10 max-w-2xl mx-auto">Let's discuss how Twinfusion can tailor technology solutions to meet your unique challenges and unlock new opportunities.</p>
-            <a href="#contact" class="btn btn-outline text-lg">Start a Conversation</a>
-        </div>
-    </section>
-
-    <section id="contact" class="py-20 bg-white">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16 fade-in-section">
-                <h2 class="text-4xl font-bold text-gray-800 mb-4">Get In Touch</h2>
-                <p class="text-lg text-gray-600 max-w-2xl mx-auto">We're here to answer your questions and explore how we can help. Reach out to us today!</p>
-            </div>
-            <div class="max-w-2xl mx-auto bg-gray-50 p-8 md:p-12 rounded-xl shadow-2xl fade-in-section">
-                <form id="contactForm">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                        <div>
-                            <label for="name" class="block text-gray-700 font-medium mb-2">Full Name</label>
-                            <input type="text" id="name" name="name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-shadow" required>
-                        </div>
-                        <div>
-                            <label for="email" class="block text-gray-700 font-medium mb-2">Email Address</label>
-                            <input type="email" id="email" name="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-shadow" required>
-                        </div>
-                    </div>
-                    <div class="mb-6">
-                        <label for="subject" class="block text-gray-700 font-medium mb-2">Subject</label>
-                        <input type="text" id="subject" name="subject" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-shadow" required>
-                    </div>
-                    <div class="mb-8">
-                        <label for="message" class="block text-gray-700 font-medium mb-2">Message</label>
-                        <textarea id="message" name="message" rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-shadow" required></textarea>
-                    </div>
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-primary text-lg w-full md:w-auto">Send Message</button>
-                    </div>
-                    <div id="form-feedback" class="mt-4 text-center"></div>
+    <section id="contact" class="py-24 md:py-40 section-light"> <div class="container mx-auto px-6">
+            <h2 class="text-4xl md:text-5xl font-bold text-center text-white mb-20 font-[Orbitron]">Get in Touch</h2> <div class="max-w-lg mx-auto bg-gray-800 p-12 rounded-lg shadow-xl border border-gray-700"> <form>
+                    <div class="mb-10"> <label for="name" class="block text-gray-300 text-sm font-bold mb-4">Name</label> <input type="text" id="name" class="shadow-inner appearance-none border border-gray-700 rounded w-full py-4 px-5 text-gray-200 leading-tight focus:outline-none focus:ring-2 focus:ring-primary bg-gray-700 placeholder-gray-500" placeholder="Your Name"> </div>
+                    <div class="mb-10"> <label for="email" class="block text-gray-300 text-sm font-bold mb-4">Email</label> <input type="email" id="email" class="shadow-inner appearance-none border border-gray-700 rounded w-full py-4 px-5 text-gray-200 leading-tight focus:outline-none focus:ring-2 focus:ring-primary bg-gray-700 placeholder-gray-500" placeholder="Your Email"> </div>
+                    <div class="mb-10"> <label for="message" class="block text-gray-300 text-sm font-bold mb-4">Message</label> <textarea id="message" rows="8" class="shadow-inner appearance-none border border-gray-700 rounded w-full py-4 px-5 text-gray-200 leading-tight focus:outline-none focus:ring-2 focus:ring-primary bg-gray-700 placeholder-gray-500" placeholder="Your Message"></textarea> </div>
+                    <div class="flex items-center justify-center">
+                        <button type="submit" class="bg-primary hover:bg-cyan-600 text-dark-bg font-bold py-5 px-12 rounded-full focus:outline-none focus:shadow-outline transition duration-300 ease-in-out button-hover-effect text-lg">
+                            Send Transmission
+                        </button> </div>
                 </form>
             </div>
         </div>
     </section>
 
-    <footer class="bg-gray-800 text-gray-300 py-12">
-        <div class="container mx-auto px-6">
-            <div class="grid md:grid-cols-3 gap-8 mb-8">
-                <div>
-                    <h3 class="text-2xl font-bold text-white mb-3">Twinfusion</h3>
-                    <p class="text-gray-400">Innovate. Integrate. Inspire.</p>
-                    <p class="text-gray-400 mt-2 text-sm">123 Tech Avenue, Innovation City, TX 75001</p>
-                </div>
-                <div>
-                    <h4 class="text-lg font-semibold text-white mb-3">Quick Links</h4>
-                    <ul class="space-y-2">
-                        <li><a href="#services" class="hover:text-indigo-400 transition-colors">Services</a></li>
-                        <li><a href="#about" class="hover:text-indigo-400 transition-colors">About Us</a></li>
-                        <li><a href="#portfolio" class="hover:text-indigo-400 transition-colors">Portfolio</a></li>
-                        <li><a href="#" class="hover:text-indigo-400 transition-colors">Careers (Placeholder)</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-lg font-semibold text-white mb-3">Connect With Us</h4>
-                    <div class="flex space-x-4">
-                        <a href="#" aria-label="Facebook" class="text-gray-400 hover:text-indigo-400 transition-colors"><i class="fab fa-facebook-f text-xl"></i></a>
-                        <a href="#" aria-label="Twitter" class="text-gray-400 hover:text-indigo-400 transition-colors"><i class="fab fa-twitter text-xl"></i></a>
-                        <a href="#" aria-label="LinkedIn" class="text-gray-400 hover:text-indigo-400 transition-colors"><i class="fab fa-linkedin-in text-xl"></i></a>
-                        <a href="#" aria-label="GitHub" class="text-gray-400 hover:text-indigo-400 transition-colors"><i class="fab fa-github text-xl"></i></a>
-                    </div>
-                     <p class="text-gray-400 mt-4 text-sm">Email: <a href="mailto:info@twinfusion.com" class="hover:text-indigo-400">info@twinfusion.com</a></p>
-                </div>
-            </div>
-            <div class="border-t border-gray-700 pt-8 text-center text-sm">
-                <p>&copy; <span id="currentYear"></span> Twinfusion. All Rights Reserved.</p>
-                <p class="mt-1">
-                    <a href="#" class="hover:text-indigo-400 transition-colors">Privacy Policy</a> |
-                    <a href="#" class="hover:text-indigo-400 transition-colors">Terms of Service</a>
-                </p>
-            </div>
-        </div>
+    <footer class="bg-gray-900 text-gray-600 py-12 border-t border-gray-800"> <div class="container mx-auto px-6 text-center text-sm">
+            <p>&copy; 2025 Twinfusion. All rights reserved. // Engineered for the Future</p> </div>
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Mobile menu toggle
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-            if (mobileMenuButton && mobileMenu) {
-                mobileMenuButton.addEventListener('click', () => {
-                    mobileMenu.classList.toggle('hidden');
-                    // Toggle icon
-                    const icon = mobileMenuButton.querySelector('i');
-                    if (icon.classList.contains('fa-bars')) {
-                        icon.classList.remove('fa-bars');
-                        icon.classList.add('fa-times');
-                    } else {
-                        icon.classList.remove('fa-times');
-                        icon.classList.add('fa-bars');
-                    }
-                });
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
 
-                // Close mobile menu when a link is clicked
-                const mobileNavLinks = mobileMenu.querySelectorAll('a');
-                mobileNavLinks.forEach(link => {
-                    link.addEventListener('click', () => {
-                        mobileMenu.classList.add('hidden');
-                        const icon = mobileMenuButton.querySelector('i');
-                        icon.classList.remove('fa-times');
-                        icon.classList.add('fa-bars');
-                    });
-                });
-            }
-
-
-            // Sticky header on scroll
-            const header = document.getElementById('header');
-            let lastScrollTop = 0;
-            window.addEventListener('scroll', function() {
-                let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                if (scrollTop > 50) { // Add shadow after scrolling a bit
-                    header.classList.add('py-2');
-                    header.classList.remove('py-3');
-                } else {
-                    header.classList.remove('py-2');
-                    header.classList.add('py-3');
-                }
-
-                // Optional: Hide header on scroll down, show on scroll up
-                // if (scrollTop > lastScrollTop && scrollTop > 200) { // If scrolling down and past 200px
-                //     header.style.top = '-100px'; // Adjust based on header height
-                // } else {
-                //     header.style.top = '0';
-                // }
-                lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // For Mobile or negative scrolling
-            });
-
-
-            // Intersection Observer for fade-in sections
-            const sections = document.querySelectorAll('.fade-in-section');
-            const observerOptions = {
-                root: null, // relative to document viewport
-                rootMargin: '0px',
-                threshold: 0.1 // 10% of item is visible
-            };
-
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                        observer.unobserve(entry.target); // Optional: stop observing once visible
-                    }
-                });
-            }, observerOptions);
-
-            sections.forEach(section => {
-                observer.observe(section);
-            });
-
-            // Smooth scroll for anchor links & Active Nav Link Highlighting
-            const navLinks = document.querySelectorAll('nav a[href^="#"], #mobile-menu a[href^="#"]');
-            const desktopNavLinks = document.querySelectorAll('header nav a.nav-link');
-            const mobileNavLinksForActive = document.querySelectorAll('#mobile-menu a.nav-link-mobile');
-
-            function updateActiveLink() {
-                let currentSectionId = "";
-                const scrollPosition = window.scrollY + header.offsetHeight + 50; // Offset for sticky header + a little margin
-
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    const sectionHeight = section.offsetHeight;
-                    if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-                        currentSectionId = section.id;
-                    }
-                });
-                
-                // Special case for hero section when at the very top
-                if (window.scrollY < window.innerHeight / 2) {
-                    currentSectionId = "hero";
-                }
-
-
-                desktopNavLinks.forEach(link => {
-                    link.classList.remove('nav-link-active');
-                    if (link.getAttribute('href') === `#${currentSectionId}`) {
-                        link.classList.add('nav-link-active');
-                    }
-                });
-                mobileNavLinksForActive.forEach(link => {
-                    link.classList.remove('nav-link-active-mobile');
-                     if (link.getAttribute('href') === `#${currentSectionId}`) {
-                        link.classList.add('nav-link-active-mobile');
-                    }
-                });
-            }
-            
-            window.addEventListener('scroll', updateActiveLink);
-            updateActiveLink(); // Initial call
-
-
-            // Contact Form Submission (Basic)
-            const contactForm = document.getElementById('contactForm');
-            const formFeedback = document.getElementById('form-feedback');
-
-            if (contactForm) {
-                contactForm.addEventListener('submit', function(e) {
-                    e.preventDefault(); // Prevent actual submission for this demo
-
-                    // Basic validation
-                    const name = document.getElementById('name').value.trim();
-                    const email = document.getElementById('email').value.trim();
-                    const subject = document.getElementById('subject').value.trim();
-                    const message = document.getElementById('message').value.trim();
-
-                    if (!name || !email || !subject || !message) {
-                        formFeedback.textContent = 'Please fill out all fields.';
-                        formFeedback.className = 'mt-4 text-center text-red-600 font-medium';
-                        return;
-                    }
-                    
-                    // Validate email format (simple regex)
-                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                    if (!emailRegex.test(email)) {
-                        formFeedback.textContent = 'Please enter a valid email address.';
-                        formFeedback.className = 'mt-4 text-center text-red-600 font-medium';
-                        return;
-                    }
-
-                    // Simulate form submission
-                    formFeedback.textContent = 'Thank you for your message! We will get back to you soon.';
-                    formFeedback.className = 'mt-4 text-center text-green-600 font-medium';
-                    contactForm.reset();
-
-                    // Remove feedback message after a few seconds
-                    setTimeout(() => {
-                        formFeedback.textContent = '';
-                        formFeedback.className = 'mt-4 text-center';
-                    }, 5000);
-                });
-            }
-
-            // Set current year in footer
-            const currentYearSpan = document.getElementById('currentYear');
-            if (currentYearSpan) {
-                currentYearSpan.textContent = new Date().getFullYear();
-            }
-
-            // Add simple Tailwind-like animations for hero text (if not using custom CSS animations)
-            // Example: animate-fade-in-down, animate-fade-in-up
-            // These would need to be defined in Tailwind config or custom CSS if not default
-            // For simplicity, using CSS classes like .animate-fade-in-down directly
-            // and assuming they are defined (e.g. via a custom animation plugin or custom CSS)
-            // Let's add some basic keyframe animations for these
-            const styleSheet = document.createElement("style");
-            styleSheet.type = "text/css";
-            styleSheet.innerText = `
-                @keyframes fadeInDown {
-                    0% { opacity: 0; transform: translateY(-20px); }
-                    100% { opacity: 1; transform: translateY(0); }
-                }
-                .animate-fade-in-down { animation: fadeInDown 0.8s ease-out forwards; }
-
-                @keyframes fadeInUp {
-                    0% { opacity: 0; transform: translateY(20px); }
-                    100% { opacity: 1; transform: translateY(0); }
-                }
-                .animate-fade-in-up { animation: fadeInUp 0.8s ease-out forwards; }
-                
-                .animation-delay-300 { animation-delay: 0.3s; }
-                .animation-delay-600 { animation-delay: 0.6s; }
-                .animation-delay-1000 { animation-delay: 1s; }
-
-                @keyframes bounceSlow {
-                    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-                    40% { transform: translateY(-15px); }
-                    60% { transform: translateY(-7px); }
-                }
-                .animate-bounce-slow {
-                    animation: bounceSlow 2s infinite;
-                    opacity:0; /* Start hidden, will be shown by animation-delay */
-                    animation-fill-mode: forwards; /* Keep final state */
-                }
-            `;
-            document.head.appendChild(styleSheet);
-
-            // Ensure elements with animation delays start invisible
-            document.querySelectorAll('[class*="animation-delay-"]').forEach(el => {
-                el.style.opacity = '0';
-            });
-
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
         });
+
+        // Close mobile menu when a link is clicked
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+    </script>
+
+     <script>
+        function showTab(tabId, button) {
+            // Hide all tab content
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Deactivate all tab buttons
+            const tabButtons = document.querySelectorAll('.tab-button');
+            tabButtons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show the selected tab content
+            document.getElementById(tabId).classList.add('active');
+
+            // Activate the clicked button
+            button.classList.add('active');
+        }
+
+        // Show the default tab on page load (e.g., 'branding')
+        document.addEventListener('DOMContentLoaded', () => {
+             // Find the default active button and click it
+             const defaultButton = document.querySelector('.tab-button.active');
+             if (defaultButton) {
+                 // Extract tabId from the onclick attribute
+                 const onclickAttr = defaultButton.getAttribute('onclick');
+                 const match = onclickAttr.match(/showTab\('([^']*)'/);
+                 if (match && match[1]) {
+                     showTab(match[1], defaultButton);
+                 }
+             } else {
+                 // Fallback: if no button has 'active', show the first tab
+                 const firstTabContent = document.querySelector('.tab-content');
+                 const firstButton = document.querySelector('.tab-button');
+                 if (firstTabContent && firstButton) {
+                      firstTabContent.classList.add('active');
+                      firstButton.classList.add('active');
+                 }
+             }
+        });
+    </script>
+
+    <script>
+        // Basic particle effect using Canvas
+        const particlesCanvas = document.getElementById('particles-js');
+        const ctx = particlesCanvas.getContext('2d');
+        let particles = [];
+        const numParticles = 100; // Increased number of particles for density
+
+        // Set canvas size
+        function setCanvasSize() {
+            particlesCanvas.width = window.innerWidth;
+            // Ensure particles cover at least the hero section height, or more if needed
+            particlesCanvas.height = Math.max(window.innerHeight, particlesCanvas.parentElement.offsetHeight);
+        }
+
+        // Particle class
+        class Particle {
+            constructor() {
+                this.x = Math.random() * particlesCanvas.width;
+                this.y = Math.random() * particlesCanvas.height;
+                this.size = Math.random() * 2.5 + 1; // Slightly larger particles
+                this.speedX = Math.random() * 0.7 - 0.35; // Faster speed
+                this.speedY = Math.random() * 0.7 - 0.35; // Faster speed
+                this.color = 'rgba(15, 238, 240, 0.7)'; // Electric Cyan with transparency
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                // Wrap particles around edges
+                if (this.x > particlesCanvas.width) this.x = 0;
+                if (this.x < 0) this.x = particlesCanvas.width;
+                if (this.y > particlesCanvas.height) this.y = 0;
+                if (this.y < 0) this.y = particlesCanvas.height;
+            }
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        // Create particles
+        function createParticles() {
+            particles = []; // Clear existing particles on resize
+            for (let i = 0; i < numParticles; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        // Animation loop
+        function animateParticles() {
+            ctx.clearRect(0, 0, particlesCanvas.width, particlesCanvas.height); // Clear canvas
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+            requestAnimationFrame(animateParticles); // Loop the animation
+        }
+
+        // Initialize on window load and resize
+        window.addEventListener('load', () => {
+             setCanvasSize(); // Set initial size
+             createParticles(); // Create particles
+             animateParticles(); // Start animation
+        });
+
+        window.addEventListener('resize', () => {
+            setCanvasSize(); // Adjust size on resize
+            createParticles(); // Recreate particles on resize
+        });
+
+    </script>
+
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (entry.target.classList.contains('animate-fade-in-up')) {
+                         entry.target.classList.add('animate-fade-in-up-visible');
+                    }
+                     if (entry.target.classList.contains('animate-scale-in')) {
+                         entry.target.classList.add('animate-scale-in-visible');
+                    }
+                } else {
+                    // Optional: remove class when not visible if you want elements to re-animate on scroll back
+                    // entry.target.classList.remove('animate-fade-in-up-visible');
+                    // entry.target.classList.remove('animate-scale-in-visible');
+                }
+            });
+        }, { threshold: 0.1 }); // Trigger when 10% of the element is visible
+
+        // Add animation classes to elements you want to animate
+        document.querySelectorAll('.animate-fade-in-up, .animate-scale-in').forEach(element => {
+            observer.observe(element);
+        });
+
     </script>
 
 </body>
