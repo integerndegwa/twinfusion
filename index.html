@@ -132,7 +132,7 @@
         </div>
         <div class="hero-overlay"></div>
 
-        <div class="container mx-auto px-6 text-center relative z-10">
+        <div class="container mx-auto px-6 text-center relative z-10"> {/* z-10 to ensure text is above overlay */}
             <h1 class="text-4xl sm:text-5xl md:text-7xl font-extrabold mb-6 animate-fadeInSlideUp" style="opacity:0;">
                 Transforming Businesses with <span class="block md:inline">Cutting-Edge Technology</span>
             </h1>
@@ -145,7 +145,7 @@
                 </a>
             </div>
         </div>
-        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce z-10">
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce z-10"> {/* z-10 for visibility */}
             <a href="#services" aria-label="Scroll down">
                 <svg class="w-8 h-8 text-white opacity-70 hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
             </a>
@@ -188,7 +188,7 @@
         <div class="container mx-auto px-6">
             <div class="flex flex-col md:flex-row items-center gap-10 md:gap-16">
                 <div class="md:w-1/2">
-                    <img src="https://placehold.co/600x400/6366F1/FFFFFF?text=Our+Team&font=Inter" alt="Our Team Working" class="rounded-xl shadow-2xl w-full" onerror="this.onerror=null;this.src='https://placehold.co/600x400/E0E7FF/6366F1?text=Image+Not+Found';">
+                    <img src="about-us-team.jpg" alt="Our Team Working" class="rounded-xl shadow-2xl w-full" onerror="this.onerror=null;this.src='https://placehold.co/600x400/E0E7FF/6366F1?text=Image+Not+Found';">
                 </div>
                 <div class="md:w-1/2">
                     <span class="text-indigo-600 font-semibold">Who We Are</span>
@@ -245,11 +245,11 @@
                 <p class="text-lg text-slate-600 mt-2 md:mt-4">We're proud to have partnered with amazing companies.</p>
             </div>
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8 items-center">
-                <img src="https://placehold.co/200x100/E0E7FF/6366F1?text=Client+Logo+1" alt="Client Logo 1" class="mx-auto opacity-70 hover:opacity-100 transition-opacity duration-300" onerror="this.onerror=null;this.src='https://placehold.co/200x100/CCCCCC/999999?text=Logo+Error';">
-                <img src="https://placehold.co/200x100/E0E7FF/6366F1?text=Client+Logo+2" alt="Client Logo 2" class="mx-auto opacity-70 hover:opacity-100 transition-opacity duration-300" onerror="this.onerror=null;this.src='https://placehold.co/200x100/CCCCCC/999999?text=Logo+Error';">
-                <img src="https://placehold.co/200x100/E0E7FF/6366F1?text=Client+Logo+3" alt="Client Logo 3" class="mx-auto opacity-70 hover:opacity-100 transition-opacity duration-300" onerror="this.onerror=null;this.src='https://placehold.co/200x100/CCCCCC/999999?text=Logo+Error';">
-                <img src="https://placehold.co/200x100/E0E7FF/6366F1?text=Client+Logo+4" alt="Client Logo 4" class="mx-auto opacity-70 hover:opacity-100 transition-opacity duration-300" onerror="this.onerror=null;this.src='https://placehold.co/200x100/CCCCCC/999999?text=Logo+Error';">
-                <img src="https://placehold.co/200x100/E0E7FF/6366F1?text=Client+Logo+5" alt="Client Logo 5" class="mx-auto opacity-70 hover:opacity-100 transition-opacity duration-300" onerror="this.onerror=null;this.src='https://placehold.co/200x100/CCCCCC/999999?text=Logo+Error';">
+                <img src="client-logo1.png" alt="Client Logo 1" class="mx-auto opacity-70 hover:opacity-100 transition-opacity duration-300" onerror="this.onerror=null;this.src='https://placehold.co/200x100/CCCCCC/999999?text=Logo+1';">
+                <img src="client-logo2.png" alt="Client Logo 2" class="mx-auto opacity-70 hover:opacity-100 transition-opacity duration-300" onerror="this.onerror=null;this.src='https://placehold.co/200x100/CCCCCC/999999?text=Logo+2';">
+                <img src="client-logo3.svg" alt="Client Logo 3" class="mx-auto opacity-70 hover:opacity-100 transition-opacity duration-300" onerror="this.onerror=null;this.src='https://placehold.co/200x100/CCCCCC/999999?text=Logo+3';">
+                <img src="client-logo4.png" alt="Client Logo 4" class="mx-auto opacity-70 hover:opacity-100 transition-opacity duration-300" onerror="this.onerror=null;this.src='https://placehold.co/200x100/CCCCCC/999999?text=Logo+4';">
+                <img src="client-logo5.svg" alt="Client Logo 5" class="mx-auto opacity-70 hover:opacity-100 transition-opacity duration-300" onerror="this.onerror=null;this.src='https://placehold.co/200x100/CCCCCC/999999?text=Logo+5';">
             </div>
         </div>
     </section>
@@ -264,7 +264,7 @@
                 <div class="bg-indigo-700/50 p-8 rounded-xl shadow-xl backdrop-blur-sm">
                     <p class="text-indigo-50 italic leading-relaxed mb-6">"Innovatech Solutions transformed our operations. Their expertise and dedication were pivotal to our project's success. Highly recommended!"</p>
                     <div class="flex items-center">
-                        <img src="https://placehold.co/50x50/FFFFFF/6366F1?text=AP&font=Inter" alt="Alex P." class="w-12 h-12 rounded-full mr-4 border-2 border-sky-400" onerror="this.onerror=null;this.src='https://placehold.co/50x50/CCCCCC/999999?text=Err';">
+                        <img src="avatar-alex.jpg" alt="Alex P." class="w-12 h-12 rounded-full mr-4 border-2 border-sky-400" onerror="this.onerror=null;this.src='https://placehold.co/50x50/CCCCCC/999999?text=AP';">
                         <div>
                             <p class="font-semibold text-white">Alex P.</p>
                             <p class="text-indigo-200 text-sm">CEO, TechForward Inc.</p>
@@ -274,7 +274,7 @@
                 <div class="bg-indigo-700/50 p-8 rounded-xl shadow-xl backdrop-blur-sm">
                     <p class="text-indigo-50 italic leading-relaxed mb-6">"The team at Innovatech is incredibly knowledgeable and responsive. They delivered a solution that exceeded our expectations on time and budget."</p>
                     <div class="flex items-center">
-                        <img src="https://placehold.co/50x50/FFFFFF/6366F1?text=SJ&font=Inter" alt="Sarah J." class="w-12 h-12 rounded-full mr-4 border-2 border-sky-400" onerror="this.onerror=null;this.src='https://placehold.co/50x50/CCCCCC/999999?text=Err';">
+                         <img src="avatar-sarah.jpg" alt="Sarah J." class="w-12 h-12 rounded-full mr-4 border-2 border-sky-400" onerror="this.onerror=null;this.src='https://placehold.co/50x50/CCCCCC/999999?text=SJ';">
                         <div>
                             <p class="font-semibold text-white">Sarah J.</p>
                             <p class="text-indigo-200 text-sm">CTO, MarketBoost Co.</p>
@@ -462,6 +462,7 @@
         const slideInterval = 5000; // Time in ms (5 seconds)
 
         function nextSlide() {
+            if (slides.length === 0) return; // Do nothing if no slides
             slides[currentSlide].classList.remove('active');
             currentSlide = (currentSlide + 1) % slides.length;
             slides[currentSlide].classList.add('active');
@@ -470,7 +471,10 @@
         // Start the slideshow
         if (slides.length > 1) {
             setInterval(nextSlide, slideInterval);
+        } else if (slides.length === 1) {
+            slides[0].classList.add('active'); // Ensure single slide is visible
         }
+
 
     </script>
 </body>
