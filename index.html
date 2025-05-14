@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Twinfusion </title>
+    <title>Twinfusion</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
     <style>
@@ -47,21 +47,64 @@
             background: var(--color-primary);
         }
 
-        /* Styles for Tabs (now controlling slideshow) */
+        /* Styles for Slideshow */
+        .slideshow-container {
+            position: relative;
+            max-width: 1200px; /* Match max-w-4xl */
+            margin: 0 auto; /* Center the container */
+            overflow: hidden; /* Hide overflowing slides */
+            border-radius: 0.5rem; /* Match rounded-lg */
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); /* Match shadow-2xl */
+            border: 1px solid var(--color-light-bg); /* Match border-gray-700 */
+            aspect-ratio: 16 / 9; /* Maintain aspect ratio */
+        }
+
         .tab-content {
-            display: none; /* Hide all tab content by default */
-            opacity: 0; /* Start hidden for fade-in */
-            transition: opacity 0.8s ease-in-out; /* Slower transition */
-            position: absolute; /* Position for slideshow stacking */
+            display: none; /* Hidden by default */
+            opacity: 0; /* Start transparent */
+            transition: opacity 0.8s ease-in-out; /* Fade transition */
+            position: absolute; /* Stack slides */
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+             z-index: 0; /* Ensure non-active slides are behind */
         }
+
         .tab-content.active {
-            display: block; /* Show active tab content */
+            display: block; /* Show active slide */
             opacity: 1; /* Fade in */
             position: relative; /* Active slide dictates container size */
+             z-index: 10; /* Bring active slide to front */
+        }
+
+        /* Slideshow image styling */
+        .slideshow-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Cover the container */
+            display: block; /* Remove extra space below image */
+        }
+
+        /* Slideshow navigation dots */
+        .dot-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .dot {
+            cursor: pointer;
+            height: 12px;
+            width: 12px;
+            margin: 0 5px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+        }
+
+        .dot.active, .dot:hover {
+            background-color: var(--color-primary);
         }
 
         /* Style for tab buttons */
@@ -212,45 +255,23 @@
             filter: grayscale(0%) brightness(100%); /* Full color on hover */
         }
 
-        /* Slideshow container */
-        .slideshow-container {
-            position: relative;
-            max-width: 1200px; /* Match max-w-4xl */
-            margin: 0 auto; /* Center the container */
-            overflow: hidden; /* Hide overflowing slides */
-            border-radius: 0.5rem; /* Match rounded-lg */
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); /* Match shadow-2xl */
-            border: 1px solid var(--color-light-bg); /* Match border-gray-700 */
-            aspect-ratio: 16 / 9; /* Maintain aspect ratio */
+        /* Blog post card styling */
+        .blog-card {
+            background-color: var(--color-light-bg);
+            border: 1px solid var(--color-light-bg);
+            transition: all 0.5s ease-in-out;
         }
-
-        /* Slideshow image styling */
-        .slideshow-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* Cover the container */
-            display: block; /* Remove extra space below image */
+        .blog-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), 0 0 20px rgba(123, 0, 255, 0.5); /* Darker shadow + purple glow */
+            border-color: var(--color-secondary);
         }
-
-        /* Slideshow navigation dots */
-        .dot-container {
-            text-align: center;
-            margin-top: 20px;
+        .blog-card img {
+            filter: brightness(80%) contrast(1.1);
+            transition: filter 0.4s ease-in-out;
         }
-
-        .dot {
-            cursor: pointer;
-            height: 12px;
-            width: 12px;
-            margin: 0 5px;
-            background-color: rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            display: inline-block;
-            transition: background-color 0.6s ease;
-        }
-
-        .dot.active, .dot:hover {
-            background-color: var(--color-primary);
+        .blog-card:hover img {
+             filter: brightness(100%) contrast(1);
         }
 
 
@@ -267,7 +288,7 @@
                 <a href="#services" class="text-gray-300 hover:text-cyan-500 transition duration-300 ease-in-out font-semibold">Services</a>
                 <a href="#portfolio" class="text-gray-300 hover:text-cyan-500 transition duration-300 ease-in-out font-semibold">Portfolio</a>
                 <a href="#clients" class="text-gray-300 hover:text-cyan-500 transition duration-300 ease-in-out font-semibold">Clients</a>
-                <a href="#about" class="text-gray-300 hover:text-cyan-500 transition duration-300 ease-in-out font-semibold">About Us</a>
+                 <a href="#blog" class="text-gray-300 hover:text-cyan-500 transition duration-300 ease-in-out font-semibold">Blog</a> <a href="#about" class="text-gray-300 hover:text-cyan-500 transition duration-300 ease-in-out font-semibold">About Us</a>
                 <a href="#contact" class="text-gray-300 hover:text-cyan-500 transition duration-300 ease-in-out font-semibold">Contact</a>
             </nav>
             <div class="md:hidden">
@@ -281,7 +302,7 @@
                 <a href="#services" class="block text-gray-300 hover:text-cyan-500 transition duration-300 ease-in-out py-2 font-semibold">Services</a>
                 <a href="#portfolio" class="block text-gray-300 hover:text-cyan-500 transition duration-300 ease-in-out py-2 font-semibold">Portfolio</a>
                 <a href="#clients" class="block text-gray-300 hover:text-cyan-500 transition duration-300 ease-in-out py-2 font-semibold">Clients</a>
-                <a href="#about" class="block text-gray-300 hover:text-cyan-500 transition duration-300 ease-in-out py-2 font-semibold">About Us</a>
+                 <a href="#blog" class="block text-gray-300 hover:text-cyan-500 transition duration-300 ease-in-out py-2 font-semibold">Blog</a> <a href="#about" class="block text-gray-300 hover:text-cyan-500 transition duration-300 ease-in-out py-2 font-semibold">About Us</a>
                 <a href="#contact" class="block text-gray-300 hover:text-cyan-500 transition duration-300 ease-in-out py-2 font-semibold">Contact</a>
             </nav>
         </div>
@@ -334,54 +355,54 @@
                     <div class="text-primary mb-8 text-center animate-pulse-glow">
                         <svg class="w-20 h-20 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h.01M17 14l.01 0M12 14h.01M12 10h.01M5 14h.01M19 17h-2a2 2 0 01-2-2V5a2 2 0 012-2h2a2 2 0 012 2v10a2 2 0 01-2 2z"></path></svg>
                     </div>
-                    <h3 class="text-2xl font-semibold text-white mb-4 text-center font-[Orbitron]">Saify POS</h3>
+                    <h3 class="text-2xl font-semibold text-white mb-4 text-center font-[Orbitron]">Saify POS Implementation</h3>
                     <p class="text-gray-400 text-center leading-relaxed">
-                        Implementing and customizing the Saify Point of Sale system for streamlined retail operations and enhanced customer experiences.
+                        Revolutionize your retail operations with seamless Saify Point of Sale system implementation and optimization, enhancing transaction speed and customer satisfaction.
                     </p>
                 </div>
                 <div class="bg-gray-800 p-12 rounded-lg shadow-xl card-hover-effect animate-fade-in-up animation-delay-300 border border-gray-700">
                     <div class="text-primary mb-8 text-center animate-pulse-glow animation-delay-100">
                          <svg class="w-20 h-20 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
                     </div>
-                    <h3 class="text-2xl font-semibold text-white mb-4 text-center font-[Orbitron]">Custom Software Solutions</h3>
+                    <h3 class="text-2xl font-semibold text-white mb-4 text-center font-[Orbitron]">Bespoke Software Engineering</h3>
                     <p class="text-gray-400 text-center leading-relaxed">
-                        Designing and building bespoke software applications tailored precisely to your unique business processes and requirements.
+                        Unlock unparalleled efficiency with custom-engineered software solutions, precisely tailored to your unique workflows and strategic objectives.
                     </p>
                 </div>
                 <div class="bg-gray-800 p-12 rounded-lg shadow-xl card-hover-effect animate-fade-in-up animation-delay-400 border border-gray-700">
                      <div class="text-primary mb-8 text-center animate-pulse-glow animation-delay-200">
                          <svg class="w-20 h-20 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
                     </div>
-                    <h3 class="text-2xl font-semibold text-white mb-4 text-center font-[Orbitron]">Web & Mobile App Dev</h3>
+                    <h3 class="text-2xl font-semibold text-white mb-4 text-center font-[Orbitron]">Cross-Platform App Development</h3>
                     <p class="text-gray-400 text-center leading-relaxed">
-                        Developing responsive and intuitive web and mobile applications that deliver seamless user experiences across all devices.
+                        Reach your audience everywhere with stunning, high-performance web and mobile applications built for seamless experiences across all devices.
                     </p>
                 </div>
                  <div class="bg-gray-800 p-12 rounded-lg shadow-xl card-hover-effect animate-fade-in-up animation-delay-500 border border-gray-700">
                     <div class="text-primary mb-8 text-center animate-pulse-glow animation-delay-300">
                          <svg class="w-20 h-20 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 13.255A23.931 23.931 0 0112 15.711m8.75-2.456c-.19.16-.4.32-.62.48m0 0l-.52 1.04a1 1 0 01-1.73 0l-.52-1.04m-8.75-2.456c.19.16.4.32.62.48m0 0L6.75 14.3a1 1 0 001.73 0l.52-1.04M12 10a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                     </div>
-                    <h3 class="text-2xl font-semibold text-white mb-4 text-center font-[Orbitron]">Enterprise Software Dev</h3>
+                    <h3 class="text-2xl font-semibold text-white mb-4 text-center font-[Orbitron]">Scalable Enterprise Solutions</h3>
                     <p class="text-gray-400 text-center leading-relaxed">
-                        Building robust and scalable enterprise-level software solutions designed to optimize complex business operations.
+                        Future-proof your business with robust and scalable enterprise software, designed to streamline complex operations and drive significant growth.
                     </p>
                 </div>
                  <div class="bg-gray-800 p-12 rounded-lg shadow-xl card-hover-effect animate-fade-in-up animation-delay-600 border border-gray-700">
                     <div class="text-primary mb-8 text-center animate-pulse-glow animation-delay-400">
                          <svg class="w-20 h-20 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.5a2.5 2.5 0 10-5 0V12"></path></svg>
                     </div>
-                    <h3 class="text-2xl font-semibold text-white mb-4 text-center font-[Orbitron]">Digital Marketing & Social</h3>
+                    <h3 class="text-2xl font-semibold text-white mb-4 text-center font-[Orbitron]">AI-Driven Digital Strategy</h3>
                     <p class="text-gray-400 text-center leading-relaxed">
-                        Crafting data-driven digital marketing strategies and managing social media presence to amplify your brand's reach.
+                        Leverage the power of AI and data analytics to craft intelligent digital marketing strategies that maximize reach, engagement, and conversion.
                     </p>
                 </div>
                  <div class="bg-gray-800 p-12 rounded-lg shadow-xl card-hover-effect animate-fade-in-up animation-delay-700 border border-gray-700">
                     <div class="text-primary mb-8 text-center animate-pulse-glow animation-delay-500">
                          <svg class="w-20 h-20 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 7v10l2 2h10l2-2V7m-2 0H6m12 0V5a2 2 0 00-2-2h-2a2 2 0 00-2 2v2M4 7h4m-4 0H3m0 0v4m0 0h3m0 0h4m0 0h4m0 0h4m0 0v-4m0 4h3m0 0v-4m0 0h-3m-2 4h2m-2 0v-4m0 0h-2m2 4v-4m0 0h-2"></path></svg>
                     </div>
-                    <h3 class="text-2xl font-semibold text-white mb-4 text-center font-[Orbitron]">Digital Infra & Analytics</h3>
+                    <h3 class="text-2xl font-semibold text-white mb-4 text-center font-[Orbitron]">Advanced Cloud & Data Architecture</h3>
                     <p class="text-gray-400 text-center leading-relaxed">
-                        Designing, implementing, and managing robust digital infrastructure and providing insightful data analytics for informed decisions.
+                        Build a foundation for innovation with cutting-edge digital infrastructure and advanced data analytics for unparalleled insights and performance.
                     </p>
                 </div>
             </div>
@@ -396,7 +417,7 @@
                     <img src="https://placehold.co/600x400/FF00AA/0A0A1A?text=Muthokinju+Paints+POS" alt="Muthokinju Paints POS Integration" class="w-full h-64 object-cover portfolio-image">
                     <div class="p-8">
                         <h3 class="text-xl font-semibold text-white mb-2 font-[Orbitron]">Muthokinju Paints POS Integration</h3>
-                        <p class="text-gray-400 text-sm mb-4 leading-relaxed">Seamlessly integrated a modern POS system for Muthokinju Paints, enhancing sales tracking and inventory management.</p>
+                        <p class="text-gray-400 text-sm mb-4 leading-relaxed">Seamlessly integrated a modern POS system for Muthokinju Paints, enhancing sales tracking and inventory management for improved efficiency and data accuracy.</p>
                         <a href="#" class="text-primary hover:underline text-sm font-semibold">View Case Study &rarr;</a>
                     </div>
                 </div>
@@ -404,9 +425,13 @@
                     <img src="https://placehold.co/600x400/0FEEF0/0A0A1A?text=Al+Jamea+University+PMS" alt="Al Jamea University Project Management Solution" class="w-full h-64 object-cover portfolio-image">
                     <div class="p-8">
                         <h3 class="text-xl font-semibold text-white mb-2 font-[Orbitron]">Al Jamea University Project Mgt.</h3>
-                        <p class="text-gray-400 text-sm mb-4 leading-relaxed">Developed a comprehensive project management solution for Al Jamea University, streamlining academic and administrative projects.</p>
+                        <p class="text-gray-400 text-sm mb-4 leading-relaxed">Developed a comprehensive project management solution for Al Jamea University, streamlining academic and administrative projects with advanced features and intuitive design.</p>
                         <a href="#" class="text-primary hover:underline text-sm font-semibold">View Case Study &rarr;</a>
                     </div>
+                </div>
+                 <div class="bg-gray-800 rounded-lg shadow-xl overflow-hidden card-hover-effect animate-fade-in-up animation-delay-600 border border-gray-700">
+                    <img src="https://placehold.co/600x400/7B00FF/0A0A1A?text=Future+Project" alt="Future Project" class="w-full h-64 object-cover portfolio-image">
+    
                 </div>
             </div>
         </div>
@@ -438,45 +463,104 @@
         </div>
     </section>
 
-
-     <section id="about" class="py-24 md:py-40 section-dark animate-fade-in-up border-b border-gray-800"> <div class="container mx-auto px-6 flex flex-col md:flex-row items-center gap-20"> <div class="md:w-1/2 animate-fade-in-up animation-delay-200">
-                <h2 class="text-4xl md:text-5xl font-bold text-white mb-10 font-[Orbitron]">About Twinfusion</h2> <p class="text-gray-400 text-lg mb-8 leading-relaxed">
-                    Twinfusion is a collective of visionary technologists and strategists, dedicated to pioneering the future of digital innovation. We are not just a consultancy; we are architects of tomorrow's technological landscape, fusing cutting-edge expertise with a relentless pursuit of excellence.
-                </p>
-                <p class="text-gray-400 text-lg leading-relaxed">
-                    Our mission is to empower businesses to thrive in an accelerating digital universe. With a deep understanding of emerging technologies and a passion for solving complex challenges, we partner with you to build solutions that are not only functional but truly revolutionary.
-                </p>
+    <section id="blog" class="py-24 md:py-40 section-light animate-fade-in-up border-b border-gray-800">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-20 text-white animate-fade-in-up font-[Orbitron]">Latest Blogs</h2> <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
+                <div class="rounded-lg shadow-xl overflow-hidden blog-card animate-fade-in-up animation-delay-200">
+                    <img src="https://placehold.co/600x400/FF00AA/0A0A1A?text=AI+Future" alt="Blog Post 1 Image" class="w-full h-48 object-cover">
+                    <div class="p-8">
+                        <h3 class="text-xl font-semibold text-white mb-4 font-[Orbitron]">The Quantum Leap: AI in the Next Decade</h3>
+                        <p class="text-gray-400 text-sm mb-6 leading-relaxed">
+                            Explore the transformative potential of Artificial Intelligence and its impact on industries, society, and the future of technology.
+                        </p>
+                        <a href="#" class="text-primary hover:underline text-sm font-semibold">Read More &rarr;</a>
+                    </div>
+                </div>
+                <div class="rounded-lg shadow-xl overflow-hidden blog-card animate-fade-in-up animation-delay-400">
+                    <img src="https://placehold.co/600x400/0FEEF0/0A0A1A?text=Blockchain+Impact" alt="Blog Post 2 Image" class="w-full h-48 object-cover">
+                    <div class="p-8">
+                        <h3 class="text-xl font-semibold text-white mb-4 font-[Orbitron]">Beyond Crypto: Blockchain's Enterprise Applications</h3>
+                        <p class="text-gray-400 text-sm mb-6 leading-relaxed">
+                            Delve into the real-world applications of blockchain technology beyond cryptocurrencies, from supply chain to secure data management.
+                        </p>
+                        <a href="#" class="text-primary hover:underline text-sm font-semibold">Read More &rarr;</a>
+                    </div>
+                </div>
+                 <div class="rounded-lg shadow-xl overflow-hidden blog-card animate-fade-in-up animation-delay-600">
+                    <img src="https://placehold.co/600x400/7B00FF/0A0A1A?text=Cybersecurity" alt="Blog Post 3 Image" class="w-full h-48 object-cover">
+                    <div class="p-8">
+                        <h3 class="text-xl font-semibold text-white mb-4 font-[Orbitron]">Fortifying the Digital Frontier: Advanced Cybersecurity</h3>
+                        <p class="text-gray-400 text-sm mb-6 leading-relaxed">
+                            Understand the evolving landscape of cybersecurity threats and the advanced strategies needed to protect your digital assets in a connected world.
+                        </p>
+                        <a href="#" class="text-primary hover:underline text-sm font-semibold">Read More &rarr;</a>
+                    </div>
+                </div>
             </div>
-            <div class="md:w-1/2 animate-fade-in-up animation-delay-400">
-                <img src="about-us-team.jpg" alt="About Us" class="rounded-lg shadow-2xl border border-secondary"> </div>
         </div>
     </section>
 
-    <section class="bg-gradient-to-br from-purple-900 to-gray-900 text-white py-24 md:py-36 text-center animate-fade-in-up border-b border-gray-800"> <div class="container mx-auto px-6">
-            <h2 class="text-4xl md:text-5xl font-bold mb-10 font-[Orbitron]">Ready to Innovate?</h2> <p class="text-xl md:text-2xl mb-16 opacity-90 leading-relaxed">
-                Connect with Twinfusion and let's engineer a digital future that sets you apart.
+
+     <section id="about" class="py-24 md:py-40 section-dark animate-fade-in-up border-b border-gray-800">
+        <div class="container mx-auto px-6 flex flex-col md:flex-row items-center gap-20">
+            <div class="md:w-1/2 animate-fade-in-up animation-delay-200">
+                <h2 class="text-4xl md:text-5xl font-bold text-white mb-10 font-[Orbitron]">About Twinfusion</h2>
+                <p class="text-gray-400 text-lg mb-8 leading-relaxed">
+                    Twinfusion is a collective of visionary technologists and strategists, dedicated to pioneering the future of digital innovation. We are not just a consultancy; we are architects of tomorrow's technological landscape, fusing cutting-edge expertise with a relentless pursuit of excellence. Our journey began with a shared vision: to empower businesses to navigate and excel in the rapidly evolving digital universe.
+                </p>
+                <p class="text-gray-400 text-lg leading-relaxed">
+                    Our mission is to empower businesses to thrive in an accelerating digital universe. With a deep understanding of emerging technologies and a passion for solving complex challenges, we partner with you to build solutions that are not only functional but truly revolutionary. We believe in a collaborative approach, working closely with our clients to understand their unique needs and deliver transformative results.
+                </p>
+            </div>
+            <div class="md:w-1/2 animate-fade-in-up animation-delay-400">
+                <img src="about-us-team.jpg" alt="About Us" class="rounded-lg shadow-2xl border border-secondary">
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-gradient-to-br from-purple-900 to-gray-900 text-white py-24 md:py-36 text-center animate-fade-in-up border-b border-gray-800">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl md:text-5xl font-bold mb-10 font-[Orbitron]">Ready to Innovate?</h2>
+            <p class="text-xl md:text-2xl mb-16 opacity-90 leading-relaxed">
+                Connect with Twinfusion and let's engineer a digital future that sets you apart. Our team is ready to transform your vision into reality.
             </p>
             <a href="#contact" class="bg-accent hover:bg-pink-600 text-white font-bold py-6 px-12 rounded-full text-xl transition duration-300 ease-in-out transform hover:scale-105 inline-block button-hover-effect">
                 Initiate Project
-            </a> </div>
+            </a>
+        </div>
     </section>
 
-    <section id="contact" class="py-24 md:py-40 section-light"> <div class="container mx-auto px-6">
-            <h2 class="text-4xl md:text-5xl font-bold text-center text-white mb-20 font-[Orbitron]">Get in Touch</h2> <div class="max-w-lg mx-auto bg-gray-800 p-12 rounded-lg shadow-xl border border-gray-700"> <form>
-                    <div class="mb-10"> <label for="name" class="block text-gray-300 text-sm font-bold mb-4">Name</label> <input type="text" id="name" class="shadow-inner appearance-none border border-gray-700 rounded w-full py-4 px-5 text-gray-200 leading-tight focus:outline-none focus:ring-2 focus:ring-primary bg-gray-700 placeholder-gray-500" placeholder="Your Name"> </div>
-                    <div class="mb-10"> <label for="email" class="block text-gray-300 text-sm font-bold mb-4">Email</label> <input type="email" id="email" class="shadow-inner appearance-none border border-gray-700 rounded w-full py-4 px-5 text-gray-200 leading-tight focus:outline-none focus:ring-2 focus:ring-primary bg-gray-700 placeholder-gray-500" placeholder="Your Email"> </div>
-                    <div class="mb-10"> <label for="message" class="block text-gray-300 text-sm font-bold mb-4">Message</label> <textarea id="message" rows="8" class="shadow-inner appearance-none border border-gray-700 rounded w-full py-4 px-5 text-gray-200 leading-tight focus:outline-none focus:ring-2 focus:ring-primary bg-gray-700 placeholder-gray-500" placeholder="Your Message"></textarea> </div>
+    <section id="contact" class="py-24 md:py-40 section-light">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl md:text-5xl font-bold text-center text-white mb-20 font-[Orbitron]">Get in Touch</h2>
+            <div class="max-w-lg mx-auto bg-gray-800 p-12 rounded-lg shadow-xl border border-gray-700">
+                <form>
+                    <div class="mb-10">
+                        <label for="name" class="block text-gray-300 text-sm font-bold mb-4">Name</label>
+                        <input type="text" id="name" class="shadow-inner appearance-none border border-gray-700 rounded w-full py-4 px-5 text-gray-200 leading-tight focus:outline-none focus:ring-2 focus:ring-primary bg-gray-700 placeholder-gray-500" placeholder="Your Name">
+                    </div>
+                    <div class="mb-10">
+                        <label for="email" class="block text-gray-300 text-sm font-bold mb-4">Email</label>
+                        <input type="email" id="email" class="shadow-inner appearance-none border border-gray-700 rounded w-full py-4 px-5 text-gray-200 leading-tight focus:outline-none focus:ring-2 focus:ring-primary bg-gray-700 placeholder-gray-500" placeholder="Your Email">
+                    </div>
+                    <div class="mb-10">
+                        <label for="message" class="block text-gray-300 text-sm font-bold mb-4">Message</label>
+                        <textarea id="message" rows="8" class="shadow-inner appearance-none border border-gray-700 rounded w-full py-4 px-5 text-gray-200 leading-tight focus:outline-none focus:ring-2 focus:ring-primary bg-gray-700 placeholder-gray-500" placeholder="Your Message"></textarea>
+                    </div>
                     <div class="flex items-center justify-center">
                         <button type="submit" class="bg-primary hover:bg-cyan-600 text-dark-bg font-bold py-5 px-12 rounded-full focus:outline-none focus:shadow-outline transition duration-300 ease-in-out button-hover-effect text-lg">
                             Send Transmission
-                        </button> </div>
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>
     </section>
 
-    <footer class="bg-gray-900 text-gray-600 py-12 border-t border-gray-800"> <div class="container mx-auto px-6 text-center text-sm">
-            <p>&copy; 2025 Twinfusion. All rights reserved. // Engineered for the Future</p> </div>
+    <footer class="bg-gray-900 text-gray-600 py-12 border-t border-gray-800">
+        <div class="container mx-auto px-6 text-center text-sm">
+            <p>&copy; 2025 Twinfusion. All rights reserved. // Engineered for the Future</p>
+        </div>
     </footer>
 
     <script>
@@ -498,6 +582,7 @@
 
      <script>
         let slideIndex = 1; // Start with the first slide
+        let autoSlideTimer; // Timer for automatic slideshow
 
         function showSlides(n) {
             let i;
@@ -509,10 +594,7 @@
             if (n > slides.length) { slideIndex = 1 }
             if (n < 1) { slideIndex = slides.length }
 
-            // Hide all slides and deactivate dots/buttons
-            for (i = 0; i < slides.length; i++) {
-                slides[i].classList.remove('active');
-            }
+            // Deactivate all dots/buttons
             for (i = 0; i < dots.length; i++) {
                 dots[i].classList.remove("active");
             }
@@ -520,14 +602,34 @@
                 tabButtons[i].classList.remove("active");
             }
 
-            // Show the current slide and activate the corresponding dot/button
-            slides[slideIndex - 1].classList.add('active');
+             // Hide all slides by setting opacity to 0 and display to none after transition
+            for (i = 0; i < slides.length; i++) {
+                 slides[i].style.opacity = 0;
+                 // Use a timeout to set display: none after the transition
+                 setTimeout((index) => {
+                     if (index !== (slideIndex - 1)) { // Only hide if not the active slide
+                        slides[index].style.display = 'none';
+                     }
+                 }, 800, i); // Match CSS transition duration
+            }
+
+
+            // Show the current slide by setting display to block and then opacity to 1
+            slides[slideIndex - 1].style.display = 'block';
+            // Use a small timeout to allow display: block to take effect before transitioning opacity
+            setTimeout(() => {
+                 slides[slideIndex - 1].style.opacity = 1;
+            }, 50); // Small delay
+
+
+            // Activate the corresponding dot/button
             dots[slideIndex - 1].classList.add("active");
             tabButtons[slideIndex - 1].classList.add("active");
         }
 
         // Function to control the current slide (used by dots and tabs)
         function currentSlide(n, button) {
+            stopAutoSlides(); // Stop auto slideshow on user interaction
             showSlides(slideIndex = n);
              // Ensure the correct button is active when clicking dots
             if (button) {
@@ -539,35 +641,38 @@
                  const tabButtons = document.querySelectorAll(".tab-button");
                  tabButtons[n - 1].classList.add('active');
             }
+             startAutoSlides(); // Restart auto slideshow after a delay
         }
 
-        // Automatic slideshow (optional)
-        // let autoSlideTimer;
-        // function startAutoSlides() {
-        //     autoSlideTimer = setInterval(() => {
-        //         showSlides(++slideIndex);
-        //     }, 5000); // Change image every 5 seconds
-        // }
+        // Automatic slideshow
+        function startAutoSlides() {
+            // Clear any existing timer before starting a new one
+            clearInterval(autoSlideTimer);
+            autoSlideTimer = setInterval(() => {
+                showSlides(++slideIndex);
+            }, 5000); // Change image every 5 seconds
+        }
 
-        // Stop automatic slideshow on user interaction (optional)
-        // function stopAutoSlides() {
-        //     clearInterval(autoSlideTimer);
-        // }
+        // Stop automatic slideshow
+        function stopAutoSlides() {
+            clearInterval(autoSlideTimer);
+        }
 
 
         // Initialize slideshow on page load
         document.addEventListener('DOMContentLoaded', () => {
             showSlides(slideIndex); // Show the first slide
-            // startAutoSlides(); // Start automatic slideshow
+            startAutoSlides(); // Start automatic slideshow
         });
 
-         // Restart automatic slideshow after user interaction (optional)
-        // document.querySelectorAll('.tab-button, .dot').forEach(element => {
-        //     element.addEventListener('click', () => {
-        //         stopAutoSlides();
-        //         startAutoSlides();
-        //     });
-        // });
+         // Restart automatic slideshow after user interaction
+        document.querySelectorAll('.tab-button, .dot').forEach(element => {
+            element.addEventListener('click', () => {
+                stopAutoSlides();
+                // Restart after a short delay, allowing the manual transition to complete
+                setTimeout(startAutoSlides, 1000); // Adjust delay as needed
+            });
+        });
 
     </script>
 
