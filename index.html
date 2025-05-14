@@ -1,483 +1,151 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Twinfusion - Your Partner in Tech Excellence</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-        /* Custom animation for hero text */
-        @keyframes fadeInSlideUp {
-            0% {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        .animate-fadeInSlideUp {
-            animation: fadeInSlideUp 0.8s ease-out forwards;
-        }
-        .delay-200 { animation-delay: 0.2s; }
-        .delay-400 { animation-delay: 0.4s; }
-        .delay-600 { animation-delay: 0.6s; }
-
-        /* Custom scrollbar (optional, for aesthetics) */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #888;
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #555;
-        }
-        .section-transition {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-        .section-transition.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Slideshow Styles */
-        #hero-slideshow {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: 0; /* Behind hero content */
-        }
-        .hero-slide {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            opacity: 0;
-            transition: opacity 1.5s ease-in-out; /* Smooth fade transition */
-            z-index: 1;
-        }
-        .hero-slide.active {
-            opacity: 1;
-            z-index: 2;
-        }
-        /* Dark overlay for better text readability on slideshow */
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5); /* Adjust opacity as needed */
-            z-index: 3; /* Above slides, below text */
-        }
-
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PinnacleTech – Innovate. Build. Elevate.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Orbitron', sans-serif;
+    }
+    .fade-in {
+      animation: fadeIn 2s ease-in-out forwards;
+      opacity: 0;
+    }
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+    .card-glow:hover {
+      box-shadow: 0 10px 25px rgba(0, 255, 255, 0.4);
+    }
+  </style>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased">
+<body class="bg-gray-950 text-white scroll-smooth">
 
-    <nav id="navbar" class="bg-white/90 backdrop-blur-md shadow-md fixed top-0 left-0 right-0 z-50 transition-all duration-300">
-        <div class="container mx-auto px-6 py-4">
-            <div class="flex items-center justify-between">
-                <a href="#" class="text-2xl font-bold text-indigo-600">
-                    Twinfusion<span class="text-sky-500">.</span>
-                </a>
-                <div class="hidden md:flex space-x-6 items-center">
-                    <a href="#home" class="text-slate-600 hover:text-indigo-600 transition duration-300">Home</a>
-                    <a href="#services" class="text-slate-600 hover:text-indigo-600 transition duration-300">Services</a>
-                    <a href="#about" class="text-slate-600 hover:text-indigo-600 transition duration-300">About Us</a>
-                    <a href="#process" class="text-slate-600 hover:text-indigo-600 transition duration-300">Our Process</a>
-                    <a href="#contact" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105">Get In Touch</a>
-                </div>
-                <div class="md:hidden">
-                    <button id="mobile-menu-button" class="text-slate-600 focus:outline-none">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg">
-            <a href="#home" class="block py-3 px-6 text-slate-600 hover:bg-indigo-50 hover:text-indigo-600 transition duration-300">Home</a>
-            <a href="#services" class="block py-3 px-6 text-slate-600 hover:bg-indigo-50 hover:text-indigo-600 transition duration-300">Services</a>
-            <a href="#about" class="block py-3 px-6 text-slate-600 hover:bg-indigo-50 hover:text-indigo-600 transition duration-300">About Us</a>
-            <a href="#process" class="block py-3 px-6 text-slate-600 hover:bg-indigo-50 hover:text-indigo-600 transition duration-300">Our Process</a>
-            <a href="#contact" class="block py-3 px-6 text-indigo-600 bg-indigo-100 hover:bg-indigo-200 font-semibold transition duration-300">Get In Touch</a>
-        </div>
-    </nav>
+  <!-- Hero -->
+  <section class="hero-bg py-32 px-6 text-center fade-in bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900">
+    <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight text-cyan-400 animate-pulse">
+      Innovate. Build. Elevate.
+    </h1>
+    <p class="text-xl md:text-2xl max-w-2xl mx-auto text-gray-300 mb-8">
+      Empowering your business with next-gen technology solutions.
+    </p>
+    <a href="#services" class="bg-cyan-500 hover:bg-cyan-400 text-black font-bold py-3 px-6 rounded-full transition">
+      Discover Our Services
+    </a>
+  </section>
 
-    <header id="home" class="min-h-screen flex items-center justify-center text-white pt-20 relative overflow-hidden">
-        <div id="hero-slideshow">
-            <div class="hero-slide active" style="background-image: url('backgroundimage1.jpg');"></div>
-            <div class="hero-slide" style="background-image: url('backgroundimage2.jpg');"></div>
-            <div class="hero-slide" style="background-image: url('backgroundimage3.jpg');"></div>
-        </div>
-        <div class="hero-overlay"></div>
+  <!-- Services -->
+  <section id="services" class="py-20 px-6 bg-gray-900">
+    <h2 class="text-4xl text-center font-bold text-cyan-300 mb-12">What We Offer</h2>
+    <div class="grid gap-10 md:grid-cols-3">
+      <div class="bg-gray-800 p-6 rounded-xl card-glow transition transform hover:-translate-y-1">
+        <h3 class="text-2xl font-bold text-cyan-200 mb-4">Custom Software</h3>
+        <p class="text-gray-400">Tailored solutions that solve real problems and scale with your business.</p>
+      </div>
+      <div class="bg-gray-800 p-6 rounded-xl card-glow transition transform hover:-translate-y-1">
+        <h3 class="text-2xl font-bold text-cyan-200 mb-4">Cloud Integration</h3>
+        <p class="text-gray-400">Modernize infrastructure with scalable and secure cloud solutions.</p>
+      </div>
+      <div class="bg-gray-800 p-6 rounded-xl card-glow transition transform hover:-translate-y-1">
+        <h3 class="text-2xl font-bold text-cyan-200 mb-4">AI & Data</h3>
+        <p class="text-gray-400">Leverage insights with advanced analytics and AI-driven tools.</p>
+      </div>
+    </div>
+  </section>
 
-        <div class="container mx-auto px-6 text-center relative z-10"> 
-            <h1 class="text-4xl sm:text-5xl md:text-7xl font-extrabold mb-6 animate-fadeInSlideUp" style="opacity:0;">
-                Transforming Businesses with <span class="block md:inline">Cutting-Edge Technology</span>
-            </h1>
-            <p class="text-lg md:text-2xl text-indigo-100 mb-10 animate-fadeInSlideUp delay-200" style="opacity:0;">
-                We architect, build, and scale innovative digital solutions that drive growth and efficiency.
-            </p>
-            <div class="animate-fadeInSlideUp delay-400" style="opacity:0;">
-                <a href="#services" class="bg-white text-indigo-700 font-bold py-4 px-8 rounded-lg text-lg shadow-xl hover:bg-slate-100 transition duration-300 transform hover:scale-105">
-                    Discover Our Expertise
-                </a>
-            </div>
-        </div>
-        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce z-10"> 
-            <a href="#services" aria-label="Scroll down">
-                <svg class="w-8 h-8 text-white opacity-70 hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-            </a>
-        </div>
-    </header>
+  <!-- Portfolio -->
+  <section id="portfolio" class="py-20 px-6 bg-gray-950">
+    <h2 class="text-4xl text-center font-bold text-cyan-300 mb-12">Our Projects</h2>
+    <div class="grid gap-8 md:grid-cols-3">
+      <img src="https://via.placeholder.com/400x250" alt="Project 1" class="rounded-lg hover:scale-105 transition duration-300" />
+      <img src="https://via.placeholder.com/400x250" alt="Project 2" class="rounded-lg hover:scale-105 transition duration-300" />
+      <img src="https://via.placeholder.com/400x250" alt="Project 3" class="rounded-lg hover:scale-105 transition duration-300" />
+    </div>
+  </section>
 
-    <section id="services" class="py-16 md:py-24 bg-white section-transition">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-12 md:mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Our Core Services</h2>
-                <p class="text-lg text-slate-600 mt-2 md:mt-4 max-w-2xl mx-auto">Empowering your vision with tailored technology solutions.</p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-slate-50 p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:-translate-y-1">
-                    <div class="text-indigo-600 mb-4">
-                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                    </div>
-                    <h3 class="text-2xl font-semibold text-slate-800 mb-3">Custom Software Development</h3>
-                    <p class="text-slate-600 leading-relaxed">Bespoke software solutions designed to meet your unique business challenges and objectives.</p>
-                </div>
-                <div class="bg-slate-50 p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:-translate-y-1">
-                    <div class="text-indigo-600 mb-4">
-                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75"></path></svg>
-                    </div>
-                    <h3 class="text-2xl font-semibold text-slate-800 mb-3">Cloud Solutions & DevOps</h3>
-                    <p class="text-slate-600 leading-relaxed">Optimize your infrastructure with scalable cloud services and streamlined DevOps practices.</p>
-                </div>
-                <div class="bg-slate-50 p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:-translate-y-1">
-                    <div class="text-indigo-600 mb-4">
-                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z"></path></svg>
-                    </div>
-                    <h3 class="text-2xl font-semibold text-slate-800 mb-3">AI & Data Analytics</h3>
-                    <p class="text-slate-600 leading-relaxed">Unlock insights and drive decisions with advanced AI/ML models and data analytics.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+  <!-- Clients -->
+  <section class="py-16 px-6 bg-gray-900">
+    <h2 class="text-4xl text-center font-bold text-cyan-300 mb-12">Trusted By</h2>
+    <div class="flex flex-wrap justify-center items-center gap-10">
+      <img src="https://via.placeholder.com/120x60" alt="Client 1" class="opacity-60 hover:opacity-100 transition duration-300">
+      <img src="https://via.placeholder.com/120x60" alt="Client 2" class="opacity-60 hover:opacity-100 transition duration-300">
+      <img src="https://via.placeholder.com/120x60" alt="Client 3" class="opacity-60 hover:opacity-100 transition duration-300">
+    </div>
+  </section>
 
-    <section id="about" class="py-16 md:py-24 bg-slate-100 section-transition">
-        <div class="container mx-auto px-6">
-            <div class="flex flex-col md:flex-row items-center gap-10 md:gap-16">
-                <div class="md:w-1/2">
-                    <img src="about-us-team.jpg" alt="Our Team Working" class="rounded-xl shadow-2xl w-full" onerror="this.onerror=null;this.src='https://placehold.co/600x400/E0E7FF/6366F1?text=Image+Not+Found';">
-                </div>
-                <div class="md:w-1/2">
-                    <span class="text-indigo-600 font-semibold">Who We Are</span>
-                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-2 mb-6">Pioneering Tech Innovation, Together.</h2>
-                    <p class="text-slate-600 leading-relaxed mb-4">
-                        At Innovatech Solutions, we are more than just consultants; we are your dedicated partners in navigating the complexities of the digital landscape. Our team of passionate technologists, strategists, and designers is committed to delivering excellence and measurable results.
-                    </p>
-                    <p class="text-slate-600 leading-relaxed mb-6">
-                        We believe in a collaborative approach, working closely with you to understand your challenges and co-create solutions that not only meet but exceed your expectations.
-                    </p>
-                    <a href="#contact" class="inline-block bg-sky-500 hover:bg-sky-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105">
-                        Meet The Team (Coming Soon)
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
+  <!-- Team -->
+  <section id="team" class="py-20 px-6 bg-gray-950">
+    <h2 class="text-4xl text-center font-bold text-cyan-300 mb-12">Meet the Team</h2>
+    <div class="grid gap-10 md:grid-cols-3 text-center">
+      <div>
+        <img src="https://via.placeholder.com/150" class="mx-auto rounded-full mb-4" alt="CEO" />
+        <h3 class="text-xl font-semibold text-cyan-200">Alex Muriuki</h3>
+        <p class="text-gray-400">CEO & Lead Strategist</p>
+      </div>
+      <div>
+        <img src="https://via.placeholder.com/150" class="mx-auto rounded-full mb-4" alt="CTO" />
+        <h3 class="text-xl font-semibold text-cyan-200">Jane Wanjiru</h3>
+        <p class="text-gray-400">CTO & AI Engineer</p>
+      </div>
+      <div>
+        <img src="https://via.placeholder.com/150" class="mx-auto rounded-full mb-4" alt="Dev" />
+        <h3 class="text-xl font-semibold text-cyan-200">Brian Otieno</h3>
+        <p class="text-gray-400">Full Stack Developer</p>
+      </div>
+    </div>
+  </section>
 
-    <section id="process" class="py-16 md:py-24 bg-white section-transition">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-12 md:mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Our Approach to Success</h2>
-                <p class="text-lg text-slate-600 mt-2 md:mt-4 max-w-2xl mx-auto">A transparent and collaborative process designed for impact.</p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
-                <div class="bg-slate-50 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-                    <div class="text-3xl font-bold text-indigo-600 mb-3">01</div>
-                    <h3 class="text-xl font-semibold text-slate-800 mb-2">Discovery & Strategy</h3>
-                    <p class="text-slate-600 text-sm">Understanding your goals, challenges, and market landscape to craft a winning strategy.</p>
-                </div>
-                <div class="bg-slate-50 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-                    <div class="text-3xl font-bold text-indigo-600 mb-3">02</div>
-                    <h3 class="text-xl font-semibold text-slate-800 mb-2">Design & Prototyping</h3>
-                    <p class="text-slate-600 text-sm">Creating intuitive user experiences and visual designs, validated through prototypes.</p>
-                </div>
-                <div class="bg-slate-50 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-                    <div class="text-3xl font-bold text-indigo-600 mb-3">03</div>
-                    <h3 class="text-xl font-semibold text-slate-800 mb-2">Development & Testing</h3>
-                    <p class="text-slate-600 text-sm">Building robust solutions with agile methodologies and rigorous quality assurance.</p>
-                </div>
-                <div class="bg-slate-50 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-                    <div class="text-3xl font-bold text-indigo-600 mb-3">04</div>
-                    <h3 class="text-xl font-semibold text-slate-800 mb-2">Deployment & Growth</h3>
-                    <p class="text-slate-600 text-sm">Launching your solution and providing ongoing support for continuous improvement.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <section id="clients" class="py-16 md:py-24 bg-slate-100 section-transition">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-12 md:mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Trusted by Industry Leaders</h2>
-                <p class="text-lg text-slate-600 mt-2 md:mt-4">We're proud to have partnered with amazing companies.</p>
-            </div>
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8 items-center">
-                <img src="ajsn.png" alt="Client Logo 1" class="mx-auto opacity-70 hover:opacity-100 transition-opacity duration-300" onerror="this.onerror=null;this.src='https://placehold.co/200x100/CCCCCC/999999?text=Logo+1';">
-                <img src="alhatim.png" alt="Client Logo 2" class="mx-auto opacity-70 hover:opacity-100 transition-opacity duration-300" onerror="this.onerror=null;this.src='https://placehold.co/200x100/CCCCCC/999999?text=Logo+2';">
-                <img src="formlab.png" alt="Client Logo 3" class="mx-auto opacity-70 hover:opacity-100 transition-opacity duration-300" onerror="this.onerror=null;this.src='https://placehold.co/200x100/CCCCCC/999999?text=Logo+3';">
-                <img src="fairdeal.png" alt="Client Logo 4" class="mx-auto opacity-70 hover:opacity-100 transition-opacity duration-300" onerror="this.onerror=null;this.src='https://placehold.co/200x100/CCCCCC/999999?text=Logo+4';">
-                <img src="homecare.png" alt="Client Logo 5" class="mx-auto opacity-70 hover:opacity-100 transition-opacity duration-300" onerror="this.onerror=null;this.src='https://placehold.co/200x100/CCCCCC/999999?text=Logo+5';">
-                <img src="retreat.png" alt="Client Logo 5" class="mx-auto opacity-70 hover:opacity-100 transition-opacity duration-300" onerror="this.onerror=null;this.src='https://placehold.co/200x100/CCCCCC/999999?text=Logo+5';">
+  <!-- Testimonials -->
+  <section class="bg-gray-900 py-20 px-6">
+    <h2 class="text-4xl font-bold text-center text-cyan-300 mb-10">What Our Clients Say</h2>
+    <div id="testimonial" class="text-center text-lg text-gray-300 max-w-3xl mx-auto transition duration-500">
+      "PinnacleTech delivered beyond expectations. Our app is faster and smarter than ever!"
+    </div>
+  </section>
 
-            </div>
-        </div>
-    </section>
+  <!-- Contact -->
+  <section id="contact" class="py-20 px-6 bg-gray-950">
+    <h2 class="text-4xl text-center font-bold text-cyan-300 mb-12">Get in Touch</h2>
+    <form class="max-w-2xl mx-auto bg-gray-800 p-8 rounded-xl space-y-6">
+      <input type="text" placeholder="Your Name" class="w-full p-3 rounded bg-gray-700 text-white" />
+      <input type="email" placeholder="Your Email" class="w-full p-3 rounded bg-gray-700 text-white" />
+      <textarea rows="5" placeholder="Your Message" class="w-full p-3 rounded bg-gray-700 text-white"></textarea>
+      <button type="submit" class="bg-cyan-500 hover:bg-cyan-400 text-black py-3 px-6 rounded-full font-bold">Send Message</button>
+    </form>
+  </section>
 
-    <section id="testimonials" class="py-16 md:py-24 bg-indigo-600 text-white section-transition">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-12 md:mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold">What Our Clients Say</h2>
-                <p class="text-lg text-indigo-100 mt-2 md:mt-4 max-w-2xl mx-auto">Real stories from partners who've experienced the Innovatech difference.</p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="bg-indigo-700/50 p-8 rounded-xl shadow-xl backdrop-blur-sm">
-                    <p class="text-indigo-50 italic leading-relaxed mb-6">"Innovatech Solutions transformed our operations. Their expertise and dedication were pivotal to our project's success. Highly recommended!"</p>
-                    <div class="flex items-center">
-                        <img src="avatar-alex.jpg" alt="Alex P." class="w-12 h-12 rounded-full mr-4 border-2 border-sky-400" onerror="this.onerror=null;this.src='https://placehold.co/50x50/CCCCCC/999999?text=AP';">
-                        <div>
-                            <p class="font-semibold text-white">Alex P.</p>
-                            <p class="text-indigo-200 text-sm">CEO, TechForward Inc.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-indigo-700/50 p-8 rounded-xl shadow-xl backdrop-blur-sm">
-                    <p class="text-indigo-50 italic leading-relaxed mb-6">"The team at Innovatech is incredibly knowledgeable and responsive. They delivered a solution that exceeded our expectations on time and budget."</p>
-                    <div class="flex items-center">
-                         <img src="avatar-sarah.jpg" alt="Sarah J." class="w-12 h-12 rounded-full mr-4 border-2 border-sky-400" onerror="this.onerror=null;this.src='https://placehold.co/50x50/CCCCCC/999999?text=SJ';">
-                        <div>
-                            <p class="font-semibold text-white">Sarah J.</p>
-                            <p class="text-indigo-200 text-sm">CTO, MarketBoost Co.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-16 md:py-24 bg-slate-100 section-transition">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-6">Ready to Elevate Your Business?</h2>
-            <p class="text-lg text-slate-600 mb-10 max-w-2xl mx-auto">
-                Let's discuss how Innovatech Solutions can help you achieve your technology goals.
-                Schedule a free consultation with our experts today.
-            </p>
-            <a href="#contact" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-10 rounded-lg text-lg shadow-xl hover:shadow-2xl transition duration-300 transform hover:scale-105">
-                Schedule Free Consultation
-            </a>
-        </div>
-    </section>
-
-    <section id="contact" class="py-16 md:py-24 bg-white section-transition">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-12 md:mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Get In Touch</h2>
-                <p class="text-lg text-slate-600 mt-2 md:mt-4 max-w-xl mx-auto">We're here to answer your questions and explore how we can help.</p>
-            </div>
-            <div class="max-w-2xl mx-auto bg-slate-50 p-8 md:p-12 rounded-xl shadow-2xl">
-                <form action="#" method="POST"> <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                        <div>
-                            <label for="name" class="block text-sm font-medium text-slate-700 mb-1">Full Name</label>
-                            <input type="text" name="name" id="name" required class="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-150" placeholder="John Doe">
-                        </div>
-                        <div>
-                            <label for="email" class="block text-sm font-medium text-slate-700 mb-1">Email Address</label>
-                            <input type="email" name="email" id="email" required class="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-150" placeholder="you@example.com">
-                        </div>
-                    </div>
-                    <div class="mb-6">
-                        <label for="subject" class="block text-sm font-medium text-slate-700 mb-1">Subject</label>
-                        <input type="text" name="subject" id="subject" required class="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-150" placeholder="Inquiry about Cloud Solutions">
-                    </div>
-                    <div class="mb-8">
-                        <label for="message" class="block text-sm font-medium text-slate-700 mb-1">Message</label>
-                        <textarea name="message" id="message" rows="5" required class="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-150" placeholder="Tell us more about your project..."></textarea>
-                    </div>
-                    <div>
-                        <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105">
-                            Send Message
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <footer class="bg-slate-800 text-slate-300 py-12 md:py-16">
-        <div class="container mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-                <div>
-                    <h3 class="text-xl font-bold text-white mb-3">Innovatech<span class="text-sky-400">.</span></h3>
-                    <p class="text-sm">Driving innovation through technology. Your partners in digital transformation.</p>
-                    <div class="mt-4 flex space-x-4">
-                        <a href="#" class="text-slate-400 hover:text-sky-400 transition duration-300" aria-label="Facebook">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path></svg>
-                        </a>
-                        <a href="#" class="text-slate-400 hover:text-sky-400 transition duration-300" aria-label="Twitter">
-                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-.422.724-.665 1.56-.665 2.452 0 1.613.823 3.043 2.074 3.863-.766-.024-1.483-.233-2.11-.583v.06c0 2.254 1.605 4.135 3.737 4.568-.39.107-.803.164-1.227.164-.3 0-.593-.028-.877-.082.593 1.85 2.307 3.198 4.342 3.234-1.595 1.25-3.604 1.995-5.786 1.995-.376 0-.747-.022-1.112-.065 2.062 1.323 4.51 2.093 7.14 2.093 8.57 0 13.255-7.098 13.255-13.254 0-.202-.005-.403-.014-.602a9.46 9.46 0 002.323-2.41z"></path></svg>
-                        </a>
-                        <a href="#" class="text-slate-400 hover:text-sky-400 transition duration-300" aria-label="LinkedIn">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.594-11.018-3.714v-2.155z"></path></svg>
-                        </a>
-                    </div>
-                </div>
-                <div>
-                    <h4 class="text-lg font-semibold text-white mb-3">Quick Links</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="#services" class="hover:text-sky-400 transition duration-300">Services</a></li>
-                        <li><a href="#about" class="hover:text-sky-400 transition duration-300">About Us</a></li>
-                        <li><a href="#process" class="hover:text-sky-400 transition duration-300">Our Process</a></li>
-                        <li><a href="#contact" class="hover:text-sky-400 transition duration-300">Contact</a></li>
-                         <li><a href="#" class="hover:text-sky-400 transition duration-300">Privacy Policy (Placeholder)</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-lg font-semibold text-white mb-3">Contact Info</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li><p>123 Tech Avenue, Innovation City, TX 75001</p></li>
-                        <li><a href="mailto:hello@innovatech.com" class="hover:text-sky-400 transition duration-300">hello@innovatech.com</a></li>
-                        <li><a href="tel:+1234567890" class="hover:text-sky-400 transition duration-300">(123) 456-7890</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="border-t border-slate-700 pt-8 text-center text-sm">
-                <p>&copy; <span id="currentYear"></span> Innovatech Solutions. All Rights Reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <button id="scrollToTopBtn" class="fixed bottom-6 right-6 bg-indigo-600 hover:bg-indigo-700 text-white p-3 rounded-full shadow-lg transition-opacity duration-300 opacity-0 z-50" aria-label="Scroll to top">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path></svg>
+  <!-- Footer -->
+  <footer class="bg-gray-800 py-10 px-6 text-center text-gray-400">
+    <p>&copy; 2025 PinnacleTech. Built with ❤️ using Tailwind CSS.</p>
+    <button onclick="scrollToTop()" class="mt-4 bg-cyan-500 text-black px-4 py-2 rounded-full hover:bg-cyan-400">
+      ↑ Back to Top
     </button>
+  </footer>
 
-    <script>
-        // Mobile menu toggle
-        const menuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        menuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-            // Toggle icon
-            if (mobileMenu.classList.contains('hidden')) {
-                menuButton.innerHTML = `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>`;
-            } else {
-                menuButton.innerHTML = `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>`;
-            }
-        });
+  <!-- JavaScript -->
+  <script>
+    // Testimonials
+    const testimonials = [
+      "PinnacleTech delivered beyond expectations. Our app is faster and smarter than ever!",
+      "Great communication and results. Highly recommend their custom software services!",
+      "The AI solution they deployed gave us a data edge we never imagined."
+    ];
+    let index = 0;
+    setInterval(() => {
+      index = (index + 1) % testimonials.length;
+      document.getElementById("testimonial").innerText = testimonials[index];
+    }, 4000);
 
-        // Close mobile menu when a link is clicked
-        document.querySelectorAll('#mobile-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-                menuButton.innerHTML = `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>`;
-            });
-        });
-        
-        // Dynamic year in footer
-        document.getElementById('currentYear').textContent = new Date().getFullYear();
+    // Back to top
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
 
-        // Scroll to Top button functionality
-        const scrollToTopBtn = document.getElementById('scrollToTopBtn');
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
-                scrollToTopBtn.classList.remove('opacity-0');
-                scrollToTopBtn.classList.add('opacity-100');
-            } else {
-                scrollToTopBtn.classList.remove('opacity-100');
-                scrollToTopBtn.classList.add('opacity-0');
-            }
-        });
-        scrollToTopBtn.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-
-        // Navbar shrink on scroll
-        const navbar = document.getElementById('navbar');
-        // let lastScrollTop = 0; // This variable was declared but not used effectively, can be removed if not needed for other logic.
-        window.addEventListener('scroll', function() {
-            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            if (scrollTop > 50) {
-                navbar.classList.add('py-2');
-                navbar.classList.remove('py-4');
-            } else {
-                navbar.classList.add('py-4');
-                navbar.classList.remove('py-2');
-            }
-            // lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; 
-        }, false);
-
-        // Intersection Observer for section animations
-        const sections = document.querySelectorAll('.section-transition');
-        const observerOptions = {
-            root: null, 
-            rootMargin: '0px',
-            threshold: 0.1 
-        };
-
-        const observer = new IntersectionObserver((entries, obs) => { // Renamed observer to obs to avoid conflict
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    // obs.unobserve(entry.target); // Optional: unobserve after animation
-                }
-            });
-        }, observerOptions);
-
-        sections.forEach(section => {
-            observer.observe(section);
-        });
-
-        // Hero Slideshow Logic
-        const slides = document.querySelectorAll('#hero-slideshow .hero-slide');
-        let currentSlide = 0;
-        const slideInterval = 5000; // Time in ms (5 seconds)
-
-        function nextSlide() {
-            if (slides.length === 0) return; // Do nothing if no slides
-            slides[currentSlide].classList.remove('active');
-            currentSlide = (currentSlide + 1) % slides.length;
-            slides[currentSlide].classList.add('active');
-        }
-
-        // Start the slideshow
-        if (slides.length > 1) {
-            setInterval(nextSlide, slideInterval);
-        } else if (slides.length === 1) {
-            slides[0].classList.add('active'); // Ensure single slide is visible
-        }
-
-
-    </script>
 </body>
 </html>
