@@ -1,45 +1,226 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Twinfusion – Blog</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Orbitron', sans-serif;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twinfusion Blog - Latest Transmissions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+    <style>
+        /* Define CSS Variables for Colors */
+        :root {
+            --color-primary: #0FEEF0; /* Electric Cyan */
+            --color-secondary: #7B00FF; /* Vibrant Purple */
+            --color-accent: #FF00AA; /* Neon Pink */
+            --color-dark-bg: #0A0A1A; /* Very Dark Blue/Black */
+            --color-light-bg: #1A1A33; /* Darker Blue/Black */
+            --color-text-light: #E0FFFF; /* Pale Cyan/White */
+            --color-text-dark: #1A1A33; /* Darker Blue/Black */
+        }
+
+        /* Apply Inter font globally, use Orbitron for headings/specific elements */
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--color-text-light);
+            background-color: var(--color-dark-bg);
+            line-height: 1.6; /* Improved readability */
+            letter-spacing: 0.02em; /* Subtle letter spacing */
+        }
+
+        h1, h2, h3, .font-\[Orbitron\] {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700; /* Bold Orbitron */
+        }
+
+        /* Custom scrollbar (optional, for aesthetics) */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--color-light-bg);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-secondary);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--color-primary);
+        }
+
+         /* Specific styling for sections */
+         .section-dark {
+             background-color: var(--color-light-bg);
+             color: var(--color-text-light);
+         }
+
+         .section-light {
+             background-color: var(--color-dark-bg);
+             color: var(--color-text-light);
+         }
+
+        /* Blog post card styling */
+        .blog-card {
+            background-color: var(--color-light-bg);
+            border: 1px solid var(--color-light-bg);
+            transition: all 0.5s ease-in-out;
+        }
+        .blog-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), 0 0 20px rgba(123, 0, 255, 0.5); /* Darker shadow + purple glow */
+            border-color: var(--color-secondary);
+        }
+        .blog-card img {
+            filter: brightness(80%) contrast(1.1);
+            transition: filter 0.4s ease-in-out;
+        }
+        .blog-card:hover img {
+             filter: brightness(100%) contrast(1);
+        }
+
+         /* Animation keyframes */
+        @keyframes fade-in-up {
+            from {
+                opacity: 0;
+                transform: translateY(60px); /* More distance */
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+         .animate-fade-in-up-visible {
+            animation: fade-in-up 1.2s ease-out forwards; /* Slower duration */
+        }
+
+         .animation-delay-100 { animation-delay: 0.1s; }
+         .animation-delay-200 { animation-delay: 0.2s; }
+         .animation-delay-300 { animation-delay: 0.3s; }
+         .animation-delay-400 { animation-delay: 0.4s; }
+         .animation-delay-500 { animation-delay: 0.5s; }
+         .animation-delay-600 { animation-delay: 0.6s; }
+         .animation-delay-700 { animation-delay: 0.7s; }
+         .animation-delay-800 { animation-delay: 0.8s; }
+         .animation-delay-900 { animation-delay: 0.9s; }
+         .animation-delay-1000 { animation-delay: 1s; }
+
+
+    </style>
 </head>
-<body class="bg-white text-gray-900">
+<body class="bg-gray-100 text-gray-800 leading-normal tracking-wide">
 
-  <header class="w-full py-6 bg-white shadow">
-    <nav class="max-w-6xl mx-auto flex justify-between px-4">
-      <a href="index.html" class="text-xl font-bold text-red-500">← Back to Home</a>
-      <span class="text-lg font-medium text-gray-700">Twinfusion Blog</span>
-    </nav>
-  </header>
+    <header class="bg-purple-900 shadow-md sticky top-0 z-50 bg-opacity-80 backdrop-filter backdrop-blur-lg border-b border-gray-700">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-cyan-500 hover:text-cyan-400 transition duration-300 ease-in-out font-[Orbitron] text-shadow: 0 0 5px rgba(15, 238, 240, 0.5);">
+                Twinfusion
+            </a>
+            <nav class="hidden md:flex space-x-8">
+                <a href="index.html#services" class="text-gray-300 hover:text-cyan-500 transition duration-300 ease-in-out font-semibold">Services</a>
+                 <a href="index.html#saify-screenshots" class="text-gray-300 hover:text-cyan-500 transition duration-300 ease-in-out font-semibold">SaifyPOS</a> <a href="index.html#portfolio" class="text-gray-300 hover:text-cyan-500 transition duration-300 ease-in-out font-semibold">Portfolio</a>
+                <a href="index.html#clients" class="text-gray-300 hover:text-cyan-500 transition duration-300 ease-in-out font-semibold">Clients</a>
+                 <a href="blog.html" class="text-gray-300 hover:text-cyan-500 transition duration-300 ease-in-out font-semibold">Blog</a>
+                <a href="index.html#about" class="text-gray-300 hover:text-cyan-500 transition duration-300 ease-in-out font-semibold">About Us</a>
+                <a href="index.html#contact" class="text-gray-300 hover:text-cyan-500 transition duration-300 ease-in-out font-semibold">Contact</a>
+            </nav>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-gray-300 hover:text-cyan-500 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden bg-gray-900 shadow-lg hidden border-t border-gray-700">
+            <nav class="flex flex-col px-6 py-4 space-y-2">
+                <a href="index.html#services" class="block text-gray-300 hover:text-cyan-500 transition duration-300 ease-in-out py-2 font-semibold">Services</a>
+                 <a href="index.html#saify-screenshots" class="block text-gray-300 hover:text-cyan-500 transition duration-300 ease-in-out py-2 font-semibold">SaifyPOS</a> <a href="index.html#portfolio" class="block text-gray-300 hover:text-cyan-500 transition duration-300 ease-in-out py-2 font-semibold">Portfolio</a>
+                <a href="index.html#clients" class="block text-gray-300 hover:text-cyan-500 transition duration-300 ease-in-out py-2 font-semibold">Clients</a>
+                 <a href="blog.html" class="block text-gray-300 hover:text-cyan-500 transition duration-300 ease-in-out py-2 font-semibold">Blog</a>
+                <a href="index.html#about" class="block text-gray-300 hover:text-cyan-500 transition duration-300 ease-in-out py-2 font-semibold">About Us</a>
+                <a href="index.html#contact" class="block text-gray-300 hover:text-cyan-500 transition duration-300 ease-in-out py-2 font-semibold">Contact</a>
+            </nav>
+        </div>
+    </header>
 
-  <main class="max-w-4xl mx-auto px-4 py-20">
-    <article class="space-y-6">
-      <h1 class="text-4xl font-bold mb-2">Why Branding is Your Secret Weapon</h1>
-      <p class="text-gray-600 text-sm">April 2025 · 3 min read</p>
-      <p>
-        In today's saturated digital landscape, a compelling brand identity is more than just a logo — it's your strategic edge. From voice and tone to visuals and experiences, branding helps you stand out, connect, and grow.
-      </p>
-      <p>
-        At Twinfusion, we craft identities that spark trust and recognition. Great branding builds loyalty and drives long-term success.
-      </p>
-      <p>
-        Stay tuned for more insights and tips from our team.
-      </p>
-    </article>
-  </main>
+    <section class="py-24 md:py-40 section-light animate-fade-in-up">
+        <div class="container mx-auto px-6">
+            <h1 class="text-4xl md:text-5xl font-bold text-center mb-20 text-white animate-fade-in-up font-[Orbitron]">Latest Transmissions</h1> <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
+                <div class="rounded-lg shadow-xl overflow-hidden blog-card animate-fade-in-up animation-delay-200">
+                    <img src="https://placehold.co/600x400/FF00AA/0A0A1A?text=AI+Future" alt="Blog Post 1 Image" class="w-full h-48 object-cover">
+                    <div class="p-8">
+                        <h3 class="text-xl font-semibold text-white mb-4 font-[Orbitron]">The Quantum Leap: AI in the Next Decade</h3>
+                        <p class="text-gray-400 text-sm mb-6 leading-relaxed">
+                            Explore the transformative potential of Artificial Intelligence and its impact on industries, society, and the future of technology.
+                        </p>
+                        <a href="#" class="text-primary hover:underline text-sm font-semibold">Read More &rarr;</a>
+                    </div>
+                </div>
+                <div class="rounded-lg shadow-xl overflow-hidden blog-card animate-fade-in-up animation-delay-400">
+                    <img src="https://placehold.co/600x400/0FEEF0/0A0A1A?text=Blockchain+Impact" alt="Blog Post 2 Image" class="w-full h-48 object-cover">
+                    <div class="p-8">
+                        <h3 class="text-xl font-semibold text-white mb-4 font-[Orbitron]">Beyond Crypto: Blockchain's Enterprise Applications</h3>
+                        <p class="text-gray-400 text-sm mb-6 leading-relaxed">
+                            Delve into the real-world applications of blockchain technology beyond cryptocurrencies, from supply chain to secure data management.
+                        </p>
+                        <a href="#" class="text-primary hover:underline text-sm font-semibold">Read More &rarr;</a>
+                    </div>
+                </div>
+                 <div class="rounded-lg shadow-xl overflow-hidden blog-card animate-fade-in-up animation-delay-600">
+                    <img src="https://placehold.co/600x400/7B00FF/0A0A1A?text=Cybersecurity" alt="Blog Post 3 Image" class="w-full h-48 object-cover">
+                    <div class="p-8">
+                        <h3 class="text-xl font-semibold text-white mb-4 font-[Orbitron]">Fortifying the Digital Frontier: Advanced Cybersecurity</h3>
+                        <p class="text-gray-400 text-sm mb-6 leading-relaxed">
+                            Understand the evolving landscape of cybersecurity threats and the advanced strategies needed to protect your digital assets in a connected world.
+                        </p>
+                        <a href="#" class="text-primary hover:underline text-sm font-semibold">Read More &rarr;</a>
+                    </div>
+                </div>
+                 </div>
+        </div>
+    </section>
 
-  <footer class="py-10 text-center bg-gray-100 text-gray-600">
-    <p>&copy; 2025 Twinfusion. All rights reserved.</p>
-  </footer>
+
+    <footer class="bg-gray-900 text-gray-600 py-12 border-t border-gray-800">
+        <div class="container mx-auto px-6 text-center text-sm">
+            <p>&copy; 2025 Twinfusion. All rights reserved. // Engineered for the Future</p>
+        </div>
+    </footer>
+
+    <script>
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when a link is clicked
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+    </script>
+
+     <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (entry.target.classList.contains('animate-fade-in-up')) {
+                         entry.target.classList.add('animate-fade-in-up-visible');
+                    }
+                } else {
+                    // Optional: remove class when not visible if you want elements to re-animate on scroll back
+                    // entry.target.classList.remove('animate-fade-in-up-visible');
+                }
+            });
+        }, { threshold: 0.1 }); // Trigger when 10% of the element is visible
+
+        // Add animation classes to elements you want to animate
+        document.querySelectorAll('.animate-fade-in-up').forEach(element => {
+            observer.observe(element);
+        });
+
+    </script>
 
 </body>
 </html>
